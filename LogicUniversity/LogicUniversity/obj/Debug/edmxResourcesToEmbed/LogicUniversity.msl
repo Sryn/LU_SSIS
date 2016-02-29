@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LogicUniversityModelStoreContainer" CdmEntityContainer="LogicUniversityEntities">
+    <EntitySetMapping Name="AdjVouchers">
+      <EntityTypeMapping TypeName="LogicUniversityModel.AdjVoucher">
+        <MappingFragment StoreEntitySet="AdjVoucher">
+          <ScalarProperty Name="AdjVoucherID" ColumnName="AdjVoucherID" />
+          <ScalarProperty Name="StoreEmployeeID" ColumnName="StoreEmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdjVoucherItems">
+      <EntityTypeMapping TypeName="LogicUniversityModel.AdjVoucherItem">
+        <MappingFragment StoreEntitySet="AdjVoucherItem">
+          <ScalarProperty Name="AdjVoucherItemID" ColumnName="AdjVoucherItemID" />
+          <ScalarProperty Name="AdjVoucherID" ColumnName="AdjVoucherID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CollectionPoints">
+      <EntityTypeMapping TypeName="LogicUniversityModel.CollectionPoint">
+        <MappingFragment StoreEntitySet="CollectionPoint">
+          <ScalarProperty Name="CollectionPointID" ColumnName="CollectionPointID" />
+          <ScalarProperty Name="CollectionPointName" ColumnName="CollectionPointName" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delegates">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Delegate">
+        <MappingFragment StoreEntitySet="Delegate">
+          <ScalarProperty Name="DelegateID" ColumnName="DelegateID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="CollectionPointID" ColumnName="CollectionPointID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Disbursements">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Disbursement">
+        <MappingFragment StoreEntitySet="Disbursement">
+          <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
+          <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+          <ScalarProperty Name="CollectionPointID" ColumnName="CollectionPointID" />
+          <ScalarProperty Name="AcknowledgeEmployeeID" ColumnName="AcknowledgeEmployeeID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisbursementItems">
+      <EntityTypeMapping TypeName="LogicUniversityModel.DisbursementItem">
+        <MappingFragment StoreEntitySet="DisbursementItem">
+          <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
+          <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="RemainingQty" ColumnName="RemainingQty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="PIN" ColumnName="PIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForgotPasswords">
+      <EntityTypeMapping TypeName="LogicUniversityModel.ForgotPassword">
+        <MappingFragment StoreEntitySet="ForgotPassword">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UOM" ColumnName="UOM" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+          <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+          <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+          <ScalarProperty Name="BinNo" ColumnName="BinNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="FromUser" ColumnName="FromUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrders">
+      <EntityTypeMapping TypeName="LogicUniversityModel.PurchaseOrder">
+        <MappingFragment StoreEntitySet="PurchaseOrder">
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="StoreEmployeeID" ColumnName="StoreEmployeeID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="RequireDeliveryDate" ColumnName="RequireDeliveryDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderItems">
+      <EntityTypeMapping TypeName="LogicUniversityModel.PurchaseOrderItem">
+        <MappingFragment StoreEntitySet="PurchaseOrderItem">
+          <ScalarProperty Name="PurchaseOrderItemID" ColumnName="PurchaseOrderItemID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requisitions">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Requisition">
+        <MappingFragment StoreEntitySet="Requisition">
+          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequisitionItems">
+      <EntityTypeMapping TypeName="LogicUniversityModel.RequisitionItem">
+        <MappingFragment StoreEntitySet="RequisitionItem">
+          <ScalarProperty Name="RequisitionItemID" ColumnName="RequisitionItemID" />
+          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StockTransactions">
+      <EntityTypeMapping TypeName="LogicUniversityModel.StockTransaction">
+        <MappingFragment StoreEntitySet="StockTransaction">
+          <ScalarProperty Name="StockTransactionID" ColumnName="StockTransactionID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="AdjVoucherItemID" ColumnName="AdjVoucherItemID" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreEmployees">
+      <EntityTypeMapping TypeName="LogicUniversityModel.StoreEmployee">
+        <MappingFragment StoreEntitySet="StoreEmployee">
+          <ScalarProperty Name="StoreEmployeeID" ColumnName="StoreEmployeeID" />
+          <ScalarProperty Name="PIN" ColumnName="PIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="LogicUniversityModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="PhNo" ColumnName="PhNo" />
+          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="GSTRegistration" ColumnName="GSTRegistration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierItems">
+      <EntityTypeMapping TypeName="LogicUniversityModel.SupplierItem">
+        <MappingFragment StoreEntitySet="SupplierItem">
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="LogicUniversityModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DisbursementRequestItem" TypeName="LogicUniversityModel.DisbursementRequestItem" StoreEntitySet="DisbursementRequestItem">
+      <EndProperty Name="DisbursementItem">
+        <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
+      </EndProperty>
+      <EndProperty Name="RequisitionItem">
+        <ScalarProperty Name="RequisitionItemID" ColumnName="RequisitionItemID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

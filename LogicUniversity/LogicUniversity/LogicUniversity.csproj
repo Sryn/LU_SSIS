@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{74136054-294B-492E-A478-CE74190490FB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LogicUniversity</RootNamespace>
+    <AssemblyName>LogicUniversity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\LogicUniversity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogicUniversity.edmx</DependentUpon>
+      <LastGenOutput>LogicUniversity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\LogicUniversity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogicUniversity.edmx</DependentUpon>
+      <LastGenOutput>LogicUniversity.cs</LastGenOutput>
+    </Content>
+    <Content Include="Service1.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebView\ChangePIN.aspx" />
+    <Content Include="WebView\Employee\ChangeCollectionPoint.aspx" />
+    <Content Include="WebView\Employee\ChangeDepartmentRepresentative.aspx" />
+    <Content Include="WebView\Employee\DelegateAuthority.aspx" />
+    <Content Include="WebView\Employee\Disbursements.aspx" />
+    <Content Include="WebView\Employee\DisbursementsDetail.aspx" />
+    <Content Include="WebView\Employee\EmployeeHome.aspx" />
+    <Content Include="WebView\Employee\RequestStationery.aspx" />
+    <Content Include="WebView\Employee\RequisitionApproval.aspx" />
+    <Content Include="WebView\Employee\ViewRequest.aspx" />
+    <Content Include="WebView\LoginPage.aspx" />
+    <Content Include="WebView\Notifications.aspx" />
+    <Content Include="WebView\StoreEmployee\ApproveAdjustmentVoucher.aspx" />
+    <Content Include="WebView\StoreEmployee\ChangeDeliveryDate.aspx" />
+    <Content Include="WebView\StoreEmployee\Reports.aspx" />
+    <Content Include="WebView\StoreEmployee\CollectionInformation.aspx" />
+    <Content Include="WebView\StoreEmployee\DisbursementList.aspx" />
+    <Content Include="WebView\StoreEmployee\InventoryList.aspx" />
+    <Content Include="WebView\StoreEmployee\NotCollected.aspx" />
+    <Content Include="WebView\StoreEmployee\RaiseAdjustmentVoucher.aspx" />
+    <Content Include="WebView\StoreEmployee\RaisePurchaseOrder.aspx" />
+    <Content Include="WebView\StoreEmployee\Request.aspx" />
+    <Content Include="WebView\StoreEmployee\RequisitionTrend.aspx" />
+    <Content Include="WebView\StoreEmployee\StationaryOrderBy.aspx" />
+    <Content Include="WebView\StoreEmployee\StockCard.aspx" />
+    <Content Include="WebView\StoreEmployee\StoreEmployeeHome.aspx" />
+    <Content Include="WebView\test.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\AdjVoucher.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AdjVoucherItem.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Category.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CollectionPoint.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Control\EmailControl.cs" />
+    <Compile Include="Control\LoginControl.cs" />
+    <Compile Include="Control\RequestListControl.cs" />
+    <Compile Include="Control\RequestStationeryControl.cs" />
+    <Compile Include="Control\RequisitionApprovalControl.cs" />
+    <Compile Include="Model\Delegate.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Department.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Disbursement.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DisbursementItem.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employee.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ForgotPassword.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Item.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LogicUniversity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogicUniversity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LogicUniversity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LogicUniversity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogicUniversity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RequestListItem.cs" />
+    <Compile Include="Model\RequisitionApproval.cs" />
+    <Compile Include="Model\Notification.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PurchaseOrder.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PurchaseOrderItem.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Requisition.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RequisitionItem.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service1.svc.cs">
+      <DependentUpon>Service1.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IService1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\StockTransaction.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StoreEmployee.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Supplier.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SupplierItem.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>LogicUniversity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\ChangePIN.aspx.cs">
+      <DependentUpon>ChangePIN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\ChangePIN.aspx.designer.cs">
+      <DependentUpon>ChangePIN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\ChangeCollectionPoint.aspx.cs">
+      <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\ChangeCollectionPoint.aspx.designer.cs">
+      <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\ChangeDepartmentRepresentative.aspx.cs">
+      <DependentUpon>ChangeDepartmentRepresentative.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\ChangeDepartmentRepresentative.aspx.designer.cs">
+      <DependentUpon>ChangeDepartmentRepresentative.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\DelegateAuthority.aspx.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\DelegateAuthority.aspx.designer.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\Disbursements.aspx.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\Disbursements.aspx.designer.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\DisbursementsDetail.aspx.cs">
+      <DependentUpon>DisbursementsDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\DisbursementsDetail.aspx.designer.cs">
+      <DependentUpon>DisbursementsDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\EmployeeHome.aspx.cs">
+      <DependentUpon>EmployeeHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\EmployeeHome.aspx.designer.cs">
+      <DependentUpon>EmployeeHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\RequestStationery.aspx.cs">
+      <DependentUpon>RequestStationery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\RequestStationery.aspx.designer.cs">
+      <DependentUpon>RequestStationery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\RequisitionApproval.aspx.cs">
+      <DependentUpon>RequisitionApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\RequisitionApproval.aspx.designer.cs">
+      <DependentUpon>RequisitionApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\ViewRequest.aspx.cs">
+      <DependentUpon>ViewRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\ViewRequest.aspx.designer.cs">
+      <DependentUpon>ViewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\ApproveAdjustmentVoucher.aspx.cs">
+      <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\ApproveAdjustmentVoucher.aspx.designer.cs">
+      <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\ChangeDeliveryDate.aspx.cs">
+      <DependentUpon>ChangeDeliveryDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\ChangeDeliveryDate.aspx.designer.cs">
+      <DependentUpon>ChangeDeliveryDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\CollectionInformation.aspx.cs">
+      <DependentUpon>CollectionInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\CollectionInformation.aspx.designer.cs">
+      <DependentUpon>CollectionInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\DisbursementList.aspx.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\DisbursementList.aspx.designer.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\InventoryList.aspx.cs">
+      <DependentUpon>InventoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\InventoryList.aspx.designer.cs">
+      <DependentUpon>InventoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\NotCollected.aspx.cs">
+      <DependentUpon>NotCollected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\NotCollected.aspx.designer.cs">
+      <DependentUpon>NotCollected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RaiseAdjustmentVoucher.aspx.cs">
+      <DependentUpon>RaiseAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RaiseAdjustmentVoucher.aspx.designer.cs">
+      <DependentUpon>RaiseAdjustmentVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RaisePurchaseOrder.aspx.cs">
+      <DependentUpon>RaisePurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RaisePurchaseOrder.aspx.designer.cs">
+      <DependentUpon>RaisePurchaseOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\Request.aspx.cs">
+      <DependentUpon>Request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\Request.aspx.designer.cs">
+      <DependentUpon>Request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RequisitionTrend.aspx.cs">
+      <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\RequisitionTrend.aspx.designer.cs">
+      <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StationaryOrderBy.aspx.cs">
+      <DependentUpon>StationaryOrderBy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StationaryOrderBy.aspx.designer.cs">
+      <DependentUpon>StationaryOrderBy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StockCard.aspx.cs">
+      <DependentUpon>StockCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StockCard.aspx.designer.cs">
+      <DependentUpon>StockCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StoreEmployeeHome.aspx.cs">
+      <DependentUpon>StoreEmployeeHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\StoreEmployee\StoreEmployeeHome.aspx.designer.cs">
+      <DependentUpon>StoreEmployeeHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <EntityDeploy Include="Model\LogicUniversity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LogicUniversity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\LogicUniversity.edmx.diagram">
+      <DependentUpon>LogicUniversity.edmx</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="WebView\Site1.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>8236</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8236/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

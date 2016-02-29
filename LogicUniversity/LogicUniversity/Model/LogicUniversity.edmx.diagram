@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="923ae44716b14e7481596a9f66dd1264" Name="Diagram1">
+        <EntityTypeShape EntityType="LogicUniversityModel.AdjVoucher" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.AdjVoucherItem" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Category" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.CollectionPoint" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Delegate" Width="1.5" PointX="6" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Department" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Disbursement" Width="1.5" PointX="6" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.DisbursementItem" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Employee" Width="1.5" PointX="3.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.ForgotPassword" Width="1.5" PointX="7.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Item" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Notification" Width="1.5" PointX="7.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.PurchaseOrder" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.PurchaseOrderItem" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Requisition" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.RequisitionItem" Width="1.5" PointX="13.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.StockTransaction" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.StoreEmployee" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.Supplier" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.SupplierItem" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogicUniversityModel.sysdiagram" Width="1.5" PointX="9.75" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="LogicUniversityModel.FK_AdjVoucher_StoreEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_AdjVoucherItem_AdjVoucher" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_AdjVoucherItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_StockTransaction_AdjVoucherItem" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Item_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Department_CollectionPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Disbursement_CollectionPoint" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Delegate_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Disbursement_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_StockTransaction_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Disbursement_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_DisbursementItem_Disbursement" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_DisbursementItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_Requisition_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_PurchaseOrderItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_RequisitionItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_StockTransaction_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_SupplierItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_PurchaseOrder_StoreEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_PurchaseOrder_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_PurchaseOrderItem_PurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_RequisitionItem_Requisition" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_StockTransaction_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.FK_SupplierItem_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="LogicUniversityModel.DisbursementRequestItem" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
