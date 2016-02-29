@@ -110,6 +110,7 @@
     <Content Include="WebView\test.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\NotificationControl.cs" />
     <Compile Include="Model\AdjVoucher.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -200,6 +201,7 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Util\Utilities.cs" />
     <Compile Include="WebView\ChangePIN.aspx.cs">
       <DependentUpon>ChangePIN.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
