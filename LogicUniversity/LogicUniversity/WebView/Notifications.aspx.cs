@@ -16,10 +16,13 @@ namespace LogicUniversity.WebView
             if (!IsCallback)
             {
                 // not call back, i.e. first and only call when page loads
-                bool showDevVariables = false;
+                getCurrentEmployee();
 
+                bool showDevVariables = false;
                 toggleDevVariables(showDevVariables);
-                showVariables();
+                if(showDevVariables)
+                    showVariables();
+
                 getRelevantNotifications();
             }
             else
@@ -62,49 +65,72 @@ namespace LogicUniversity.WebView
                 //lstNotification = Control.NotificationControl.getNotificationList(currentEmployee.EmployeeID);
 
                 List<Util.FilNotiLstEle> lstNotification = new List<Util.FilNotiLstEle>();
-                lstNotification = Control.NotificationControl.getFilteredNotificationList(currentEmployee.EmployeeID);
+                lstNotification = Control.NotiListControl.getFilteredNotificationList(currentEmployee.EmployeeID);
 
                 if (NotificationGridView != null)
                 {
                     if (lstNotification != null)
                     {
-                        NotificationGridView.DataSource = lstNotification;
-                        NotificationGridView.DataBind();
+                        if (lstNotification.Count == 0)
+                        {
+                            if(lblNotiTitle != null)
+                                lblNotiTitle.Text = "No Notifications";
+                        }
+                        else
+                        {
+                            NotificationGridView.DataSource = lstNotification;
+                            NotificationGridView.DataBind();
+                        }
                     }
                 }
             }
-
         }
 
         private void showVariables()
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.showVariables()");
 
+            if ((lblSessType != null) && (Session["type"] != null)) // WTF! I have to check the label I made even exists first before I use it!!!
+            {
+                lblSessType.Text = Session["type"] as string;
+            }
+
+            if (currentEmployee != null)
+            {
+                if (lblDeptID != null)
+                    lblDeptID.Text = currentEmployee.DepartmentID.ToString();
+
+                if (lblEmpID != null)
+                    lblEmpID.Text = currentEmployee.EmployeeID.ToString();
+            }
+        }
+
+        private void getCurrentEmployee()
+        {
+            System.Diagnostics.Debug.WriteLine(">> Notification.getCurrentEmployee()");
+
             string strSessType = "";
 
             if (Session["type"] != null)
             {
                 strSessType = Session["type"] as string;
-                //System.Diagnostics.Debug.WriteLine(">> strSessType=" + strSessType);
-                if (lblSessType != null) // WTF! I have to check the label I made even exists first before I use it!!!
-                    lblSessType.Text = strSessType;
             }
-
 
             if (strSessType.Equals("Employee"))
             {
                 if (Session["User"] != null)
                 {
                     currentEmployee = Session["User"] as Model.Employee;
-
-                    if(lblDeptID != null)
-                        lblDeptID.Text = currentEmployee.DepartmentID.ToString();
-
-                    if(lblEmpID != null)
-                        lblEmpID.Text = currentEmployee.EmployeeID.ToString();
                 }
-
             }
+        }
+
+        protected void newPageNotificationGridView(object sender, GridViewPageEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Notification.newPageNotificationGridView([e.NewPageIndex=" + e.NewPageIndex + "])");
+
+            NotificationGridView.PageIndex = e.NewPageIndex;
+            NotificationGridView.DataBind();
         }
     }
 }
