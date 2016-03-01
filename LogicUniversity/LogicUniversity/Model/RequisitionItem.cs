@@ -24,6 +24,7 @@ namespace LogicUniversity.Model
         public string ItemID { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Status { get; set; }
+        public string Reson { get; set; }
     
         public virtual Item Item { get; set; }
         public virtual Requisition Requisition { get; set; }

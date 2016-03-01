@@ -16,7 +16,7 @@ namespace LogicUniversity.Model
         private string status;
         private string reason;
 
-        public RequisitionApproval(int requisitionForm,int requisitionItemID, string employeeName, string submittedDate, string itemDescription, string quantity)
+        public RequisitionApproval(int requisitionForm, int requisitionItemID, string employeeName, string submittedDate, string itemDescription, string quantity)
         {
             this.requisitionForm = requisitionForm;
             this.requisitionItemID = requisitionItemID;
@@ -36,6 +36,15 @@ namespace LogicUniversity.Model
             this.status = status;
             this.reason = reason;
         }
+
+        public RequisitionApproval(int requisitionItemID, string status, string reason)
+        {
+
+            this.requisitionItemID = requisitionItemID;
+            this.status = status;
+            this.reason = reason;
+        }
+
         public int RequisitionForm
         {
             get

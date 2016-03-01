@@ -13,9 +13,9 @@
         <asp:Label ID="txtMessage" runat="server"></asp:Label>
         <br />
     
-        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
+        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00002"></asp:TextBox>
         <br />
-        PIN<asp:TextBox ID="txtPIN" runat="server"></asp:TextBox>
+        PIN<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
         <br />
         <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
         <br />
