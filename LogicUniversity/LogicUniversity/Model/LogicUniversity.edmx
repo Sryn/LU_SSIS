@@ -37,6 +37,8 @@
           <Property Name="CollectionPointID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CollectionPointName" Type="varchar" MaxLength="50" />
           <Property Name="Time" Type="varchar" MaxLength="50" />
+          <Property Name="FirstCollectionDate" Type="varchar" MaxLength="50" />
+          <Property Name="SecondCollectionDate" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Delegate">
           <Key>
@@ -164,6 +166,7 @@
           <Property Name="ItemID" Type="varchar" MaxLength="50" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Reson" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="StockTransaction">
           <Key>
@@ -719,6 +722,8 @@
           <Property Name="CollectionPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CollectionPointName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstCollectionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SecondCollectionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Departments" Relationship="Self.FK_Department_CollectionPoint" FromRole="CollectionPoint" ToRole="Department" />
           <NavigationProperty Name="Disbursements" Relationship="Self.FK_Disbursement_CollectionPoint" FromRole="CollectionPoint" ToRole="Disbursement" />
         </EntityType>
@@ -870,6 +875,7 @@
           <Property Name="ItemID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Reson" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Item" Relationship="Self.FK_RequisitionItem_Item" FromRole="RequisitionItem" ToRole="Item" />
           <NavigationProperty Name="Requisition" Relationship="Self.FK_RequisitionItem_Requisition" FromRole="RequisitionItem" ToRole="Requisition" />
           <NavigationProperty Name="DisbursementItems" Relationship="Self.DisbursementRequestItem" FromRole="RequisitionItem" ToRole="DisbursementItem" />
@@ -1411,6 +1417,8 @@
                 <ScalarProperty Name="CollectionPointID" ColumnName="CollectionPointID" />
                 <ScalarProperty Name="CollectionPointName" ColumnName="CollectionPointName" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="FirstCollectionDate" ColumnName="FirstCollectionDate" />
+                <ScalarProperty Name="SecondCollectionDate" ColumnName="SecondCollectionDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1542,6 +1550,7 @@
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reson" ColumnName="Reson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

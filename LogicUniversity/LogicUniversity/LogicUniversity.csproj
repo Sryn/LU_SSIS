@@ -78,9 +78,7 @@
       <LastGenOutput>LogicUniversity.cs</LastGenOutput>
     </Content>
     <Content Include="Service1.svc" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="WebView\ChangePIN.aspx" />
     <Content Include="WebView\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="WebView\Employee\ChangeDepartmentRepresentative.aspx" />
@@ -110,7 +108,14 @@
     <Content Include="WebView\test.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\DisbursementController.cs" />
+    <Compile Include="Control\EmailControl.cs" />
+    <Compile Include="Control\LoginControl.cs" />
+    <Compile Include="Control\CollectionPointControl.cs" />
     <Compile Include="Control\NotiListControl.cs" />
+    <Compile Include="Control\RequestListControl.cs" />
+    <Compile Include="Control\RequestStationeryControl.cs" />
+    <Compile Include="Control\RequisitionApprovalControl.cs" />
     <Compile Include="Model\AdjVoucher.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -123,11 +128,6 @@
     <Compile Include="Model\CollectionPoint.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Control\EmailControl.cs" />
-    <Compile Include="Control\LoginControl.cs" />
-    <Compile Include="Control\RequestListControl.cs" />
-    <Compile Include="Control\RequestStationeryControl.cs" />
-    <Compile Include="Control\RequisitionApprovalControl.cs" />
     <Compile Include="Model\Delegate.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -140,6 +140,7 @@
     <Compile Include="Model\DisbursementItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DisbursementItemViewModel.cs" />
     <Compile Include="Model\Employee.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -164,8 +165,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LogicUniversity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\RequestListItem.cs" />
-    <Compile Include="Model\RequisitionApproval.cs" />
     <Compile Include="Model\Notification.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -175,17 +174,14 @@
     <Compile Include="Model\PurchaseOrderItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RequestListItem.cs" />
     <Compile Include="Model\Requisition.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RequisitionApproval.cs" />
     <Compile Include="Model\RequisitionItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IService1.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\StockTransaction.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -201,7 +197,12 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Util\Utilities.cs" />
+    <Compile Include="Model\Utilities.cs" />
+    <Compile Include="Service1.svc.cs">
+      <DependentUpon>Service1.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IService1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebView\ChangePIN.aspx.cs">
       <DependentUpon>ChangePIN.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -411,6 +412,7 @@
     <Content Include="Model\LogicUniversity.edmx.diagram">
       <DependentUpon>LogicUniversity.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\LogicUniversity.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

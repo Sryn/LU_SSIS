@@ -114,7 +114,7 @@ namespace LogicUniversity.Control
             return newNotificationList;
         }
 
-        internal static List<Util.FilNotiLstEle> getFilteredNotificationList(string empID)
+        internal static List<Model.FilNotiLstEle> getFilteredNotificationList(string empID)
         {
             System.Diagnostics.Debug.WriteLine(">> NotificationControl.getFilteredNotificationList( empID=" + empID + ")");
 
@@ -123,20 +123,20 @@ namespace LogicUniversity.Control
             DateTime aDateTime;
             String aMsg, fromUser, combNameRole;
 
-            Util.FilNotiLstEle aFilNotiLstEle;
+            Model.FilNotiLstEle aFilNotiLstEle;
 
             //LoginControl loginCrt = new LoginControl();
 
             List<Notification> newNotificationList = getNotificationList(empID);
 
-            List<Util.FilNotiLstEle> newFilteredNotificationList = new List<Util.FilNotiLstEle>();
+            List<Model.FilNotiLstEle> newFilteredNotificationList = new List<Model.FilNotiLstEle>();
 
             foreach (Notification aNotification in newNotificationList)
             {
                 //FilNotiLstEle aFilNotiLstEle = new FilNotiLstEle();
-                aFilNotiLstEle = new Util.FilNotiLstEle();
+                aFilNotiLstEle = new Model.FilNotiLstEle();
 
-                aDateTime = (DateTime) aNotification.NotificationDate;
+                aDateTime = (DateTime)aNotification.NotificationDate;
                 aMsg = aNotification.Message;
                 fromUser = aNotification.FromUser;
 

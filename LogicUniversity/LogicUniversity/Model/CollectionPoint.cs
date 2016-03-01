@@ -23,6 +23,8 @@ namespace LogicUniversity.Model
         public int CollectionPointID { get; set; }
         public string CollectionPointName { get; set; }
         public string Time { get; set; }
+        public string FirstCollectionDate { get; set; }
+        public string SecondCollectionDate { get; set; }
     
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
