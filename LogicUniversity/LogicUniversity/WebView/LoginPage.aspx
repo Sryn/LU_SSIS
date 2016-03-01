@@ -13,9 +13,13 @@
         <asp:Label ID="txtMessage" runat="server"></asp:Label>
         <br />
     
+<<<<<<< HEAD
         EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00002"></asp:TextBox>
+=======
+        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
+>>>>>>> origin/master
         <br />
-        PIN<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
+        PIN<asp:TextBox ID="txtPIN" runat="server"></asp:TextBox>
         <br />
         <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
         <br />

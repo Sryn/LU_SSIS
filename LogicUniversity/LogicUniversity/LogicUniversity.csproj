@@ -111,7 +111,10 @@
     <Compile Include="Control\DisbursementController.cs" />
     <Compile Include="Control\EmailControl.cs" />
     <Compile Include="Control\LoginControl.cs" />
+<<<<<<< HEAD
     <Compile Include="Control\CollectionPointControl.cs" />
+=======
+>>>>>>> origin/master
     <Compile Include="Control\NotiListControl.cs" />
     <Compile Include="Control\RequestListControl.cs" />
     <Compile Include="Control\RequestStationeryControl.cs" />
