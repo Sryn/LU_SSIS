@@ -9,7 +9,7 @@ namespace LogicUniversity.Control
 {
     public class EmailControl
     {
-        public void SendEmail(string to, string subject, string body)
+        public void SendEmail(string to, string subject, string body,List<string> cclist)
         {
             string from = "logicuniversity.edu.sg@gmail.com";
             string password = "logicuniversity@123";
@@ -17,11 +17,9 @@ namespace LogicUniversity.Control
             {
                 mm.Subject = subject;
                 mm.Body = body;
-                //if (postedFile.ContentLength > 0)
-                //{
-                //    string fileName = Path.GetFileName(postedFile.FileName);
-                //    mm.Attachments.Add(new Attachment(postedFile.InputStream, fileName));
-                //}
+                MailAddressCollection temp = mm.CC;
+                foreach (string s in cclist)
+                    temp.Add(s);
                 mm.IsBodyHtml = false;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";

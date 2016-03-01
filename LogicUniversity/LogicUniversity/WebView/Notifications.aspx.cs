@@ -67,7 +67,7 @@ namespace LogicUniversity.WebView
                 //List<Model.Notification> lstNotification = new List<Model.Notification>();
                 //lstNotification = Control.NotificationControl.getNotificationList(currentEmployee.EmployeeID);
 
-                List<Util.FilNotiLstEle> lstNotification = new List<Util.FilNotiLstEle>();
+                List<Model.FilNotiLstEle> lstNotification = new List<Model.FilNotiLstEle>();
 
                 if(strSessType.Equals("Employee"))
                     lstNotification = Control.NotiListControl.getFilteredNotificationList(currentEmployee.EmployeeID);
