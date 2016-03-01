@@ -10,6 +10,9 @@ namespace LogicUniversity.WebView
     public partial class Notification : System.Web.UI.Page
     {
         Model.Employee currentEmployee = null;
+        Model.StoreEmployee currentStoreEmployee = null;
+
+        String strSessType = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -59,13 +62,25 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.getRelevantNotifications()");
             //throw new NotImplementedException();
-            if (currentEmployee != null)
+            if (currentEmployee != null || currentStoreEmployee != null)
             {
                 //List<Model.Notification> lstNotification = new List<Model.Notification>();
                 //lstNotification = Control.NotificationControl.getNotificationList(currentEmployee.EmployeeID);
 
                 List<Util.FilNotiLstEle> lstNotification = new List<Util.FilNotiLstEle>();
-                lstNotification = Control.NotiListControl.getFilteredNotificationList(currentEmployee.EmployeeID);
+
+                if(strSessType.Equals("Employee"))
+                    lstNotification = Control.NotiListControl.getFilteredNotificationList(currentEmployee.EmployeeID);
+                else if(strSessType.Equals("StoreEmployee"))
+                    lstNotification = Control.NotiListControl.getFilteredNotificationList(currentStoreEmployee.StoreEmployeeID);
+                else
+                {
+                    // ERROR: Unknown Employee Type
+                    lstNotification = null;
+
+                    if (lblNotiTitle != null)
+                        lblNotiTitle.Text = "ERROR: Unknown Employee Type = " + strSessType;
+                }
 
                 if (NotificationGridView != null)
                 {
@@ -90,9 +105,9 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.showVariables()");
 
-            if ((lblSessType != null) && (Session["type"] != null)) // WTF! I have to check the label I made even exists first before I use it!!!
+            if ((lblSessType != null)) // WTF! I have to check the label I made even exists first before I use it!!!
             {
-                lblSessType.Text = Session["type"] as string;
+                lblSessType.Text = strSessType;
             }
 
             if (currentEmployee != null)
@@ -109,7 +124,7 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.getCurrentEmployee()");
 
-            string strSessType = "";
+            //string strSessType = "";
 
             if (Session["type"] != null)
             {
@@ -122,6 +137,17 @@ namespace LogicUniversity.WebView
                 {
                     currentEmployee = Session["User"] as Model.Employee;
                 }
+            }
+            else if (strSessType.Equals("StoreEmployee"))
+            {
+                if (Session["User"] != null)
+                {
+                    currentStoreEmployee = Session["User"] as Model.StoreEmployee;
+                }
+            }
+            else
+            {
+                // ERROR: Unknown Employee Type
             }
         }
 
