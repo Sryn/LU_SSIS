@@ -10,16 +10,22 @@ namespace LogicUniversity.WebView
     public partial class Notification : System.Web.UI.Page
     {
         Model.Employee currentEmployee = null;
+        Model.StoreEmployee currentStoreEmployee = null;
+
+        String strSessType = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsCallback)
             {
                 // not call back, i.e. first and only call when page loads
-                bool showDevVariables = false;
+                getCurrentEmployee();
 
+                bool showDevVariables = false;
                 toggleDevVariables(showDevVariables);
-                showVariables();
+                if(showDevVariables)
+                    showVariables();
+
                 getRelevantNotifications();
             }
             else
@@ -56,55 +62,101 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.getRelevantNotifications()");
             //throw new NotImplementedException();
-            if (currentEmployee != null)
+            if (currentEmployee != null || currentStoreEmployee != null)
             {
                 //List<Model.Notification> lstNotification = new List<Model.Notification>();
                 //lstNotification = Control.NotificationControl.getNotificationList(currentEmployee.EmployeeID);
 
-                List<Util.FilNotiLstEle> lstNotification = new List<Util.FilNotiLstEle>();
-                lstNotification = Control.NotificationControl.getFilteredNotificationList(currentEmployee.EmployeeID);
+                List<Model.FilNotiLstEle> lstNotification = new List<Model.FilNotiLstEle>();
+
+                if(strSessType.Equals("Employee"))
+                    lstNotification = Control.NotiListControl.getFilteredNotificationList(currentEmployee.EmployeeID);
+                else if(strSessType.Equals("StoreEmployee"))
+                    lstNotification = Control.NotiListControl.getFilteredNotificationList(currentStoreEmployee.StoreEmployeeID);
+                else
+                {
+                    // ERROR: Unknown Employee Type
+                    lstNotification = null;
+
+                    if (lblNotiTitle != null)
+                        lblNotiTitle.Text = "ERROR: Unknown Employee Type = " + strSessType;
+                }
 
                 if (NotificationGridView != null)
                 {
                     if (lstNotification != null)
                     {
-                        NotificationGridView.DataSource = lstNotification;
-                        NotificationGridView.DataBind();
+                        if (lstNotification.Count == 0)
+                        {
+                            if(lblNotiTitle != null)
+                                lblNotiTitle.Text = "No Notifications";
+                        }
+                        else
+                        {
+                            NotificationGridView.DataSource = lstNotification;
+                            NotificationGridView.DataBind();
+                        }
                     }
                 }
             }
-
         }
 
         private void showVariables()
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.showVariables()");
 
-            string strSessType = "";
+            if ((lblSessType != null)) // WTF! I have to check the label I made even exists first before I use it!!!
+            {
+                lblSessType.Text = strSessType;
+            }
+
+            if (currentEmployee != null)
+            {
+                if (lblDeptID != null)
+                    lblDeptID.Text = currentEmployee.DepartmentID.ToString();
+
+                if (lblEmpID != null)
+                    lblEmpID.Text = currentEmployee.EmployeeID.ToString();
+            }
+        }
+
+        private void getCurrentEmployee()
+        {
+            System.Diagnostics.Debug.WriteLine(">> Notification.getCurrentEmployee()");
+
+            //string strSessType = "";
 
             if (Session["type"] != null)
             {
                 strSessType = Session["type"] as string;
-                //System.Diagnostics.Debug.WriteLine(">> strSessType=" + strSessType);
-                if (lblSessType != null) // WTF! I have to check the label I made even exists first before I use it!!!
-                    lblSessType.Text = strSessType;
             }
-
 
             if (strSessType.Equals("Employee"))
             {
                 if (Session["User"] != null)
                 {
                     currentEmployee = Session["User"] as Model.Employee;
-
-                    if(lblDeptID != null)
-                        lblDeptID.Text = currentEmployee.DepartmentID.ToString();
-
-                    if(lblEmpID != null)
-                        lblEmpID.Text = currentEmployee.EmployeeID.ToString();
                 }
-
             }
+            else if (strSessType.Equals("StoreEmployee"))
+            {
+                if (Session["User"] != null)
+                {
+                    currentStoreEmployee = Session["User"] as Model.StoreEmployee;
+                }
+            }
+            else
+            {
+                // ERROR: Unknown Employee Type
+            }
+        }
+
+        protected void newPageNotificationGridView(object sender, GridViewPageEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Notification.newPageNotificationGridView([e.NewPageIndex=" + e.NewPageIndex + "])");
+
+            NotificationGridView.PageIndex = e.NewPageIndex;
+            NotificationGridView.DataBind();
         }
     }
 }

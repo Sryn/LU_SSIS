@@ -12,6 +12,14 @@ namespace LogicUniversity.Control
         {
             ctx = new Model.LogicUniversityEntities();
         }
+        //success = successfully deleted
+        public string DeleteRequisition(int requisitionID)
+        {
+            List<Model.Requisition> req = ctx.Requisitions.ToList();
+            req = null;
+            ctx.SaveChanges();
+            return "success";
+        }
         public List<Model.RequisitionItem> getRequistionList(string Description,string status,string empID)
         {
             if (status.Equals("All"))
@@ -42,7 +50,6 @@ namespace LogicUniversity.Control
                 resultList.Add(result);
             }
             return resultList;
-
         }
     }
 }

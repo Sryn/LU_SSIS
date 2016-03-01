@@ -1,0 +1,8 @@
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll.config
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.pdb
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\bin\EntityFramework.dll
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\bin\EntityFramework.xml
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\obj\Release\LogicUniversity.csprojResolveAssemblyReference.cache
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\obj\Release\LogicUniversity.dll
+C:\Users\e0001417\Downloads\LogicUniversity_ver3.2\LogicUniversity\LogicUniversity\LogicUniversity\obj\Release\LogicUniversity.pdb

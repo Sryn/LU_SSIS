@@ -17,7 +17,10 @@ namespace LogicUniversity.WebView
         protected void Button1_Click(object sender, EventArgs e)
         {
             Control.EmailControl emailCrt = new Control.EmailControl();
-            emailCrt.SendEmail("hhz.neo@gmail.com","testing123","testing123");
+            List<string> cclist = new List<string>();
+            cclist.Add("tanadele_sg@hotmail.com");
+            cclist.Add("asa.aung1989@gmail.com");
+            emailCrt.SendEmail("hhz.neo@gmail.com", "Hi I am Testing", "Testing 123", cclist);
         }
     }
 }

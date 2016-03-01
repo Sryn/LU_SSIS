@@ -21,10 +21,31 @@ namespace LogicUniversity.Control
             {
                 foreach(Model.RequisitionItem reqItem in req.RequisitionItems)
                 {
-                    result.Add(new Model.RequisitionApproval(reqItem.RequisitionID ?? default(int), reqItem.RequisitionItemID,req.Employee.Name,req.Date.ToString(),reqItem.Item.Description, reqItem.Quantity.ToString()));
+                    if(reqItem.Status.Equals("PendingApproval"))
+                        result.Add(new Model.RequisitionApproval(reqItem.RequisitionID ?? default(int), reqItem.RequisitionItemID,req.Employee.Name,req.Date.ToString(),reqItem.Item.Description, reqItem.Quantity.ToString()));
                 }
             }
             return result;
         }
+        // in RequisitionApproval Object, status should be only both "Approved" and "Reject"
+        //success => successfully updated
+        public string ApproveRequisition(List<Model.RequisitionApproval> reqlist)
+        {
+            Model.RequisitionItem requisition;
+            foreach (Model.RequisitionApproval req in reqlist)
+            {
+                requisition = ctx.RequisitionItems.Where(x => x.RequisitionItemID == req.RequisitionItemID).FirstOrDefault();
+                if (req.Status.Equals("Approve"))
+                {
+                    requisition.Status = "Approved";
+                }else if (req.Status.Equals("Reject"))
+                {
+                    requisition.Status = "Denied";
+                }
+                requisition.Reson = req.Reason;
+                ctx.SaveChanges();
+            }
+            return "success";
+        }        
     }
 }
