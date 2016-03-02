@@ -108,6 +108,7 @@
     <Content Include="WebView\test.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\ChangeRepresentativeControl.cs" />
     <Compile Include="Control\DisbursementController.cs" />
     <Compile Include="Control\EmailControl.cs" />
     <Compile Include="Control\LoginControl.cs" />

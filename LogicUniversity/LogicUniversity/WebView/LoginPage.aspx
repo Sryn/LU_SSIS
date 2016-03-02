@@ -13,7 +13,7 @@
         <asp:Label ID="txtMessage" runat="server"></asp:Label>
         <br />
     
-        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00002"></asp:TextBox>
+        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00001"></asp:TextBox>
         <br />
         PIN<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
         <br />

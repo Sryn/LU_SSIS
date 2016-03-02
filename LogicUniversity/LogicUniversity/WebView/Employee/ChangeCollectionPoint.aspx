@@ -4,10 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblChangeCollPt" runat="server" Text="Change Collection Point"></asp:Label>
     <table class="auto-style1">
-<%--        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>--%>
         <tr>
             <td><asp:Label ID="lblTxtSessType" runat="server" Text="Session[type]"></asp:Label></td>
             <td><asp:Label ID="lblSessType" runat="server" Text="Label"></asp:Label></td>
