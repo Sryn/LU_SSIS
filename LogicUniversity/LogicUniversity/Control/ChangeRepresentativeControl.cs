@@ -99,7 +99,7 @@ namespace LogicUniversity.Control
 
                     context.SaveChanges();
 
-                    rtnMsg = "Changes Successful";
+                    rtnMsg = "Changes Successful ";
                 }
                 catch (Exception)
                 {
@@ -109,6 +109,17 @@ namespace LogicUniversity.Control
                     rtnMsg += "Cannot change the roles of both current and new representative at the same time.";
                 }
             } 
+
+            return rtnMsg;
+        }
+
+        public static string sendChangeDeptRepEmail(string currEmpID, string prevDeptRepID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> EmailControl.sendChangeDeptRepEmail( currEmpID=" + currEmpID + ", prevDeptRepID=" + prevDeptRepID + ")");
+
+            string rtnMsg = "ERROR: sendChangeDeptRepEmail not implemented yet";
+
+            // public void SendEmail(string to, string subject, string body,List<string> cclist)
 
             return rtnMsg;
         }

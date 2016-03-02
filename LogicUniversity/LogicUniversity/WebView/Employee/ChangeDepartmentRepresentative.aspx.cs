@@ -15,6 +15,12 @@ namespace LogicUniversity.WebView.Employee
             set { ViewState["strCurrDeptRep"] = value; }
         }
 
+        protected String prevDeptRepID
+        {
+            get { return ViewState["prevDeptRepID"] as String; }
+            set { ViewState["prevDeptRepID"] = value; }
+        }
+
         String strSessType = "";
 
         Model.Employee currEmp = null;
@@ -30,6 +36,8 @@ namespace LogicUniversity.WebView.Employee
                 getSessionData();
 
                 getCurrDeptRep();
+
+                saveCurrDeprRep(); // for use during email notification
 
                 fillDropDownList();
 
@@ -56,6 +64,18 @@ namespace LogicUniversity.WebView.Employee
 
         }
 
+        private void saveCurrDeprRep()
+        {
+            System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.saveCurrDeprRep()");
+            //throw new NotImplementedException();
+
+            if (currDeptRep != null)
+            {
+                prevDeptRepID = currDeptRep.EmployeeID;
+            }
+
+        }
+
         private void getCurrDeptRep()
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.getCurrDeptRep()");
@@ -63,7 +83,7 @@ namespace LogicUniversity.WebView.Employee
             if (currEmp != null)
             {
                 currDeptRep = Control.CollectionPointControl.getDeptRep(currEmp.DepartmentID);
-                strCurrDeptRep = currDeptRep.Name + " (" + currDeptRep.EmployeeID + ")";
+                strCurrDeptRep = currDeptRep.Name + " (" + currDeptRep.EmployeeID + ")"; // for the label
             }
         }
 
@@ -157,7 +177,7 @@ namespace LogicUniversity.WebView.Employee
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.btnClick_ChangeDeptRep(ddlNewDeptRep.SelectedItem.Value=" + ddlNewDeptRep.SelectedItem.Value + ")");
 
-            String newDeptRepID = ddlNewDeptRep.SelectedItem.Value, confirmMsg = "";
+            String newDeptRepID = ddlNewDeptRep.SelectedItem.Value, confirmMsg = "", emailRtnMsg = "";
 
             //if (currDeptRep != null)
                 //confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(currDeptRep.EmployeeID, newDeptRepID);
@@ -167,8 +187,6 @@ namespace LogicUniversity.WebView.Employee
             else
                 confirmMsg = "ERROR: Changes Unsuccessful with system error msg: " + "currDeptRep not loaded after PostBack";
 
-            showPopUp(confirmMsg);
-
             if(!confirmMsg.Substring(0, 5).Equals("ERROR"))
             {
                 getCurrDeptRep();
@@ -176,7 +194,26 @@ namespace LogicUniversity.WebView.Employee
                 showCurrDeptRep(); // update label to show new current dept rep
 
                 // NEED TO DO eMail Notifications here to prev rep, new rep, dept head and store clerks
+
+                if (currEmp != null && prevDeptRepID != null)
+                    emailRtnMsg = Control.ChangeRepresentativeControl.sendChangeDeptRepEmail(currEmp.EmployeeID, prevDeptRepID);
+                else
+                    confirmMsg += " but ERROR sending notification emails.";
+
+                if (emailRtnMsg.Substring(0, 5).Equals("ERROR"))
+                {
+                    confirmMsg += emailRtnMsg;
+                }
+                else
+                {
+                    // temp
+                    confirmMsg += emailRtnMsg;
+                    confirmMsg += "";
+                }
             }
+
+            showPopUp(confirmMsg);
+
         }
 
         private void showPopUp(String msg)
