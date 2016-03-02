@@ -17,6 +17,13 @@ namespace LogicUniversity.Model
     }
 <<<<<<< HEAD
 
+    public struct deptEmpDDL_Ele
+    {
+        public String EmployeeID { get; set; }
+
+        public String combEmpNameID { get; set; }
+    }
+
     public class MySession
     {
         // http://stackoverflow.com/questions/621549/how-to-access-session-variables-from-any-class-in-asp-net
