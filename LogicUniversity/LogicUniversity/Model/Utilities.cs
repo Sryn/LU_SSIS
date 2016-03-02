@@ -15,7 +15,6 @@ namespace LogicUniversity.Model
         public String msgFilNoti { get; set; }
         public String fromUserFilNoti { get; set; }
     }
-<<<<<<< HEAD
 
     public struct deptEmpDDL_Ele
     {
@@ -126,6 +125,4 @@ namespace LogicUniversity.Model
 
     }
 
-=======
->>>>>>> origin/master
 }
