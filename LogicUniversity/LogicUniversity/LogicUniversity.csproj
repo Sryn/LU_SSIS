@@ -175,6 +175,7 @@
     <Compile Include="Model\PurchaseOrderItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RegexUtilities.cs" />
     <Compile Include="Model\RequestListItem.cs" />
     <Compile Include="Model\Requisition.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>

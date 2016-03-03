@@ -143,10 +143,13 @@ namespace LogicUniversity.WebView.Employee
 
         public void btnClick_ChangeCollPt(Object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(">> ChangeCollectionPoint.btnClick_ChangeCollPt( ddlNewCollPt.SelectedItem.Value=" + ddlNewCollPt.SelectedItem.Value + " )");
+            System.Diagnostics.Debug.WriteLine(">> ChangeCollectionPoint.btnClick_ChangeCollPt( "
+                +"ddlNewCollPt.SelectedItem.Value=" + ddlNewCollPt.SelectedItem.Value 
+                + ", .Text="+ddlNewCollPt.SelectedItem.Text+" )");
 
-            int rtnInt = 0
-                , newCollPtID = Convert.ToInt32(ddlNewCollPt.SelectedItem.Value);
+            int rtnInt = 0, newCollPtID = Convert.ToInt32(ddlNewCollPt.SelectedItem.Value);
+
+            string newCollPtName = ddlNewCollPt.SelectedItem.Text;
 
             if (lblNewCollPt != null)
             {
@@ -158,14 +161,25 @@ namespace LogicUniversity.WebView.Employee
 
             if (lblChangeResult != null)
             {
-                if (rtnInt == 1)
-                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
+                if (rtnInt == 1) {
+                    //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
+                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully.";
+
+                    if (lblCurrCollPt != null)
+                        lblCurrCollPt.Text = newCollPtName;
+                }
                 else if (rtnInt == 0)
                     lblChangeResult.Text = "ERROR: New Collection Point Not Saved.";
                 else if (rtnInt > 1)
                     lblChangeResult.Text = "ERROR: Multiple Collection Points were saved.";
                 else
                     lblChangeResult.Text = "ERROR: Some unknown error occured with rtnInt=" + rtnInt;
+            }
+
+            if (rtnInt == 1)
+            {
+                // code for do notification
+                lblChangeResult.Text += Control.CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
             }
 
         }

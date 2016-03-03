@@ -7,10 +7,6 @@ namespace LogicUniversity.Model
 {
     public struct FilNotiLstEle
     {
-        //public DateTime dateTimeFilNoti;
-        //public String msgFilNoti;
-        //public String fromUserFilNoti;
-
         public String dateTimeFilNoti { get; set; }
         public String msgFilNoti { get; set; }
         public String fromUserFilNoti { get; set; }
@@ -21,6 +17,15 @@ namespace LogicUniversity.Model
         public String EmployeeID { get; set; }
 
         public String combEmpNameID { get; set; }
+    }
+
+    // used in CollectionPointControl for having an email and 
+    // empID list of both ModelEmployees and Model.StoreEmployees
+    public struct empIdEmail 
+    {
+        public String EmployeeID { get; set; }
+
+        public String Email { get; set; }
     }
 
     public class MySession

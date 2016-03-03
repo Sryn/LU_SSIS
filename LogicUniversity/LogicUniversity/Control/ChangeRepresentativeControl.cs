@@ -63,7 +63,7 @@ namespace LogicUniversity.Control
             return newListDeptEmpsForDDL;
         }
 
-        private static String getCombEmpNameID(String empID, String empName)
+        public static String getCombEmpNameID(String empID, String empName)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.getCombEmpNameID(empID=" + empID + ", empName=" + empName + ")");
 
