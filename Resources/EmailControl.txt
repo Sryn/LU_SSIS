@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -47,20 +47,20 @@ namespace LogicUniversity.Control
             ctx.SaveChanges();
             try
             {
-                string body = "Dear " + name + ",\r\n";
+                string body = "Dear "+ name + ",\r\n";
                 body += "You have requested for a reset of your PIN to Logic University Stationery Store System.\r\n";
-                body += "http://localhost:8236/WebView/ForgotPassword.aspx?code=" + fpwd.Code + "\r\n\r\n";
-                body += "If you didn’t request a new PIN, please contact us immediately @ 8424-4865.\r\n\r\nThis is a system generated email, please donot reply.";
+                body += "http://localhost:8236/WebView/ForgotPassword.aspx?code="+ fpwd.Code+ "\r\n\r\n";
+                body += "If you didn�t request a new PIN, please contact us immediately @ 8424-4865.\r\n\r\nThis is a system generated email, please donot reply.";
                 string subject = "Reset PIN ";
                 SendEmail(email, subject, body, new List<string>());
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return "error";
             }
             return "success";
         }
-        public void SendEmail(string to, string subject, string body, List<string> cclist)
+        public void SendEmail(string to, string subject, string body,List<string> cclist)
         {
             string from = "logicuniversity.edu.sg@gmail.com";
             string password = "logicuniversity@123";
@@ -78,8 +78,7 @@ namespace LogicUniversity.Control
                 NetworkCredential NetworkCred = new NetworkCredential(from, password);
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = NetworkCred;
-                //smtp.Port = 587;
-                smtp.Port = 25;
+                smtp.Port = 587;
                 smtp.Send(mm);
                 System.Diagnostics.Debug.WriteLine("Mail is sent");
             }

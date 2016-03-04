@@ -51,15 +51,28 @@ namespace LogicUniversity.Control
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.changeCollectionPointForDept( deptID=" + deptID + ", newCollPt=" + newCollPt + ")");
 
-            int rtnInt;
+            //deptID = "ABCD"; // ERROR test - passed
+            //newCollPt = 2; // ERROR test - passed
 
-            var context = new LogicUniversityEntities();
+            int rtnInt = 0;
 
-            Department currDept = context.Departments.Single(x => x.DepartmentID == deptID);
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    Department currDept = context.Departments.Single(x => x.DepartmentID == deptID);
 
-            currDept.CollectionPointID = newCollPt;
+                    currDept.CollectionPointID = newCollPt;
 
-            rtnInt = context.SaveChanges();
+                    rtnInt = context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    context.Dispose();
+
+                    rtnInt = -1;
+                }
+            }
 
             return rtnInt;
         }
@@ -77,185 +90,215 @@ namespace LogicUniversity.Control
             return deptRep;
         }
 
-        // StoreFound = Store Employee Found;
-        // EmployeeFound = Employee Found
-        // NotFound = Not Found User;
-        // Delegate = Employee is delegate;
-        //public String Login(string UserID, string PIN)
-        //{
-        //    string UserType = UserID.Substring(0, 1);
-        //    if (UserType.Equals("S"))
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("StoreClerk Login");
-        //        StoreEmployee semp = ctx.StoreEmployees.Where(x => x.StoreEmployeeID == UserID && x.PIN == PIN).FirstOrDefault();
-        //        if (semp == null)
-        //        {
-        //            System.Diagnostics.Debug.WriteLine("StoreClerk Not Found");
-        //            return "NotFound";
-        //        }
-        //        return "StoreFound";
-        //    }
-        //    else if (UserType.Equals("E"))
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("Employee Login");
-        //        Employee emp = ctx.Employees.Where(x => x.EmployeeID == UserID && x.PIN == PIN).FirstOrDefault();
-        //        if (emp == null)
-        //        {
-        //            System.Diagnostics.Debug.WriteLine("Employee Not Found");
-        //            return "NotFound";
-        //        }
-        //        if (emp.Role != "Department Head")
-        //        {
-        //            Model.Delegate del = ctx.Delegates.Where(x => x.EmployeeID == emp.EmployeeID && x.ToDate >= DateTime.Today && x.FromDate <= DateTime.Today).FirstOrDefault();
-        //            if (del == null)
-        //            {
-        //                return "EmployeeFound";
-        //            }
-        //            else
-        //            {
-        //                System.Diagnostics.Debug.WriteLine("Delegate");
-        //                return "Delegate";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return "EmployeeFound";
-        //        }
-        //    }
-        //    return "NotFound";
-        //}
-        //public Employee getEmployeeUserObject(string empid)
-        //{
-        //    return ctx.Employees.Where(x => x.EmployeeID == empid).FirstOrDefault();
-        //}
-        //public StoreEmployee getStoreEmployeeUserObject(String sid)
-        //{
-        //    return ctx.StoreEmployees.Where(x => x.StoreEmployeeID == sid).FirstOrDefault();
-        //}
+        /*
+            To: Store Clerk, Store Supervisor, Store Manager
+            Cc: Department Representative, Department Head
+            Title: XX Department changed its Collection Point to XX
 
-        // success = successfully changed
-        // notfound = user not found
-        // error = type is not equal both StoreEmployee and Employee
-        //public String ChangePIN(Object user,string type,string oldPIN,string newPIN)
-        //{
-        //    string result = "error";
-        //    if (type.Equals("StoreEmployee"))
-        //    {
-        //        StoreEmployee semp = (StoreEmployee)user;
-        //        StoreEmployee sEmp = ctx.StoreEmployees.Where(x => x.StoreEmployeeID == semp.StoreEmployeeID && x.PIN == oldPIN).FirstOrDefault();
-        //        if (sEmp == null)
-        //            return "notfound";
-        //        sEmp.PIN = newPIN;
-        //        ctx.SaveChanges();
-        //        return "success";
-        //    }
-        //    if (type.Equals("Employee"))
-        //    {
-        //        Employee semp = (Employee)user;
-        //        Employee Emp = ctx.Employees.Where(x => x.EmployeeID == semp.EmployeeID && x.PIN == oldPIN).FirstOrDefault();
-        //        if (Emp == null)
-        //            return "notfound";
-        //        Emp.PIN = newPIN;
-        //        ctx.SaveChanges();
-        //        return "success";
-        //    }
-        //    return result;
-        //}
+            Dear Sir/ Madam,
+            Please be informed that XX Department has changed their collection point to XX.
+            This is a system generated email, please do not reply.
 
-        //internal static List<Notification> getNotificationList(string empID)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(">> NotificationControl.getNotificationList( empID=" + empID + ")");
+            Notification: XX Department has changed its collection point to XX.         
 
-        //    // returns unfiltered 5-columns Model.Notification as a list
+            public void SendEmail(string to, string subject, string body, List<string> cclist)
+         */
+        public static string sendChangeCollectionPointNotifications(Employee currEmp, Department currDept, string newCollPtName)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName=" + newCollPtName + ")");
 
-        //    //throw new NotImplementedException();
-        //    List<Notification> newNotificationList = null;
+            string msg = "", emailSubject = "", emailBody = "", notiMsg = "", currDeptName;
 
-        //    var context = new LogicUniversityEntities();
+            List<Model.empIdEmail> empIdEmailToList = new List<Model.empIdEmail>(), empIdEmailCCList = new List<Model.empIdEmail>();
 
-        //    newNotificationList = context.Notifications.Where(x => x.UserID == empID).OrderByDescending(x => x.NotificationDate).ToList();
+            List<String> justEmpEmailList = new List<String>();
 
-        //    return newNotificationList;
-        //}
+            if (currDept != null)
+            {
+                currDeptName = currDept.DepartmentName;
 
-        //internal static List<Model.FilNotiLstEle> getFilteredNotificationList(string empID)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(">> NotificationControl.getFilteredNotificationList( empID=" + empID + ")");
+                notiMsg = currDeptName + " Department has changed its collection point to " + newCollPtName;
 
-        //    // returns filtered 3-columns NotificationDate, Message, FromUser(UserName - UserRole) as a list
+                emailSubject = currDeptName + " Department changed its Collection Point to " + newCollPtName;
 
-        //    DateTime aDateTime;
-        //    String aMsg, fromUser, combNameRole;
+                emailBody = getEmailBody(currEmp, currDeptName, newCollPtName);
 
-        //    Model.FilNotiLstEle aFilNotiLstEle;
+                empIdEmailToList = getAllStoreEmployeesIdEmailToList();
 
-        //    //LoginControl loginCrt = new LoginControl();
+                empIdEmailCCList = getDeptHeadRepIdEmailList(currDept.DepartmentID);
 
-        //    List<Notification> newNotificationList = getNotificationList(empID);
+                // don't do this as it sends to the entire CC list for every TO email sent
+                // but I'm doing this temporarily until emailCtrl.SendEmail works with an email list for TO
+                foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
+                    empIdEmailToList.Add(empIdEmail);
 
-        //    List<Model.FilNotiLstEle> newFilteredNotificationList = new List<Model.FilNotiLstEle>();
+                if (empIdEmailToList.Count != 0)
+                {
+                    // send an email one-by-one to every email listed in empIdEmailToList
 
-        //    foreach (Notification aNotification in newNotificationList)
-        //    {
-        //        //FilNotiLstEle aFilNotiLstEle = new FilNotiLstEle();
-        //        aFilNotiLstEle = new Model.FilNotiLstEle();
+                    RegexUtilities regexUtil = new RegexUtilities();
+                    EmailControl emailCtrl = new EmailControl();
 
-        //        aDateTime = (DateTime)aNotification.NotificationDate;
-        //        aMsg = aNotification.Message;
-        //        fromUser = aNotification.FromUser;
+                    foreach (Model.empIdEmail empIdEmail in empIdEmailToList)
+                    {
+                        msg += sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
+                        justEmpEmailList.Add(empIdEmail.Email);
+                    }
 
-        //        combNameRole = getCombNameRole(fromUser);
+                    //foreach (String empEmail in justEmpEmailList)
+                    //{
+                    string empEmail = currEmp.Email; // temporary until emailCtrl.SendEmail works with an email list for TO
 
-        //        aFilNotiLstEle.dateTimeFilNoti = aDateTime.Date.ToString("dd-MMM-yyyy");
-        //        aFilNotiLstEle.msgFilNoti = aMsg;
-        //        aFilNotiLstEle.fromUserFilNoti = combNameRole;
+                        if (regexUtil.IsValidEmail(empEmail))
+                        {
+                            // valid email, so send
+                            try
+                            {
+                                emailCtrl.SendEmail(empEmail, emailSubject, emailBody, justEmpEmailList);
+                            }
+                            catch (Exception e)
+                            {
+                                // send email error
+                                System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                                msg += "\nSendEmail Exception caught for " + empEmail;
+                            }
+                        }
+                        else
+                        {
+                            // invalid email found
+                            msg += ", Invalid email: " + empEmail;
+                        }
+                    //}
+                }
+                else
+                {
+                    // ERROR: cannot get any recipient emails
+                    msg += "ERROR: Cannot get any recipient emails.";
+                }
 
-        //        newFilteredNotificationList.Add(aFilNotiLstEle);
-        //    }
+            }
+            else
+            {
+                // ERROR: no valid current department obtained
+                msg += "ERROR: No valid current department information obtained.";
+            }
 
-        //    //return newNotificationList;
+            return msg;
+        }
 
-        //    return newFilteredNotificationList;
-        //}
+        public static string sendNotification(string toEmpID, string notiMsg, string fromEmpID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotification(empID=" + toEmpID + ", notiMsg, fromEmpID=" + fromEmpID + ")");
+            //throw new NotImplementedException();
 
-        //private static String getCombNameRole(String fromUserID)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(">> NotificationControl.getCombNameRole( fromUserID=" + fromUserID + ")");
+            string rtnMsg = "";
 
-        //    LoginControl loginCrt = new LoginControl();
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    Notification aNotification = new Notification();
 
-        //    Employee anEmp;
-        //    StoreEmployee aStoreEmp;
+                    aNotification.UserID = toEmpID;
+                    aNotification.Message = notiMsg;
+                    aNotification.FromUser = fromEmpID;
+                    aNotification.NotificationDate = System.DateTime.Now;
 
-        //    String fromUserName = "", fromUserRole = "", combNameRole;
+                    context.Notifications.Add(aNotification);
 
-        //    if (fromUserID.Substring(0, 3).Equals("STR"))
-        //    {
-        //        // fromUser is StoreEmployee
-        //        aStoreEmp = loginCrt.getStoreEmployeeUserObject(fromUserID);
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                    rtnMsg += "\nERROR: sendNotification for empID=" + toEmpID;
+                }
+            }
 
-        //        fromUserName = aStoreEmp.Name;
-        //        fromUserRole = aStoreEmp.Role;
+            return rtnMsg;
+        }
 
-        //    }
-        //    else if (fromUserID.Substring(0, 3).Equals("Emp"))
-        //    {
-        //        // fromUser is Employee
-        //        anEmp = loginCrt.getEmployeeUserObject(fromUserID);
+        public static List<Model.empIdEmail> getDeptHeadRepIdEmailList(string deptID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getDeptHeadRepIdEmailList(deptID=" + deptID + ")");
 
-        //        fromUserName = anEmp.Name;
-        //        fromUserRole = anEmp.Role;
-        //    }
-        //    else
-        //    {
-        //        // fromUser is neither StoreEmployee nor Employee, therefore, an ERROR
-        //        fromUserName = "Unknown FromUserName";
-        //        fromUserRole = "Unknown FromUserRole";
-        //    }
+            List<Model.empIdEmail> deptHeadRepIdEmailList = new List<Model.empIdEmail>();
 
-        //    combNameRole = fromUserName + " - " + fromUserRole;
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    foreach (Employee row in context.Employees.Where(x => x.DepartmentID == deptID).ToList())
+                    {
+                        if (row.Role.Equals("Department Head") || row.Role.Equals("Representative"))
+                        {
+                            Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
 
-        //    return combNameRole;
-        //}
+                            anEmpIdEmail.EmployeeID = row.EmployeeID;
+                            anEmpIdEmail.Email = row.Email;
+
+                            deptHeadRepIdEmailList.Add(anEmpIdEmail);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                }
+            }
+
+            return deptHeadRepIdEmailList;
+        }
+
+        private static List<Model.empIdEmail> getAllStoreEmployeesIdEmailToList()
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getAllStoreEmployeesIdEmailToList()");
+
+            List<Model.empIdEmail> empIdEmailToList = new List<Model.empIdEmail>();
+
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    foreach (StoreEmployee row in context.StoreEmployees)
+                    {
+                        Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
+
+                        anEmpIdEmail.EmployeeID = row.StoreEmployeeID;
+                        anEmpIdEmail.Email = row.Email;
+
+                        empIdEmailToList.Add(anEmpIdEmail);
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                }
+            }
+
+            return empIdEmailToList;
+        }
+
+        private static string getEmailBody(Model.Employee currEmp, string currDeptName, string newCollPtName)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getEmailBody(currEmp, currDeptName=" + currDeptName + ", newCollPtName=" + newCollPtName + ")");
+
+            string emailBody = "Dear Sir / Madam,\r\n";
+            emailBody += "Please be informed that ";
+            emailBody += currDeptName;
+            emailBody += " Department has changed their collection point to ";
+            emailBody += newCollPtName;
+            emailBody += ".\r\n";
+            emailBody += "This is a system generated email, please do not reply.\r\n\r\n";
+
+            if (currEmp != null)
+            {
+                emailBody += "Change made by ";
+                emailBody += Control.ChangeRepresentativeControl.getCombEmpNameID(currEmp.EmployeeID, currEmp.Name);
+                emailBody += ".\r\n";
+            }
+
+            return emailBody;
+        }
     }
 }
