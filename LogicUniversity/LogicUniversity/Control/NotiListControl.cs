@@ -25,7 +25,7 @@ namespace LogicUniversity.Control
 
             var context = new LogicUniversityEntities();
 
-            newNotificationList = context.Notifications.Where(x => x.UserID == empID).OrderByDescending(x => x.NotificationDate).ToList();
+            newNotificationList = context.Notifications.Where(x => x.UserID == empID).OrderByDescending(x => x.NotificationDate).ThenByDescending(x => x.NotificationID).ToList();
 
             return newNotificationList;
         }
