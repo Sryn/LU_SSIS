@@ -107,7 +107,9 @@ namespace LogicUniversity.Control
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName=" + newCollPtName + ")");
 
-            string msg = "", emailSubject = "", emailBody = "", notiMsg = "", currDeptName;
+            int successfulNotiSentCount = 0;
+
+            string msg = "", emailSubject = "", emailBody = "", notiMsg = "", currDeptName, notiRtnMsg;
 
             List<Model.empIdEmail> empIdEmailToList = new List<Model.empIdEmail>(), empIdEmailCCList = new List<Model.empIdEmail>();
 
@@ -141,9 +143,19 @@ namespace LogicUniversity.Control
 
                     foreach (Model.empIdEmail empIdEmail in empIdEmailToList)
                     {
-                        msg += sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
+                        notiRtnMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
+
+                        try{
+                            successfulNotiSentCount += int.Parse(notiRtnMsg.Substring(0, 1));
+                        } catch(Exception e) {
+                            System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                            msg += notiRtnMsg;
+                        }
+
                         justEmpEmailList.Add(empIdEmail.Email);
                     }
+
+                    msg += "; Notifications sent: " + successfulNotiSentCount;
 
                     //foreach (String empEmail in justEmpEmailList)
                     //{
@@ -155,6 +167,8 @@ namespace LogicUniversity.Control
                             try
                             {
                                 emailCtrl.SendEmail(empEmail, emailSubject, emailBody, justEmpEmailList);
+
+                                msg += "; Emails sent.";
                             }
                             catch (Exception e)
                             {
@@ -206,7 +220,7 @@ namespace LogicUniversity.Control
 
                     context.Notifications.Add(aNotification);
 
-                    context.SaveChanges();
+                    rtnMsg += context.SaveChanges();
                 }
                 catch (Exception e)
                 {

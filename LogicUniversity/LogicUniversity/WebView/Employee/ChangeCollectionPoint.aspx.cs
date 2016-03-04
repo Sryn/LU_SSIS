@@ -163,9 +163,9 @@ namespace LogicUniversity.WebView.Employee
             {
                 if (rtnInt == 1) {
                     //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
-                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully.";
+                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully";
 
-                    if (lblCurrCollPt != null)
+                    //if (lblCurrCollPt != null)
                         lblCurrCollPt.Text = newCollPtName;
                 }
                 else if (rtnInt == 0)
