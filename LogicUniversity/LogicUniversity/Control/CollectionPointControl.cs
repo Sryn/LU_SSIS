@@ -202,7 +202,7 @@ namespace LogicUniversity.Control
                     aNotification.UserID = toEmpID;
                     aNotification.Message = notiMsg;
                     aNotification.FromUser = fromEmpID;
-                    aNotification.NotificationDate = System.DateTime.Now.Date;
+                    aNotification.NotificationDate = System.DateTime.Now;
 
                     context.Notifications.Add(aNotification);
 
