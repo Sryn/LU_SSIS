@@ -25,6 +25,7 @@ namespace LogicUniversity.WebView.Employee
 
         Model.Employee currEmp = null;
         Model.Employee currDeptRep = null;
+        Model.Employee prevDeptRep = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,6 +55,7 @@ namespace LogicUniversity.WebView.Employee
                 if (Model.MySession.Current.type.Equals("Employee"))
                 {
                     currEmp = Model.MySession.Current.User as Model.Employee; // somehow, I can't save this to a ViewState without a runtime error
+                    prevDeptRep = getPrevDeptRep(prevDeptRepID);
                 }
                 else
                     showPopUp("ERROR: Unknown or Illegal Employee Type Accessing this function.");
@@ -62,6 +64,18 @@ namespace LogicUniversity.WebView.Employee
             // runs everytime the page loads
             System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.Page_Load( 3 IsPostBack=" + IsCallback + ")");
 
+        }
+
+        private Model.Employee getPrevDeptRep(string prevDeptRepID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.getPrevDeptRep(prevDeptRepID=" + prevDeptRepID + ")");
+            //throw new NotImplementedException();
+
+            var aLoginCtrl = new LogicUniversity.Control.LoginControl();
+
+            Model.Employee prevDeptRep = aLoginCtrl.getEmployeeUserObject(prevDeptRepID);
+
+            return prevDeptRep;
         }
 
         private void saveCurrDeprRep()
@@ -195,8 +209,8 @@ namespace LogicUniversity.WebView.Employee
 
                 // NEED TO DO eMail Notifications here to prev rep, new rep, dept head and store clerks
 
-                if (currEmp != null && prevDeptRepID != null)
-                    emailRtnMsg = Control.ChangeRepresentativeControl.sendChangeDeptRepEmail(currEmp.EmployeeID, prevDeptRepID);
+                if (currEmp != null && prevDeptRep != null)
+                    emailRtnMsg = Control.ChangeRepresentativeControl.sendChangeDeptRepNotifications(currEmp, prevDeptRep, currDeptRep);
                 else
                     confirmMsg += " but ERROR sending notification emails.";
 

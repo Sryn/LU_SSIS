@@ -107,23 +107,20 @@ namespace LogicUniversity.Control
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName=" + newCollPtName + ")");
 
-            int successfulNotiSentCount = 0;
-
-            string msg = "", emailSubject = "", emailBody = "", notiMsg = "", currDeptName, notiRtnMsg;
+            string msg, emailSubject = "", emailBody = "", notiMsg = "", currDeptName;
 
             List<Model.empIdEmail> empIdEmailToList = new List<Model.empIdEmail>(), empIdEmailCCList = new List<Model.empIdEmail>();
-
-            List<String> justEmpEmailList = new List<String>();
 
             if (currDept != null)
             {
                 currDeptName = currDept.DepartmentName;
 
-                notiMsg = currDeptName + " Department has changed its collection point to " + newCollPtName;
+                //notiMsg = currDeptName + " Department has changed its collection point to " + newCollPtName;
+                notiMsg = getValidNotificationMsg(currDeptName, newCollPtName, " Department has changed its ", "Collection Point");
 
                 emailSubject = currDeptName + " Department changed its Collection Point to " + newCollPtName;
 
-                emailBody = getEmailBody(currEmp, currDeptName, newCollPtName);
+                emailBody = getEmailBody(currEmp, currDeptName, newCollPtName, "Collection Point");
 
                 empIdEmailToList = getAllStoreEmployeesIdEmailToList();
 
@@ -134,67 +131,113 @@ namespace LogicUniversity.Control
                 foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
                     empIdEmailToList.Add(empIdEmail);
 
-                if (empIdEmailToList.Count != 0)
-                {
-                    // send an email one-by-one to every email listed in empIdEmailToList
-
-                    RegexUtilities regexUtil = new RegexUtilities();
-                    EmailControl emailCtrl = new EmailControl();
-
-                    foreach (Model.empIdEmail empIdEmail in empIdEmailToList)
-                    {
-                        notiRtnMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
-
-                        try{
-                            successfulNotiSentCount += int.Parse(notiRtnMsg);
-                        } catch(Exception e) {
-                            System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                            msg += notiRtnMsg;
-                        }
-
-                        justEmpEmailList.Add(empIdEmail.Email);
-                    }
-
-                    msg += "; Notifications sent: " + successfulNotiSentCount;
-
-                    //foreach (String empEmail in justEmpEmailList)
-                    //{
-                    string empEmail = currEmp.Email; // temporary until emailCtrl.SendEmail works with an email list for TO
-
-                        if (regexUtil.IsValidEmail(empEmail))
-                        {
-                            // valid email, so send
-                            try
-                            {
-                                emailCtrl.SendEmail(empEmail, emailSubject, emailBody, justEmpEmailList);
-
-                                msg += "; Emails sent.";
-                            }
-                            catch (Exception e)
-                            {
-                                // send email error
-                                System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                                msg += "\nSendEmail Exception caught for " + empEmail;
-                            }
-                        }
-                        else
-                        {
-                            // invalid email found
-                            msg += ", Invalid email: " + empEmail;
-                        }
-                    //}
-                }
-                else
-                {
-                    // ERROR: cannot get any recipient emails
-                    msg += "ERROR: Cannot get any recipient emails.";
-                }
+                msg = sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList);
 
             }
             else
             {
                 // ERROR: no valid current department obtained
-                msg += "ERROR: No valid current department information obtained.";
+                msg = "ERROR: No valid current department information obtained.";
+            }
+
+            return msg;
+        }
+
+        public static string getValidNotificationMsg(string currDeptName, string newThing, string middleText, string changedThing)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotiAndEmails(currDeptName=" + currDeptName + ", newThing=" + newThing + ", middleText, changedThing=" + changedThing + " )");
+
+            int maxSize = Model.Utilities.GetColumnMaxLength<Notification>(x => x.Message);
+
+            System.Diagnostics.Debug.WriteLine(">>> Model.Utilities.GetColumnMaxLength<Notification>(x => x.Message)=" + maxSize);
+
+            string notiMsg = currDeptName + middleText + changedThing + " to " + newThing;
+
+            if (notiMsg.Length > maxSize)
+            {
+                notiMsg = currDeptName + " changed " + changedThing + " to " + newThing;
+
+                if (notiMsg.Length > maxSize)
+                {
+                    notiMsg = changedThing + " changed";
+
+                    if (notiMsg.Length > maxSize)
+                        notiMsg = notiMsg.Substring(0, maxSize - 1);
+                }
+
+                System.Diagnostics.Debug.WriteLine(">>> Shortened notiMsg to " + notiMsg.Length);
+            }
+
+            return notiMsg;
+        }
+
+        public static string sendNotiAndEmails(Employee currEmp, string emailSubject, string emailBody, string notiMsg, List<Model.empIdEmail> empIdEmailToList)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList)");
+
+            string notiRtnMsg = "", msg = "";
+
+            int successfulNotiSentCount = 0;
+
+            List<String> justEmpEmailList = new List<String>();
+
+            if (empIdEmailToList.Count != 0)
+            {
+                // send an email one-by-one to every email listed in empIdEmailToList
+
+                RegexUtilities regexUtil = new RegexUtilities();
+                EmailControl emailCtrl = new EmailControl();
+
+                foreach (Model.empIdEmail empIdEmail in empIdEmailToList)
+                {
+                    notiRtnMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
+
+                    try
+                    {
+                        successfulNotiSentCount += int.Parse(notiRtnMsg);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                        msg += notiRtnMsg;
+                    }
+
+                    justEmpEmailList.Add(empIdEmail.Email);
+                }
+
+                msg += "; Notifications sent: " + successfulNotiSentCount;
+
+                //foreach (String empEmail in justEmpEmailList)
+                //{
+                string empEmail = currEmp.Email; // temporary until emailCtrl.SendEmail works with an email list for TO
+
+                if (regexUtil.IsValidEmail(empEmail))
+                {
+                    // valid email, so send
+                    try
+                    {
+                        emailCtrl.SendEmail(empEmail, emailSubject, emailBody, justEmpEmailList);
+
+                        msg += "; Emails sent.";
+                    }
+                    catch (Exception e)
+                    {
+                        // send email error
+                        System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                        msg += " SendEmail Exception caught for " + empEmail;
+                    }
+                }
+                else
+                {
+                    // invalid email found
+                    msg += ", Invalid email: " + empEmail;
+                }
+                //}
+            }
+            else
+            {
+                // ERROR: cannot get any recipient emails
+                msg += "ERROR: Cannot get any recipient emails.";
             }
 
             return msg;
@@ -225,7 +268,7 @@ namespace LogicUniversity.Control
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                    rtnMsg += "\nERROR: sendNotification for empID=" + toEmpID;
+                    rtnMsg += " ERROR: sendNotification for empID=" + toEmpID;
                 }
             }
 
@@ -246,12 +289,16 @@ namespace LogicUniversity.Control
                     {
                         if (row.Role.Equals("Department Head") || row.Role.Equals("Representative"))
                         {
-                            Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
+                            ////Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
 
-                            anEmpIdEmail.EmployeeID = row.EmployeeID;
-                            anEmpIdEmail.Email = row.Email;
+                            ////anEmpIdEmail.EmployeeID = row.EmployeeID;
+                            ////anEmpIdEmail.Email = row.Email;
 
-                            deptHeadRepIdEmailList.Add(anEmpIdEmail);
+                            //Model.empIdEmail anEmpIdEmail = Model.Utilities.getEmpIdEmail(row);
+
+                            //deptHeadRepIdEmailList.Add(anEmpIdEmail);
+
+                            deptHeadRepIdEmailList.Add(Model.Utilities.getEmpIdEmail(row));
                         }
                     }
                 }
@@ -264,7 +311,7 @@ namespace LogicUniversity.Control
             return deptHeadRepIdEmailList;
         }
 
-        private static List<Model.empIdEmail> getAllStoreEmployeesIdEmailToList()
+        public static List<Model.empIdEmail> getAllStoreEmployeesIdEmailToList()
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getAllStoreEmployeesIdEmailToList()");
 
@@ -276,12 +323,14 @@ namespace LogicUniversity.Control
                 {
                     foreach (StoreEmployee row in context.StoreEmployees)
                     {
-                        Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
+                        //Model.empIdEmail anEmpIdEmail = new Model.empIdEmail();
 
-                        anEmpIdEmail.EmployeeID = row.StoreEmployeeID;
-                        anEmpIdEmail.Email = row.Email;
+                        //anEmpIdEmail.EmployeeID = row.StoreEmployeeID;
+                        //anEmpIdEmail.Email = row.Email;
 
-                        empIdEmailToList.Add(anEmpIdEmail);
+                        //empIdEmailToList.Add(anEmpIdEmail);
+
+                        empIdEmailToList.Add(Model.Utilities.getStoreEmpIdEmail(row));
                     }
                 }
                 catch (Exception e)
@@ -293,14 +342,16 @@ namespace LogicUniversity.Control
             return empIdEmailToList;
         }
 
-        private static string getEmailBody(Model.Employee currEmp, string currDeptName, string newCollPtName)
+        public static string getEmailBody(Model.Employee currEmp, string currDeptName, string newCollPtName, string changeThing)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getEmailBody(currEmp, currDeptName=" + currDeptName + ", newCollPtName=" + newCollPtName + ")");
 
             string emailBody = "Dear Sir / Madam,\r\n";
             emailBody += "Please be informed that ";
             emailBody += currDeptName;
-            emailBody += " Department has changed their collection point to ";
+            emailBody += " Department has changed their ";
+            emailBody += changeThing;
+            emailBody += " to ";
             emailBody += newCollPtName;
             emailBody += ".\r\n";
             emailBody += "This is a system generated email, please do not reply.\r\n\r\n";
