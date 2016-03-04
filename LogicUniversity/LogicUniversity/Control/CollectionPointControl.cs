@@ -146,7 +146,7 @@ namespace LogicUniversity.Control
                         notiRtnMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
 
                         try{
-                            successfulNotiSentCount += int.Parse(notiRtnMsg.Substring(0, 1));
+                            successfulNotiSentCount += int.Parse(notiRtnMsg);
                         } catch(Exception e) {
                             System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
                             msg += notiRtnMsg;

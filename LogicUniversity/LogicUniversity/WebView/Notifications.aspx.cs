@@ -61,12 +61,9 @@ namespace LogicUniversity.WebView
         private void getRelevantNotifications()
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.getRelevantNotifications()");
-            //throw new NotImplementedException();
+
             if (currentEmployee != null || currentStoreEmployee != null)
             {
-                //List<Model.Notification> lstNotification = new List<Model.Notification>();
-                //lstNotification = Control.NotificationControl.getNotificationList(currentEmployee.EmployeeID);
-
                 List<Model.FilNotiLstEle> lstNotification = new List<Model.FilNotiLstEle>();
 
                 if(strSessType.Equals("Employee"))
@@ -95,6 +92,7 @@ namespace LogicUniversity.WebView
                         {
                             NotificationGridView.DataSource = lstNotification;
                             NotificationGridView.DataBind();
+                            Cache["Data"] = lstNotification; // caching for paging
                         }
                     }
                 }
@@ -155,7 +153,10 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.newPageNotificationGridView([e.NewPageIndex=" + e.NewPageIndex + "])");
 
+            // http://codedisplay.com/how-to-paging-gridview-in-asp-net-c-vb-net/
+
             NotificationGridView.PageIndex = e.NewPageIndex;
+            NotificationGridView.DataSource = Cache["Data"] as List<Model.FilNotiLstEle>;
             NotificationGridView.DataBind();
         }
     }
