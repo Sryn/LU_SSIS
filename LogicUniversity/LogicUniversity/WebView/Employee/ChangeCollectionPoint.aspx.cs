@@ -151,37 +151,40 @@ namespace LogicUniversity.WebView.Employee
 
             string newCollPtName = ddlNewCollPt.SelectedItem.Text;
 
-            if (lblNewCollPt != null)
+            if (newCollPtID != currDept.CollectionPointID) // stop doing anything if its the same collection point
             {
-                //lblNewCollPt.Text = selectedCollPt.ToString();
-                //lblNewCollPt.Text = ddlNewCollPt.SelectedItem.Value;
-                rtnInt = Control.CollectionPointControl.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
-                lblNewCollPt.Text = rtnInt.ToString();
-            }
-
-            if (lblChangeResult != null)
-            {
-                if (rtnInt == 1) {
-                    //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
-                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully";
-
-                    //if (lblCurrCollPt != null)
-                        lblCurrCollPt.Text = newCollPtName;
+                if (lblNewCollPt != null)
+                {
+                    //lblNewCollPt.Text = selectedCollPt.ToString();
+                    //lblNewCollPt.Text = ddlNewCollPt.SelectedItem.Value;
+                    rtnInt = Control.CollectionPointControl.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
+                    lblNewCollPt.Text = rtnInt.ToString();
                 }
-                else if (rtnInt == 0)
-                    lblChangeResult.Text = "ERROR: New Collection Point Not Saved.";
-                else if (rtnInt > 1)
-                    lblChangeResult.Text = "ERROR: Multiple Collection Points were saved.";
-                else
-                    lblChangeResult.Text = "ERROR: Some unknown error occured with rtnInt=" + rtnInt;
-            }
 
-            if (rtnInt == 1)
-            {
-                // code for do notification
-                lblChangeResult.Text += Control.CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
-            }
+                if (lblChangeResult != null)
+                {
+                    if (rtnInt == 1)
+                    {
+                        //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
+                        lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully";
 
+                        //if (lblCurrCollPt != null)
+                        lblCurrCollPt.Text = newCollPtName;
+                    }
+                    else if (rtnInt == 0)
+                        lblChangeResult.Text = "ERROR: New Collection Point Not Saved.";
+                    else if (rtnInt > 1)
+                        lblChangeResult.Text = "ERROR: Multiple Collection Points were saved.";
+                    else
+                        lblChangeResult.Text = "ERROR: Some unknown error occured with rtnInt=" + rtnInt;
+                }
+
+                if (rtnInt == 1)
+                {
+                    // code for do notification
+                    lblChangeResult.Text += Control.CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
+                }
+            }
         }
 
     }
