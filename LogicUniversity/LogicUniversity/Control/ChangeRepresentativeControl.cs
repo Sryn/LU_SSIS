@@ -106,7 +106,7 @@ namespace LogicUniversity.Control
                     context.Dispose();
 
                     rtnMsg = "ERROR: Changes Unsuccessful with system error msg: ";
-                    rtnMsg += "Cannot change the roles of both current and new representative at the same time.";
+                    rtnMsg += "Cannot successfully change the roles of both current and new representative at the same time.";
                 }
             } 
 
