@@ -13,8 +13,8 @@ namespace LogicUniversity.Control
         {
             ctx = new LogicUniversityEntities();
         }
-
-        internal static List<Notification> getNotificationList(string empID)
+        
+        public List<Notification> getNotificationList(string empID)
         {
             System.Diagnostics.Debug.WriteLine(">> NotificationControl.getNotificationList( empID=" + empID + ")");
 
@@ -25,12 +25,12 @@ namespace LogicUniversity.Control
 
             var context = new LogicUniversityEntities();
 
-            newNotificationList = context.Notifications.Where(x => x.UserID == empID).OrderByDescending(x => x.NotificationDate).ThenByDescending(x => x.NotificationID).ToList();
+            newNotificationList = context.Notifications.Where(x => x.UserID == empID).OrderByDescending(x => x.NotificationDate).ToList();
 
             return newNotificationList;
         }
 
-        internal static List<Model.FilNotiLstEle> getFilteredNotificationList(string empID)
+        public List<Model.FilNotiLstEle> getFilteredNotificationList(string empID)
         {
             System.Diagnostics.Debug.WriteLine(">> NotificationControl.getFilteredNotificationList( empID=" + empID + ")");
 
@@ -70,7 +70,7 @@ namespace LogicUniversity.Control
             return newFilteredNotificationList;
         }
 
-        private static String getCombNameRole(String fromUserID)
+        public String getCombNameRole(String fromUserID)
         {
             System.Diagnostics.Debug.WriteLine(">> NotificationControl.getCombNameRole( fromUserID=" + fromUserID + ")");
 

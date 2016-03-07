@@ -67,6 +67,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\!emp_deptHead.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\emp.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\Store_style.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style1.css" />
+    <Content Include="css\style3.css" />
+    <Content Include="images\calendar.png" />
+    <Content Include="images\cm-mockup01-o.jpg" />
+    <Content Include="images\photo_bg.jpg" />
+    <Content Include="images\photo_bg1.jpg" />
+    <Content Include="images\profilePicture.jpg" />
+    <Content Include="images\unilogo.png" />
     <Content Include="Model\LogicUniversity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LogicUniversity.edmx</DependentUpon>
@@ -89,6 +103,7 @@
     <Content Include="WebView\Employee\RequestStationery.aspx" />
     <Content Include="WebView\Employee\RequisitionApproval.aspx" />
     <Content Include="WebView\Employee\ViewRequest.aspx" />
+    <Content Include="WebView\ForgotPassword.aspx" />
     <Content Include="WebView\LoginPage.aspx" />
     <Content Include="WebView\Notifications.aspx" />
     <Content Include="WebView\StoreEmployee\ApproveAdjustmentVoucher.aspx" />
@@ -108,15 +123,23 @@
     <Content Include="WebView\test.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\Acknowledge.cs" />
+    <Compile Include="Control\AdjustmentVoucherControl.cs" />
     <Compile Include="Control\ChangeRepresentativeControl.cs" />
+    <Compile Include="Control\CollectionInformationController.cs" />
+    <Compile Include="Control\CollectionPointControl.cs" />
+    <Compile Include="Control\DelegateAuthorityControl.cs" />
     <Compile Include="Control\DisbursementController.cs" />
+    <Compile Include="Control\DisbursementDetailsController.cs" />
     <Compile Include="Control\EmailControl.cs" />
     <Compile Include="Control\LoginControl.cs" />
-    <Compile Include="Control\CollectionPointControl.cs" />
     <Compile Include="Control\NotiListControl.cs" />
+    <Compile Include="Control\RaisePOControl.cs" />
     <Compile Include="Control\RequestListControl.cs" />
     <Compile Include="Control\RequestStationeryControl.cs" />
     <Compile Include="Control\RequisitionApprovalControl.cs" />
+    <Compile Include="Control\UpdateInventoryControl.cs" />
+    <Compile Include="Model\AcknowledgeModel.cs" />
     <Compile Include="Model\AdjVoucher.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -126,6 +149,7 @@
     <Compile Include="Model\Category.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CollectionInformation.cs" />
     <Compile Include="Model\CollectionPoint.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -138,6 +162,8 @@
     <Compile Include="Model\Disbursement.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DisbursementDetail.cs" />
+    <Compile Include="Model\DisbursementInformation.cs" />
     <Compile Include="Model\DisbursementItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -175,6 +201,8 @@
     <Compile Include="Model\PurchaseOrderItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RaiseAdjustmentVoucherItem.cs" />
+    <Compile Include="Model\RaisePOVoucherItem.cs" />
     <Compile Include="Model\RegexUtilities.cs" />
     <Compile Include="Model\RequestListItem.cs" />
     <Compile Include="Model\Requisition.cs">
@@ -196,6 +224,7 @@
     <Compile Include="Model\SupplierItem.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Suppliers.cs" />
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -274,6 +303,13 @@
     </Compile>
     <Compile Include="WebView\Employee\ViewRequest.aspx.designer.cs">
       <DependentUpon>ViewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebView\Notifications.aspx.cs">
       <DependentUpon>Notifications.aspx</DependentUpon>

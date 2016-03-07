@@ -11,12 +11,12 @@ namespace LogicUniversity.WebView.Employee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["type"] == null)
+           /* if (Session["type"] == null)
                 Response.Redirect("~/WebView/LoginPage.aspx");
             tvMenu.Nodes.Clear();
-            CreateMenu(tvMenu);
+            CreateMenu(tvMenu);*/
         }
-        public void CreateMenu(TreeView tv)
+      /*  public void CreateMenu(TreeView tv)
         {
             tv.Nodes.Add(new TreeNode("Notifications", "", "", "~/WebView/Notifications.aspx", ""));
             
@@ -48,11 +48,11 @@ namespace LogicUniversity.WebView.Employee
                 Model.Employee emp = (Model.Employee)Session["User"];
                 System.Diagnostics.Debug.WriteLine("=========");
                 System.Diagnostics.Debug.WriteLine(emp.Role);
-                tv.Nodes.Add(new TreeNode("Request Stationery", "", "", "~/WebView/Employee/RequestStationery.aspx", ""));
-                tv.Nodes.Add(new TreeNode("View Request", "", "", "~/WebView/Employee/ViewRequest.aspx", ""));
+              //  tv.Nodes.Add(new TreeNode("Request Stationery", "", "", "~/WebView/Employee/RequestStationery.aspx", ""));
+              //  tv.Nodes.Add(new TreeNode("View Request", "", "", "~/WebView/Employee/ViewRequest.aspx", ""));
                 if (!emp.Role.Equals("Employee"))
                 {
-                    tv.Nodes.Add(new TreeNode("Change Collection Point", "", "", "~/WebView/Employee/ChangeCollectionPoint.aspx", ""));
+                  //  tv.Nodes.Add(new TreeNode("Change Collection Point", "", "", "~/WebView/Employee/ChangeCollectionPoint.aspx", ""));
                     tv.Nodes.Add(new TreeNode("Disbursements", "", "", "~/WebView/Employee/Disbursements.aspx", ""));
                     tv.Nodes.Add(new TreeNode("Disbursements Detail", "", "", "~/WebView/Employee/DisbursementsDetail.aspx", ""));
                     if (emp.Role.Equals("Department Head") || emp.Role.Equals("Delegate"))
@@ -68,6 +68,6 @@ namespace LogicUniversity.WebView.Employee
             }
             tv.Nodes.Add(new TreeNode("Change PIN", "", "", "~/WebView/ChangePIN.aspx", ""));
             tv.Nodes.Add(new TreeNode("Log Out", "", "", "~/WebView/LoginPage.aspx", ""));
-        }
+        }*/
     }
 }

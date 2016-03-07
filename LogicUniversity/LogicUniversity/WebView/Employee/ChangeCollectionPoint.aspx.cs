@@ -39,7 +39,8 @@ namespace LogicUniversity.WebView.Employee
                 if (Model.MySession.Current.type.Equals("Employee"))
                 {
                     currEmp = Model.MySession.Current.User as Model.Employee;
-                    currDept = Control.CollectionPointControl.getDepartment(currEmp.DepartmentID);
+                    Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                    currDept = crt.getDepartment(currEmp.DepartmentID);
                 } else
                     lblChangeResult.Text = "ERROR: Unknown or Illegal Employee Type Accessing this function.";
             }
@@ -56,7 +57,8 @@ namespace LogicUniversity.WebView.Employee
             // Specify the data source and field names for the Text 
             // and Value properties of the items (ListItem objects) 
             // in the DropDownList control.
-            ddlNewCollPt.DataSource = Control.CollectionPointControl.getListCollectionPoint();
+            Control.CollectionPointControl crt = new Control.CollectionPointControl();
+            ddlNewCollPt.DataSource = crt.getListCollectionPoint();
             ddlNewCollPt.DataTextField = "CollectionPointName";
             ddlNewCollPt.DataValueField = "CollectionPointID";
 
@@ -76,8 +78,8 @@ namespace LogicUniversity.WebView.Employee
 
             if (strSessType.Equals("Employee")) {
                 currEmp = Model.Utilities.getCurrLoginEmp2(strSessType) as Model.Employee;
-
-                currDept = Control.CollectionPointControl.getDepartment(currEmp.DepartmentID);
+                Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                currDept = crt.getDepartment(currEmp.DepartmentID);
 
                 strCollPtName = Model.Utilities.getCollPtName(Convert.ToInt32(currDept.CollectionPointID));
             }
@@ -131,7 +133,10 @@ namespace LogicUniversity.WebView.Employee
                     lblDeptID.Text = currEmp.DepartmentID.ToString();
 
                 if (lblDeptRep != null)
-                    lblDeptRep.Text = Control.CollectionPointControl.getDeptRep(currEmp.DepartmentID).Name;
+                {
+                    Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                    lblDeptRep.Text = crt.getDeptRep(currEmp.DepartmentID).Name;
+                }
 
                 if (lblDeptName != null)
                     lblDeptName.Text = currDept.DepartmentName;
@@ -151,37 +156,42 @@ namespace LogicUniversity.WebView.Employee
 
             string newCollPtName = ddlNewCollPt.SelectedItem.Text;
 
-            if (lblNewCollPt != null)
+            if (newCollPtID != currDept.CollectionPointID) // stop doing anything if its the same collection point
             {
-                //lblNewCollPt.Text = selectedCollPt.ToString();
-                //lblNewCollPt.Text = ddlNewCollPt.SelectedItem.Value;
-                rtnInt = Control.CollectionPointControl.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
-                lblNewCollPt.Text = rtnInt.ToString();
-            }
-
-            if (lblChangeResult != null)
-            {
-                if (rtnInt == 1) {
-                    //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
-                    lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully";
-
-                    //if (lblCurrCollPt != null)
-                        lblCurrCollPt.Text = newCollPtName;
+                if (lblNewCollPt != null)
+                {
+                    //lblNewCollPt.Text = selectedCollPt.ToString();
+                    //lblNewCollPt.Text = ddlNewCollPt.SelectedItem.Value;
+                    Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                    rtnInt = crt.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
+                    lblNewCollPt.Text = rtnInt.ToString();
                 }
-                else if (rtnInt == 0)
-                    lblChangeResult.Text = "ERROR: New Collection Point Not Saved.";
-                else if (rtnInt > 1)
-                    lblChangeResult.Text = "ERROR: Multiple Collection Points were saved.";
-                else
-                    lblChangeResult.Text = "ERROR: Some unknown error occured with rtnInt=" + rtnInt;
-            }
 
-            if (rtnInt == 1)
-            {
-                // code for do notification
-                lblChangeResult.Text += Control.CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
-            }
+                if (lblChangeResult != null)
+                {
+                    if (rtnInt == 1)
+                    {
+                        //lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + Model.Utilities.getCollPtName(newCollPtID) + " saved successfully.";
+                        lblChangeResult.Text = currDept.DepartmentName + " new Collection Point at " + newCollPtName + " saved successfully";
 
+                        //if (lblCurrCollPt != null)
+                        lblCurrCollPt.Text = newCollPtName;
+                    }
+                    else if (rtnInt == 0)
+                        lblChangeResult.Text = "ERROR: New Collection Point Not Saved.";
+                    else if (rtnInt > 1)
+                        lblChangeResult.Text = "ERROR: Multiple Collection Points were saved.";
+                    else
+                        lblChangeResult.Text = "ERROR: Some unknown error occured with rtnInt=" + rtnInt;
+                }
+
+                if (rtnInt == 1)
+                {
+                    // code for do notification
+                    Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                    lblChangeResult.Text += crt.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
+                }
+            }
         }
 
     }

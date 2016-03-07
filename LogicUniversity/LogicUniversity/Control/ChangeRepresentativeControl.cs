@@ -14,7 +14,7 @@ namespace LogicUniversity.Control
             ctx = new LogicUniversityEntities();
         }
 
-        public static List<Employee> getListDeptEmployees(string deptID)
+        public List<Employee> getListDeptEmployees(string deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.getListDeptEmployees(deptID=" + deptID + ")");
 
@@ -25,7 +25,7 @@ namespace LogicUniversity.Control
             return rtnDeptEmpsList;
         }
 
-        public static List<Model.deptEmpDDL_Ele> getListDeptEmpsForDDL(string deptID)
+        public List<Model.deptEmpDDL_Ele> getListDeptEmpsForDDL(string deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.getListDeptEmpsForDDL(deptID=" + deptID + ")");
 
@@ -63,7 +63,7 @@ namespace LogicUniversity.Control
             return newListDeptEmpsForDDL;
         }
 
-        public static String getCombEmpNameID(String empID, String empName)
+        public String getCombEmpNameID(String empID, String empName)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.getCombEmpNameID(empID=" + empID + ", empName=" + empName + ")");
 
@@ -74,7 +74,7 @@ namespace LogicUniversity.Control
             return combEmpNameID;
         }
 
-        public static string changeDeptRep(string currDeptRepID, string newDeptRepID)
+        public string changeDeptRep(string currDeptRepID, string newDeptRepID)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.changeDeptRep(currDeptRepID=" + currDeptRepID + ", newDeptRepID=" + newDeptRepID + ")");
             //throw new NotImplementedException();
@@ -99,7 +99,7 @@ namespace LogicUniversity.Control
 
                     context.SaveChanges();
 
-                    rtnMsg = "Changes Successful ";
+                    rtnMsg = "Changes Successful";
                 }
                 catch (Exception)
                 {
@@ -108,7 +108,7 @@ namespace LogicUniversity.Control
                     rtnMsg = "ERROR: Changes Unsuccessful with system error msg: ";
                     rtnMsg += "Cannot change the roles of both current and new representative at the same time.";
                 }
-            } 
+            }
 
             return rtnMsg;
         }
@@ -124,7 +124,7 @@ namespace LogicUniversity.Control
           
             Notification: XX Department has changed its Department Representative to XX.
          */
-        public static string sendChangeDeptRepNotifications(Employee currEmp, Employee prevDeptRep, Employee newDeptRep)
+        public string sendChangeDeptRepNotifications(Employee currEmp, Employee prevDeptRep, Employee newDeptRep)
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeRepresentativeControl.sendChangeDeptRepNotifications( currEmp, prevDeptRep, newDeptRep)");
 
@@ -136,19 +136,20 @@ namespace LogicUniversity.Control
 
             if (currEmp != null)
             {
-                currDeptName = Control.CollectionPointControl.getDepartment(currEmp.DepartmentID).DepartmentName;
+                Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                currDeptName = crt.getDepartment(currEmp.DepartmentID).DepartmentName;
 
                 newDeptRepNameEmpID = getCombEmpNameID(newDeptRep.EmployeeID, newDeptRep.Name);
 
-                notiMsg = Control.CollectionPointControl.getValidNotificationMsg(currDeptName, newDeptRepNameEmpID, " Department has changed its ", "Department Representative");
+                notiMsg = crt.getValidNotificationMsg(currDeptName, newDeptRepNameEmpID, " Department has changed its ", "Department Representative");
 
                 emailSubject = currDeptName + " Department changed its Department Representative to " + newDeptRepNameEmpID;
 
-                emailBody = Control.CollectionPointControl.getEmailBody(currEmp, currDeptName, newDeptRepNameEmpID, "Department Representative");
+                emailBody = crt.getEmailBody(currEmp, currDeptName, newDeptRepNameEmpID, "Department Representative");
 
-                empIdEmailToList = Control.CollectionPointControl.getAllStoreEmployeesIdEmailToList();
+                empIdEmailToList = crt.getAllStoreEmployeesIdEmailToList();
 
-                empIdEmailCCList = Control.CollectionPointControl.getDeptHeadRepIdEmailList(currEmp.DepartmentID);
+                empIdEmailCCList = crt.getDeptHeadRepIdEmailList(currEmp.DepartmentID);
 
                 if (prevDeptRep != null)
                 {
@@ -161,7 +162,7 @@ namespace LogicUniversity.Control
                 foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
                     empIdEmailToList.Add(empIdEmail);
 
-                rtnMsg = Control.CollectionPointControl.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList);
+                rtnMsg = crt.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList);
 
             }
             else

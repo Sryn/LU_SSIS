@@ -9,7 +9,7 @@ namespace LogicUniversity.WebView.Employee
 {
     public partial class ChangeDepartmentRepresentative : System.Web.UI.Page
     {
-        protected String strCurrDeptRep
+        protected String strCurrDeptRepNameID
         {
             get { return ViewState["strCurrDeptRep"] as String; }
             set { ViewState["strCurrDeptRep"] = value; }
@@ -96,8 +96,9 @@ namespace LogicUniversity.WebView.Employee
 
             if (currEmp != null)
             {
-                currDeptRep = Control.CollectionPointControl.getDeptRep(currEmp.DepartmentID);
-                strCurrDeptRep = currDeptRep.Name + " (" + currDeptRep.EmployeeID + ")"; // for the label
+                Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                currDeptRep = crt.getDeptRep(currEmp.DepartmentID);
+                strCurrDeptRepNameID = currDeptRep.Name + " (" + currDeptRep.EmployeeID + ")"; // for the label
             }
         }
 
@@ -164,8 +165,8 @@ namespace LogicUniversity.WebView.Employee
         {
             System.Diagnostics.Debug.WriteLine(">> ChangeCollectionPoint.showCurrDeptRep()");
 
-            if (lblCurrDeptRep != null && strCurrDeptRep != null)
-                lblCurrDeptRep.Text = strCurrDeptRep;
+            if (lblCurrDeptRep != null && strCurrDeptRepNameID != null)
+                lblCurrDeptRep.Text = strCurrDeptRepNameID;
         }
 
         private void fillDropDownList()
@@ -176,7 +177,8 @@ namespace LogicUniversity.WebView.Employee
             // and Value properties of the items (ListItem objects) 
             // in the DropDownList control.
 
-            ddlNewDeptRep.DataSource = Control.ChangeRepresentativeControl.getListDeptEmpsForDDL(currEmp.DepartmentID);
+            Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+            ddlNewDeptRep.DataSource = crt.getListDeptEmpsForDDL(currEmp.DepartmentID);
             ddlNewDeptRep.DataTextField = "combEmpNameID";
             ddlNewDeptRep.DataValueField = "EmployeeID";
 
@@ -193,40 +195,52 @@ namespace LogicUniversity.WebView.Employee
 
             String newDeptRepID = ddlNewDeptRep.SelectedItem.Value, confirmMsg = "", emailRtnMsg = "";
 
-            //if (currDeptRep != null)
-                //confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(currDeptRep.EmployeeID, newDeptRepID);
-
-            if(strCurrDeptRep != null) // doing this method cos I hate going back to the dB for something which I can easily store but this way might use more processing
-                confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(strCurrDeptRep.Substring(strCurrDeptRep.Length - 9, 8), newDeptRepID);
-            else
-                confirmMsg = "ERROR: Changes Unsuccessful with system error msg: " + "currDeptRep not loaded after PostBack";
-
-            if(!confirmMsg.Substring(0, 5).Equals("ERROR"))
+            if (newDeptRepID != prevDeptRepID) // to ignore when its the same current dept rep
             {
-                getCurrDeptRep();
-
-                showCurrDeptRep(); // update label to show new current dept rep
-
-                // NEED TO DO eMail Notifications here to prev rep, new rep, dept head and store clerks
-
-                if (currEmp != null && prevDeptRep != null)
-                    emailRtnMsg = Control.ChangeRepresentativeControl.sendChangeDeptRepNotifications(currEmp, prevDeptRep, currDeptRep);
-                else
-                    confirmMsg += " but ERROR sending notification emails.";
-
-                if (emailRtnMsg.Substring(0, 5).Equals("ERROR"))
+                if (strCurrDeptRepNameID != null)
                 {
-                    confirmMsg += emailRtnMsg;
+                    //if (currDeptRep != null)
+                    //confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(currDeptRep.EmployeeID, newDeptRepID);
+
+                    // doing this method cos I hate going back to the dB for something which I can easily store but this way might use more processing
+                    //confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(strCurrDeptRepNameID.Substring(strCurrDeptRepNameID.Length - 9, 8), newDeptRepID);
+                    Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+                    confirmMsg = crt.changeDeptRep(prevDeptRepID, newDeptRepID);
                 }
                 else
+                    confirmMsg = "ERROR: Changes Unsuccessful with system error msg: " + "currDeptRep not loaded after PostBack";
+
+                if (!confirmMsg.Substring(0, 5).Equals("ERROR"))
                 {
-                    // temp
-                    confirmMsg += emailRtnMsg;
-                    confirmMsg += "";
+                    getCurrDeptRep();
+
+                    showCurrDeptRep(); // update label to show new current dept rep
+
+                    // NEED TO DO eMail Notifications here to prev rep, new rep, dept head and store clerks
+
+                    if (currEmp != null && prevDeptRep != null) {
+                        Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+                        emailRtnMsg = crt.sendChangeDeptRepNotifications(currEmp, prevDeptRep, currDeptRep);
+                        confirmMsg += emailRtnMsg;
+                    }
+                    else
+                        confirmMsg += " but ERROR sending notification emails.";
+
+                    //if (emailRtnMsg.Substring(0, 5).Equals("ERROR"))
+                    //{
+                    //    confirmMsg += emailRtnMsg;
+                    //}
+                    //else
+                    //{
+                    //    // temp
+                    //    confirmMsg += emailRtnMsg;
+                    //}
+
+                    saveCurrDeprRep(); // do this in case the user immediately changes dept rep again
                 }
+
+                showPopUp(confirmMsg);
             }
-
-            showPopUp(confirmMsg);
 
         }
 
