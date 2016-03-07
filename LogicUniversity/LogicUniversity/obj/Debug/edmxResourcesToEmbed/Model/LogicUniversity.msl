@@ -43,6 +43,7 @@
     <EntitySetMapping Name="Delegates">
       <EntityTypeMapping TypeName="LogicUniversityModel.Delegate">
         <MappingFragment StoreEntitySet="Delegate">
+          <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="DelegateID" ColumnName="DelegateID" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="FromDate" ColumnName="FromDate" />

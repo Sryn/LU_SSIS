@@ -38,6 +38,7 @@ namespace LogicUniversity.Model
         public String empNameID { get; set; }
         public String fromDate { get; set; }
         public String toDate { get; set; }
+        public String Active { get; set; }
         public String edit { get; set; }
         public String cancel { get; set; }
     }

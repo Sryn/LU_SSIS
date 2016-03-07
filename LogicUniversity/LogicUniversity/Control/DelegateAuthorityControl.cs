@@ -14,6 +14,27 @@ namespace LogicUniversity.Control
             ctx = new LogicUniversityEntities();
         }
 
+        public static Model.Delegate getDelegate(int delegateID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthorityControl.getDelegate( delegateID=" + delegateID + ")");
+
+            Model.Delegate aDelegate = null;
+
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    aDelegate = context.Delegates.Where(x => x.DelegateID == delegateID).FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR @ getDelegate: Exception Caught e=" + e);
+                }
+            }
+
+            return aDelegate;
+        }
+
         public static List<Model.Delegate> getDeptDelegatesList(string deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> DelegateAuthorityControl.getDeptDelegatesList( deptID=" + deptID + ")");
@@ -96,16 +117,20 @@ namespace LogicUniversity.Control
 
                 foreach (Model.Delegate aDelegate in newDeptDelegatesList)
                 {
-                    aDeptDelegateGVEle = new deptDelegateGVEle();
+                    if (aDelegate.Active.Equals("Enable"))
+                    {
+                        aDeptDelegateGVEle = new deptDelegateGVEle();
 
-                    aDeptDelegateGVEle.DelegateID = aDelegate.DelegateID;
-                    aDeptDelegateGVEle.empNameID = Model.Utilities.getCombEmpNameID(aDelegate.EmployeeID);
-                    aDeptDelegateGVEle.fromDate = aDelegate.FromDate.ToShortDateString();
-                    aDeptDelegateGVEle.toDate = aDelegate.ToDate.ToShortDateString();
-                    aDeptDelegateGVEle.edit = getEditString(aDelegate, compDate);
-                    aDeptDelegateGVEle.cancel = getCancelString(aDelegate, compDate);
+                        aDeptDelegateGVEle.DelegateID = aDelegate.DelegateID;
+                        aDeptDelegateGVEle.empNameID = Model.Utilities.getCombEmpNameID(aDelegate.EmployeeID);
+                        aDeptDelegateGVEle.fromDate = aDelegate.FromDate.ToShortDateString();
+                        aDeptDelegateGVEle.toDate = aDelegate.ToDate.ToShortDateString();
+                        aDeptDelegateGVEle.Active = aDelegate.Active;
+                        aDeptDelegateGVEle.edit = getEditString(aDelegate, compDate);
+                        aDeptDelegateGVEle.cancel = getCancelString(aDelegate, compDate);
 
-                    newDeptDelegateGVEleList.Add(aDeptDelegateGVEle);
+                        newDeptDelegateGVEleList.Add(aDeptDelegateGVEle);
+                    }
                 }
 
             }
@@ -147,84 +172,79 @@ namespace LogicUniversity.Control
             return editString;
         }
 
-        //internal static List<Model.FilNotiLstEle> getFilteredNotificationList(string empID)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(">> NotificationControl.getFilteredNotificationList( empID=" + empID + ")");
+        public static Boolean setDelegateActiveToDisable(int delegateID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthorityControl.setDelegateActiveToDisable( delegateID=" + delegateID + ")");
 
-        //    // returns filtered 3-columns NotificationDate, Message, FromUser(UserName - UserRole) as a list
+            Boolean boolResult = false;
 
-        //    DateTime aDateTime;
-        //    String aMsg, fromUser, combNameRole;
+            Model.Delegate aDelegate = null;
 
-        //    Model.FilNotiLstEle aFilNotiLstEle;
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    aDelegate = context.Delegates.Where(x => x.DelegateID == delegateID).FirstOrDefault();
 
-        //    //LoginControl loginCrt = new LoginControl();
+                    if (aDelegate != null)
+                    {
+                        aDelegate.Active = "Disable";
 
-        //    List<Notification> newNotificationList = getNotificationList(empID);
+                        context.SaveChanges();
 
-        //    List<Model.FilNotiLstEle> newFilteredNotificationList = new List<Model.FilNotiLstEle>();
+                        boolResult = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR @ getDelegate: Exception Caught e=" + e);
+                }
+                finally
+                {
+                    context.Dispose();
+                }
+            }
 
-        //    foreach (Notification aNotification in newNotificationList)
-        //    {
-        //        //FilNotiLstEle aFilNotiLstEle = new FilNotiLstEle();
-        //        aFilNotiLstEle = new Model.FilNotiLstEle();
+            return boolResult;
 
-        //        aDateTime = (DateTime)aNotification.NotificationDate;
-        //        aMsg = aNotification.Message;
-        //        fromUser = aNotification.FromUser;
+        }
 
-        //        combNameRole = getCombNameRole(fromUser);
+        public static Boolean deleteFutureDelegateRow(int delegateID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthorityControl.deleteFutureDelegateRow( delegateID=" + delegateID + ")");
 
-        //        aFilNotiLstEle.dateTimeFilNoti = aDateTime.Date.ToString("dd-MMM-yyyy");
-        //        aFilNotiLstEle.msgFilNoti = aMsg;
-        //        aFilNotiLstEle.fromUserFilNoti = combNameRole;
+            DateTime currentDate = System.DateTime.Now.Date;
 
-        //        newFilteredNotificationList.Add(aFilNotiLstEle);
-        //    }
+            Boolean boolResult = false;
 
-        //    //return newNotificationList;
+            Model.Delegate aDelegate = null;
 
-        //    return newFilteredNotificationList;
-        //}
+            using (var context = new LogicUniversityEntities())
+            {
+                try {
+                    aDelegate = context.Delegates.Where(x => x.DelegateID == delegateID).SingleOrDefault();
 
-        //private static String getCombNameRole(String fromUserID)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(">> NotificationControl.getCombNameRole( fromUserID=" + fromUserID + ")");
+                    if (aDelegate != null && aDelegate.FromDate > currentDate)
+                    {
+                        context.Delegates.Remove(aDelegate);
 
-        //    LoginControl loginCrt = new LoginControl();
+                        context.SaveChanges();
 
-        //    Employee anEmp;
-        //    StoreEmployee aStoreEmp;
+                        boolResult = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR @ getDelegate: Exception Caught e=" + e);
+                }
+                finally
+                {
+                    context.Dispose();
+                }
+            }
 
-        //    String fromUserName = "", fromUserRole = "", combNameRole;
+            return boolResult;
+        }
 
-        //    if (fromUserID.Substring(0, 3).Equals("STR"))
-        //    {
-        //        // fromUser is StoreEmployee
-        //        aStoreEmp = loginCrt.getStoreEmployeeUserObject(fromUserID);
-
-        //        fromUserName = aStoreEmp.Name;
-        //        fromUserRole = aStoreEmp.Role;
-
-        //    }
-        //    else if (fromUserID.Substring(0, 3).Equals("Emp"))
-        //    {
-        //        // fromUser is Employee
-        //        anEmp = loginCrt.getEmployeeUserObject(fromUserID);
-
-        //        fromUserName = anEmp.Name;
-        //        fromUserRole = anEmp.Role;
-        //    }
-        //    else
-        //    {
-        //        // fromUser is neither StoreEmployee nor Employee, therefore, an ERROR
-        //        fromUserName = "Unknown FromUserName";
-        //        fromUserRole = "Unknown FromUserRole";
-        //    }
-
-        //    combNameRole = fromUserName + " - " + fromUserRole;
-
-        //    return combNameRole;
-        //}
     }
 }

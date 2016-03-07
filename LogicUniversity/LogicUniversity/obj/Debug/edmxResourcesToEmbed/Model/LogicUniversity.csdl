@@ -52,6 +52,7 @@
     <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Delegate_Employee" FromRole="Delegate" ToRole="Employee" />
+    <Property Name="Active" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Department">
     <Key>

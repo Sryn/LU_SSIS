@@ -17,7 +17,7 @@
  
     <!-- Latest compiled and minified JavaScript -->
  
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
 
     <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="~/css/Store_style.css" type="text/css" media="screen"/>

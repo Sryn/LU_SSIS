@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LogicUniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LogicUniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdjVoucher">
           <Key>
             <PropertyRef Name="AdjVoucherID" />
@@ -48,6 +48,7 @@
           <Property Name="EmployeeID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FromDate" Type="date" Nullable="false" />
           <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="Active" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -679,8 +680,7 @@
             <End Role="SupplierItem" EntitySet="SupplierItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LogicUniversityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -736,6 +736,7 @@
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Delegate_Employee" FromRole="Delegate" ToRole="Employee" />
+          <Property Name="Active" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1425,6 +1426,7 @@
           <EntitySetMapping Name="Delegates">
             <EntityTypeMapping TypeName="LogicUniversityModel.Delegate">
               <MappingFragment StoreEntitySet="Delegate">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="DelegateID" ColumnName="DelegateID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />

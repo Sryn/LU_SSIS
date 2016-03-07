@@ -38,11 +38,11 @@
 			</div>
 			<label for="username">EmployeeID</label>
 			<br/>
-			<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
+			<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00001"></asp:TextBox>
 			<br/>
 			<label for="password">PIN</label>
 			<br/>
-			<asp:TextBox ID="txtPIN" runat="server"></asp:TextBox>
+			<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
 			<br/>
 			<asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
 			<br/>

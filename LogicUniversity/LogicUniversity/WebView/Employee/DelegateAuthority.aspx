@@ -73,14 +73,14 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:HyperLink ID="editHyperLink" runat="server" NavigateUrl='<%# Eval("DelegateID", "editDelegate.aspx?DelegateID={0}") %>'
-                        Text="Edit" Target="_blank" Visible='<%# (Eval("edit") == "" ? false : true) %>'></asp:HyperLink>
+                        Text="Edit" Visible='<%# (Eval("edit") == "" ? false : true) %>'></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
 <%--            <asp:BoundField DataField="cancel" HeaderText="" />--%>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:HyperLink ID="cancelHyperLink" runat="server" NavigateUrl='<%# Eval("DelegateID", "cancelDelegate.aspx?DelegateID={0}") %>'
-                        Text="Cancel" Target="_blank" Visible='<%# (Eval("cancel") == "" ? false : true) %>'></asp:HyperLink>
+                    <asp:HyperLink ID="cancelHyperLink" runat="server" NavigateUrl='<%# Eval("DelegateID", "CancelDelegate.aspx?DelegateID={0}") %>'
+                        Text="Cancel" Visible='<%# (Eval("cancel") == "" ? false : true) %>'></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

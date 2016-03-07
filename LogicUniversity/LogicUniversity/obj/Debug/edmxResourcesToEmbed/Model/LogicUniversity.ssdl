@@ -43,6 +43,7 @@
     <Property Name="EmployeeID" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="FromDate" Type="date" Nullable="false" />
     <Property Name="ToDate" Type="date" Nullable="false" />
+    <Property Name="Active" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Department">
     <Key>

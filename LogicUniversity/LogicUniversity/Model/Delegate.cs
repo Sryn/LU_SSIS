@@ -18,6 +18,7 @@ namespace LogicUniversity.Model
         public string EmployeeID { get; set; }
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
+        public string Active { get; set; }
     
         public virtual Employee Employee { get; set; }
     }
