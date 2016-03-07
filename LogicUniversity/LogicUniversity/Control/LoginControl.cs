@@ -17,7 +17,7 @@ namespace LogicUniversity.Control
         // EmployeeFound = Employee Found
         // NotFound = Not Found User;
         // Delegate = Employee is delegate;
-        public String Login(string UserID, string PIN)
+        public string Login(string UserID, string PIN)
         {
             string UserType = UserID.Substring(0, 1);
             if (UserType.Equals("S"))
@@ -72,7 +72,7 @@ namespace LogicUniversity.Control
         // success = successfully changed
         // notfound = user not found
         // error = type is not equal both StoreEmployee and Employee
-        public String ChangePIN(Object user,string type,string oldPIN,string newPIN)
+        public string ChangePIN(Object user,string type,string oldPIN,string newPIN)
         {
             string result = "error";
             if (type.Equals("StoreEmployee"))
@@ -96,6 +96,36 @@ namespace LogicUniversity.Control
                 return "success";
             }
             return result;
+        }
+        //Found = UserID is found
+        //notFound = UserID is not found
+        public string checkUserID(string userID)
+        {
+            string UserType = userID.Substring(0, 1);
+            if (UserType.Equals("S"))
+            {
+                System.Diagnostics.Debug.WriteLine("StoreClerk Login");
+                StoreEmployee sEmp = ctx.StoreEmployees.Where(x => x.StoreEmployeeID == userID).FirstOrDefault();
+                if (sEmp == null)
+                    return "notFound";
+                return "Found";
+            }
+            else if (UserType.Equals("E"))
+            {
+                System.Diagnostics.Debug.WriteLine("Employee Login");
+                Employee emp = ctx.Employees.Where(x => x.EmployeeID == userID).FirstOrDefault();
+                if (emp == null)
+                    return "notFound";
+                return "Found";
+            }
+                return "notFound";
+        }
+        //success = sucessfully sent
+        //failToSend = cant send
+        //fail = fail
+        public string makeForgotPassword(string UserID)
+        {
+            return "success";
         }
     }
 }

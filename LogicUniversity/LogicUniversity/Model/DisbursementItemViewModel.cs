@@ -16,12 +16,19 @@ namespace LogicUniversity.Model
         private string unitOfMeasure;
         private int actualQty;
         private int totalReceived;
+        private int disbursementItemID;
+
+        public int DisbursementItemID
+        {
+            get { return disbursementItemID; }
+            set { disbursementItemID = value; }
+        }
 
         public DisbursementItemViewModel()
         {
 
         }
-        public DisbursementItemViewModel(string binCode,string itemDescription,int totalNeededQty,string department,int needQty,string unitOfMeasure,int actualQty,string itemID,int totalReceived)
+        public DisbursementItemViewModel(string binCode, string itemDescription, int totalNeededQty, string department, int needQty, string unitOfMeasure, int actualQty, string itemID, int totalReceived, int disbursementItemID)
         {
             this.binCode = binCode;
             this.itemDescription = itemDescription;
@@ -32,7 +39,9 @@ namespace LogicUniversity.Model
             this.actualQty = actualQty;
             this.itemID = itemID;
             this.totalReceived = totalReceived;
+            this.disbursementItemID = disbursementItemID;
         }
+
         public int TotalReceived
         {
             get

@@ -30,6 +30,16 @@ D:\AD Project Files\Implementation\RealImplementation\LogicUniversity_Ver1\Logic
 D:\AD Project Files\Implementation\RealImplementation\LogicUniversity_Ver1\LogicUniversity_ver4.0\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.csprojResolveAssemblyReference.cache
 D:\AD Project Files\Implementation\RealImplementation\LogicUniversity_Ver1\LogicUniversity_ver4.0\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.dll
 D:\AD Project Files\Implementation\RealImplementation\LogicUniversity_Ver1\LogicUniversity_ver4.0\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.pdb
+<<<<<<< HEAD
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll.config
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\bin\LogicUniversity.pdb
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\bin\EntityFramework.dll
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\bin\EntityFramework.xml
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.dll
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.pdb
+C:\Users\e0001302\Documents\LogicUniversity\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.csprojResolveAssemblyReference.cache
+=======
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll.config
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\bin\LogicUniversity.pdb
@@ -46,3 +56,4 @@ C:\Users\Sryn\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicU
 C:\Users\Sryn\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.csprojResolveAssemblyReference.cache
 C:\Users\Sryn\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.dll
 C:\Users\Sryn\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.pdb
+>>>>>>> master

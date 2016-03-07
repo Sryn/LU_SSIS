@@ -25,11 +25,21 @@ namespace LogicUniversity.Model
 
     // used in CollectionPointControl for having an email and 
     // empID list of both ModelEmployees and Model.StoreEmployees
-    public struct empIdEmail 
+    public struct empIdEmail
     {
         public String EmployeeID { get; set; }
 
         public String Email { get; set; }
+    }
+
+    public struct deptDelegateGVEle
+    {
+        public int DelegateID { get; set; }
+        public String empNameID { get; set; }
+        public String fromDate { get; set; }
+        public String toDate { get; set; }
+        public String edit { get; set; }
+        public String cancel { get; set; }
     }
 
     public partial class LogicUniversityEntities
@@ -155,8 +165,8 @@ namespace LogicUniversity.Model
         public static string getCollPtName(int collPtID)
         {
             string collPtName = "";
-
-            collPtName = Control.CollectionPointControl.getCollectionPoint(collPtID).CollectionPointName;
+            Control.CollectionPointControl crt = new Control.CollectionPointControl();
+            collPtName = crt.getCollectionPoint(collPtID).CollectionPointName;
 
             return collPtName;
         }
@@ -191,6 +201,32 @@ namespace LogicUniversity.Model
             }
 
             return anEmpIdEmail;
+        }
+
+        public static String getCombEmpNameID(String empID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Utilities.getCombEmpNameID(empID = " + empID + ")");
+
+            var loginCtrl = new Control.LoginControl();
+
+            String combEmpNameID = "";
+
+            try
+            {
+                Employee anEmp = loginCtrl.getEmployeeUserObject(empID);
+
+                if (anEmp != null)
+                {
+                    combEmpNameID = anEmp.Name + " (" + anEmp.EmployeeID + ")";
+                }
+
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(">>> ERROR @ getCombEmpNameID: Exception Caught e=" + e);
+            }
+
+            return combEmpNameID;
         }
 
         // Usage example:

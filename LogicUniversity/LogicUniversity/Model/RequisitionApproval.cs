@@ -15,6 +15,7 @@ namespace LogicUniversity.Model
         private string quantity;
         private string status;
         private string reason;
+        private string unitOfMeasurement;
 
         public RequisitionApproval(int requisitionForm, int requisitionItemID, string employeeName, string submittedDate, string itemDescription, string quantity)
         {
@@ -70,7 +71,6 @@ namespace LogicUniversity.Model
                 requisitionItemID = value;
             }
         }
-
         public string EmployeeName
         {
             get
@@ -81,6 +81,18 @@ namespace LogicUniversity.Model
             set
             {
                 employeeName = value;
+            }
+        }
+        public string UnitOfMeasurement
+        {
+            get
+            {
+                return unitOfMeasurement;
+            }
+
+            set
+            {
+                unitOfMeasurement = value;
             }
         }
 
