@@ -80,8 +80,8 @@ namespace LogicUniversity.Control
                 NetworkCredential NetworkCred = new NetworkCredential(from, password);
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = NetworkCred;
-                //smtp.Port = 587;
-                smtp.Port = 25;
+                smtp.Port = 587; // works on my own machine
+                //smtp.Port = 25; // works from ISS machine
                 smtp.Send(mm);
                 System.Diagnostics.Debug.WriteLine("Mail is sent");
             }

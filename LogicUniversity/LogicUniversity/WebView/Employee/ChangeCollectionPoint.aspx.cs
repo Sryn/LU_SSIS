@@ -162,8 +162,12 @@ namespace LogicUniversity.WebView.Employee
                 {
                     //lblNewCollPt.Text = selectedCollPt.ToString();
                     //lblNewCollPt.Text = ddlNewCollPt.SelectedItem.Value;
+<<<<<<< HEAD
                     Control.CollectionPointControl crt = new Control.CollectionPointControl();
                     rtnInt = crt.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
+=======
+                    rtnInt = Control.CollectionPointControl.changeCollectionPointForDept(currEmp.DepartmentID, newCollPtID);
+>>>>>>> master
                     lblNewCollPt.Text = rtnInt.ToString();
                 }
 
@@ -188,8 +192,12 @@ namespace LogicUniversity.WebView.Employee
                 if (rtnInt == 1)
                 {
                     // code for do notification
+<<<<<<< HEAD
                     Control.CollectionPointControl crt = new Control.CollectionPointControl();
                     lblChangeResult.Text += crt.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
+=======
+                    lblChangeResult.Text += Control.CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName);
+>>>>>>> master
                 }
             }
         }
