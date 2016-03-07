@@ -96,7 +96,8 @@ namespace LogicUniversity.WebView.Employee
 
             if (currEmp != null)
             {
-                currDeptRep = Control.CollectionPointControl.getDeptRep(currEmp.DepartmentID);
+                Control.CollectionPointControl crt = new Control.CollectionPointControl();
+                currDeptRep = crt.getDeptRep(currEmp.DepartmentID);
                 strCurrDeptRepNameID = currDeptRep.Name + " (" + currDeptRep.EmployeeID + ")"; // for the label
             }
         }
@@ -176,7 +177,8 @@ namespace LogicUniversity.WebView.Employee
             // and Value properties of the items (ListItem objects) 
             // in the DropDownList control.
 
-            ddlNewDeptRep.DataSource = Control.ChangeRepresentativeControl.getListDeptEmpsForDDL(currEmp.DepartmentID);
+            Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+            ddlNewDeptRep.DataSource = crt.getListDeptEmpsForDDL(currEmp.DepartmentID);
             ddlNewDeptRep.DataTextField = "combEmpNameID";
             ddlNewDeptRep.DataValueField = "EmployeeID";
 
@@ -202,8 +204,8 @@ namespace LogicUniversity.WebView.Employee
 
                     // doing this method cos I hate going back to the dB for something which I can easily store but this way might use more processing
                     //confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(strCurrDeptRepNameID.Substring(strCurrDeptRepNameID.Length - 9, 8), newDeptRepID);
-
-                    confirmMsg = Control.ChangeRepresentativeControl.changeDeptRep(prevDeptRepID, newDeptRepID);
+                    Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+                    confirmMsg = crt.changeDeptRep(prevDeptRepID, newDeptRepID);
                 }
                 else
                     confirmMsg = "ERROR: Changes Unsuccessful with system error msg: " + "currDeptRep not loaded after PostBack";
@@ -217,7 +219,8 @@ namespace LogicUniversity.WebView.Employee
                     // NEED TO DO eMail Notifications here to prev rep, new rep, dept head and store clerks
 
                     if (currEmp != null && prevDeptRep != null) {
-                        emailRtnMsg = Control.ChangeRepresentativeControl.sendChangeDeptRepNotifications(currEmp, prevDeptRep, currDeptRep);
+                        Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+                        emailRtnMsg = crt.sendChangeDeptRepNotifications(currEmp, prevDeptRep, currDeptRep);
                         confirmMsg += emailRtnMsg;
                     }
                     else

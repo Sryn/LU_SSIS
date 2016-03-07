@@ -4,24 +4,72 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+ 
+	
+	<title>Sign In</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'/>
+
+	<link rel="stylesheet" href="~/css/animate.css" type="text/css"/>
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="~/css/style.css" type="text/css"/>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 </head>
+
 <body>
-    <form id="form1" runat="server">
-    <div>
-    
-        <asp:Label ID="txtMessage" runat="server"></asp:Label>
-        <br />
-    
-        EmployeeID<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00001"></asp:TextBox>
-        <br />
-        PIN<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
-        <br />
-        <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
-        <br />
-        <asp:LinkButton ID="lkBtnForgotPassword" runat="server">Forgot Password?</asp:LinkButton>
-    
-    </div>
-    </form>
+    <form id="form2" runat="server">
+	<div class="container">
+		<div class="top">		    
+		<asp:Label ID="txtMessage" runat="server"></asp:Label>		   
+		</div>
+        <div class="img">
+         <asp:Image ID="Image1" runat="server" Height="290px" ImageUrl="~/images/unilogo.png" Width="250px" />
+           </div>
+
+		<div class="login-box animated fadeInUp">
+            
+			<div class="box-header">
+               
+				<h2>Logic University</h2>
+			</div>
+			<label for="username">EmployeeID</label>
+			<br/>
+			<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
+			<br/>
+			<label for="password">PIN</label>
+			<br/>
+			<asp:TextBox ID="txtPIN" runat="server"></asp:TextBox>
+			<br/>
+			<asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
+			<br/>
+			 <asp:LinkButton ID="lkBtnForgotPassword" runat="server">Forgot Password?</asp:LinkButton>
+		
+             </div>
+	</div>
+        </form>
 </body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
 </html>

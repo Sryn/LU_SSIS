@@ -22,7 +22,7 @@
             <td><asp:Label ID="lblSessType" runat="server" Text="Label"></asp:Label></td>
         </tr>
     </table>
-    <asp:GridView ID="NotificationGridView" runat="server" AutoGenerateColumns="False" AllowPaging="true" OnPageIndexChanging="newPageNotificationGridView" PagerSettings-Mode="NumericFirstLast">
+    <asp:GridView ID="NotificationGridView" runat="server" AutoGenerateColumns="False" AllowPaging="true" OnPageIndexChanging="newPageNotificationGridView">
         <Columns>
             <asp:BoundField DataField="dateTimeFilNoti" HeaderText="Date" />
             <asp:BoundField DataField="msgFilNoti" HeaderText="Message" />

@@ -14,7 +14,7 @@ namespace LogicUniversity.Control
             ctx = new LogicUniversityEntities();
         }
 
-        public static Department getDepartment(String deptID)
+        public Department getDepartment(String deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getDepartment( deptID=" + deptID + ")");
 
@@ -25,7 +25,7 @@ namespace LogicUniversity.Control
             return rtnDept;
         }
 
-        public static CollectionPoint getCollectionPoint(int collPtID)
+        public CollectionPoint getCollectionPoint(int collPtID)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getCollectionPoint( collPtID=" + collPtID + ")");
 
@@ -36,7 +36,7 @@ namespace LogicUniversity.Control
             return rtnCollPt;
         }
 
-        public static List<CollectionPoint> getListCollectionPoint()
+        public List<CollectionPoint> getListCollectionPoint()
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getListCollectionPoint()");
 
@@ -47,7 +47,7 @@ namespace LogicUniversity.Control
             return rtnCollPtList;
         }
 
-        public static int changeCollectionPointForDept(string deptID, int newCollPt)
+        public int changeCollectionPointForDept(string deptID, int newCollPt)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.changeCollectionPointForDept( deptID=" + deptID + ", newCollPt=" + newCollPt + ")");
 
@@ -77,7 +77,7 @@ namespace LogicUniversity.Control
             return rtnInt;
         }
 
-        public static Model.Employee getDeptRep(string deptID)
+        public Model.Employee getDeptRep(string deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getListCollectionPoint()");
 
@@ -85,7 +85,7 @@ namespace LogicUniversity.Control
 
             var context = new LogicUniversityEntities();
 
-            deptRep = context.Employees.Where(x => x.DepartmentID == deptID && x.Role=="Representative").FirstOrDefault();
+            deptRep = context.Employees.Where(x => x.DepartmentID == deptID && x.Role == "Representative").FirstOrDefault();
 
             return deptRep;
         }
@@ -103,7 +103,7 @@ namespace LogicUniversity.Control
 
             public void SendEmail(string to, string subject, string body, List<string> cclist)
          */
-        public static string sendChangeCollectionPointNotifications(Employee currEmp, Department currDept, string newCollPtName)
+        public string sendChangeCollectionPointNotifications(Employee currEmp, Department currDept, string newCollPtName)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendChangeCollectionPointNotifications(currEmp, currDept, newCollPtName=" + newCollPtName + ")");
 
@@ -143,7 +143,7 @@ namespace LogicUniversity.Control
             return msg;
         }
 
-        public static string getValidNotificationMsg(string currDeptName, string newThing, string middleText, string changedThing)
+        public string getValidNotificationMsg(string currDeptName, string newThing, string middleText, string changedThing)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotiAndEmails(currDeptName=" + currDeptName + ", newThing=" + newThing + ", middleText, changedThing=" + changedThing + " )");
 
@@ -171,7 +171,7 @@ namespace LogicUniversity.Control
             return notiMsg;
         }
 
-        public static string sendNotiAndEmails(Employee currEmp, string emailSubject, string emailBody, string notiMsg, List<Model.empIdEmail> empIdEmailToList)
+        public string sendNotiAndEmails(Employee currEmp, string emailSubject, string emailBody, string notiMsg, List<Model.empIdEmail> empIdEmailToList)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList)");
 
@@ -243,7 +243,7 @@ namespace LogicUniversity.Control
             return msg;
         }
 
-        public static string sendNotification(string toEmpID, string notiMsg, string fromEmpID)
+        public string sendNotification(string toEmpID, string notiMsg, string fromEmpID)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotification(empID=" + toEmpID + ", notiMsg, fromEmpID=" + fromEmpID + ")");
             //throw new NotImplementedException();
@@ -275,7 +275,7 @@ namespace LogicUniversity.Control
             return rtnMsg;
         }
 
-        public static List<Model.empIdEmail> getDeptHeadRepIdEmailList(string deptID)
+        public List<Model.empIdEmail> getDeptHeadRepIdEmailList(string deptID)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getDeptHeadRepIdEmailList(deptID=" + deptID + ")");
 
@@ -311,7 +311,7 @@ namespace LogicUniversity.Control
             return deptHeadRepIdEmailList;
         }
 
-        public static List<Model.empIdEmail> getAllStoreEmployeesIdEmailToList()
+        public List<Model.empIdEmail> getAllStoreEmployeesIdEmailToList()
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getAllStoreEmployeesIdEmailToList()");
 
@@ -342,7 +342,7 @@ namespace LogicUniversity.Control
             return empIdEmailToList;
         }
 
-        public static string getEmailBody(Model.Employee currEmp, string currDeptName, string newCollPtName, string changeThing)
+        public string getEmailBody(Model.Employee currEmp, string currDeptName, string newCollPtName, string changeThing)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getEmailBody(currEmp, currDeptName=" + currDeptName + ", newCollPtName=" + newCollPtName + ")");
 
@@ -359,7 +359,8 @@ namespace LogicUniversity.Control
             if (currEmp != null)
             {
                 emailBody += "Change made by ";
-                emailBody += Control.ChangeRepresentativeControl.getCombEmpNameID(currEmp.EmployeeID, currEmp.Name);
+                Control.ChangeRepresentativeControl crt = new Control.ChangeRepresentativeControl();
+                emailBody += crt.getCombEmpNameID(currEmp.EmployeeID, currEmp.Name);
                 emailBody += ".\r\n";
             }
 
