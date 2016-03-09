@@ -85,6 +85,15 @@ namespace LogicUniversity.WebView.Employee {
         protected global::System.Web.UI.WebControls.DropDownList ddlDeptEmpList;
         
         /// <summary>
+        /// tbxTodaysDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxTodaysDate;
+        
+        /// <summary>
         /// tbxFromDate control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,24 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnCalFromDate;
+        
+        /// <summary>
+        /// rfvCalFromDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCalFromDate;
+        
+        /// <summary>
+        /// cvTodaysDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTodaysDate;
         
         /// <summary>
         /// calFromDate control.
@@ -128,6 +155,24 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnCalToDate;
+        
+        /// <summary>
+        /// rfvCalToDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCalToDate;
+        
+        /// <summary>
+        /// cvtxtStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvtxtStartDate;
         
         /// <summary>
         /// calToDate control.
@@ -166,6 +211,15 @@ namespace LogicUniversity.WebView.Employee {
         protected global::System.Web.UI.WebControls.Label lblToDate;
         
         /// <summary>
+        /// btnCancelEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
+        
+        /// <summary>
         /// btnAddDelegate control.
         /// </summary>
         /// <remarks>
@@ -173,6 +227,33 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddDelegate;
+        
+        /// <summary>
+        /// btnEditDelegate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditDelegate;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
         /// lblDeptDelGVTitle control.

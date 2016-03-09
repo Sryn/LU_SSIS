@@ -79,6 +79,7 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="RequestDate" Type="date" />
           <Property Name="RemainingQty" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DisbursementRequestItem">
           <Key>
@@ -128,7 +129,7 @@
           <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="varchar" MaxLength="50" />
           <Property Name="NotificationDate" Type="date" />
-          <Property Name="Message" Type="varchar" MaxLength="100" />
+          <Property Name="Message" Type="varchar" MaxLength="400" />
           <Property Name="FromUser" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
@@ -778,6 +779,7 @@
           <NavigationProperty Name="Disbursement" Relationship="Self.FK_DisbursementItem_Disbursement" FromRole="DisbursementItem" ToRole="Disbursement" />
           <NavigationProperty Name="Item" Relationship="Self.FK_DisbursementItem_Item" FromRole="DisbursementItem" ToRole="Item" />
           <NavigationProperty Name="RequisitionItems" Relationship="Self.DisbursementRequestItem" FromRole="DisbursementItem" ToRole="RequisitionItem" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -830,7 +832,7 @@
           <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NotificationDate" Type="DateTime" Precision="0" />
-          <Property Name="Message" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="FromUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
@@ -1458,6 +1460,7 @@
           <EntitySetMapping Name="DisbursementItems">
             <EntityTypeMapping TypeName="LogicUniversityModel.DisbursementItem">
               <MappingFragment StoreEntitySet="DisbursementItem">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
                 <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />

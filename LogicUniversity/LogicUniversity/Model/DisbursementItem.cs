@@ -25,6 +25,7 @@ namespace LogicUniversity.Model
         public Nullable<int> Quantity { get; set; }
         public Nullable<System.DateTime> RequestDate { get; set; }
         public Nullable<int> RemainingQty { get; set; }
+        public string Status { get; set; }
     
         public virtual Disbursement Disbursement { get; set; }
         public virtual Item Item { get; set; }

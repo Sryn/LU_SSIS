@@ -230,17 +230,53 @@ namespace LogicUniversity.Model
             return combEmpNameID;
         }
 
-        // Usage example:
-        // int colMaxLength = Model.Utilities.GetColumnMaxLength<Notification>(x => x.Message);
-        // https://noobsysadmin.wordpress.com/2013/07/30/get-max-column-length-entity-framework-5/
+        public static String getDeptIDFromEmpID(String empID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Utilities.getDeptIDFromEmpID(empID = " + empID + ")");
+
+            String deptID = "";
+
+            var loginCtrl = new Control.LoginControl();
+
+            deptID = loginCtrl.getEmployeeUserObject(empID).DepartmentID;
+            
+            return deptID;
+        }
+
         /// <summary>
-        /// Gets the Maximum Length of a column table in Entity Framework 5
-        /// Original from SO:
-        /// http://stackoverflow.com/questions/12378186/entity-framework-5-maxlength/12964634#12964634
-        /// You need to add a reference to System.Linq.Expressions
-        /// Also these:
-        /// using System.Data.Entity.Infrastructure;
-        /// using System.Data.Metadata.Edm;
+        /// Returns a Boolean true if an Employee record with primary key value of EmployeeID is in the LogicUniversityEntities.Employees context, false if not
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <returns></returns>
+        public static Boolean checkEmployeeIDValidity(String EmployeeID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Utilities.checkEmployeeIDValidity(empID = " + EmployeeID + ")");
+
+            Boolean boolResult = false;
+
+            using(var context = new LogicUniversityEntities()) {
+                Employee anEmployee = context.Employees.Find(EmployeeID);
+
+                if (anEmployee != null)
+                    boolResult = true;
+
+                context.Dispose();
+            }
+
+            return boolResult;
+        }
+
+        /// <summary>
+        /// Gets the Maximum Length of a column table in Entity Framework 5<para />
+        /// Original from SO:<para />
+        /// http://stackoverflow.com/questions/12378186/entity-framework-5-maxlength/12964634#12964634 <para />
+        /// You need to add a reference to System.Linq.Expressions<para />
+        /// Also these:<para />
+        /// using System.Data.Entity.Infrastructure;<para />
+        /// using System.Data.Metadata.Edm;<para />
+        /// Usage example:<para />
+        /// int colMaxLength = Model.Utilities.GetColumnMaxLength&lt;Notification&gt;(x => x.Message);<para />
+        /// https://noobsysadmin.wordpress.com/2013/07/30/get-max-column-length-entity-framework-5/ <para />
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="column"></param>
@@ -285,6 +321,28 @@ namespace LogicUniversity.Model
             }
         }
 
+
+        public static Employee getDeptHeadEmpObj(string deptID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> Utilities.getDeptHeadEmpObj(deptID = " + deptID + ")");
+            //throw new NotImplementedException();
+
+            Employee deptHead = null;
+
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    deptHead = context.Employees.Where(x => x.DepartmentID == deptID && x.Role.Equals("Department Head")).Single();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR @ getDeptHeadEmpObj: Exception Caught e=" + e);
+                }
+            }
+
+            return deptHead;
+        }
     }
 
 }

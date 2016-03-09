@@ -9,6 +9,12 @@ namespace LogicUniversity.WebView.Employee
 {
     public partial class DelegateAuthority : System.Web.UI.Page
     {
+        protected int intDelegateID
+        {
+            get { return Convert.ToInt32(ViewState["intDelegateID"]); }
+            set { ViewState["intDelegateID"] = value; }
+        }
+
         String strSessType = "";
 
         Model.Employee currEmp = null;
@@ -22,37 +28,159 @@ namespace LogicUniversity.WebView.Employee
 
                 getSessionData();
 
-                //getCurrDeptRep();
-
-                //saveCurrDeprRep(); // for use during email notification
+                fillTodaysDate();
 
                 fillDropDownList();
 
-                bool showDevVariables = true;
+                bool showDevVariables = false;
                 toggleDevVariables(showDevVariables);
 
                 showVariables(); // includes both dev and non-dev variables
 
                 getDeptDelegates();
+
+                checkRequestQueryString();
             }
             else
             {
                 // is postback, i.e. loads everytime the page subsequently reloads
                 System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.Page_Load( 2 IsPostBack=" + IsCallback + ")");
 
-                //if (Model.MySession.Current.type.Equals("Employee"))
-                //{
-                //    currEmp = Model.MySession.Current.User as Model.Employee; // somehow, I can't save this to a ViewState without a runtime error
-                //    prevDeptRep = getPrevDeptRep(prevDeptRepID);
-                //}
-                //else
-                //    showPopUp("ERROR: Unknown or Illegal Employee Type Accessing this function.");
+                if (currEmp == null)
+                {
+                    getSessionData();                    
+                }
             }
 
             // runs everytime the page loads
             System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.Page_Load( 3 IsPostBack=" + IsCallback + ")");
 
+            // if this is here, when the editBtn is clicked, the values in the relevant boxes revert
+            //  back to when the page is reloaded before it is sent off to the control for processing
+            //checkRequestQueryString(); 
         }
+
+        private void fillTodaysDate()
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.fillTodaysDate()");
+            //throw new NotImplementedException();
+
+            tbxTodaysDate.Text = DateTime.Today.Date.ToShortDateString();
+        }
+
+        private void checkRequestQueryString()
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.checkRequestQueryString()");
+            //throw new NotImplementedException();
+
+            int editDelegateID;
+            Model.Delegate editDelegate;
+
+            if (Request.QueryString["DelegateID"] != null)
+            {
+                if (int.TryParse(Request.QueryString["DelegateID"], out editDelegateID))
+                {
+                    editDelegate = Control.DelegateAuthorityControl.getDelegate(editDelegateID);
+
+                    if (editDelegate != null)
+                    {
+                        intDelegateID = editDelegateID; // viewstate save for btnClick_EditDelegate
+
+                        ddlDeptEmpList.SelectedIndex = getDDLIndex(editDelegate.EmployeeID);
+                        tbxFromDate.Text = editDelegate.FromDate.ToShortDateString();
+                        tbxToDate.Text = editDelegate.ToDate.ToShortDateString();
+
+                        btnAddDelegate.Visible = false;
+
+                        btnCancelEdit.Visible = true;
+                        btnEditDelegate.Visible = true;
+                    }
+                } 
+            }
+
+            if (Request.QueryString["msg"] != null)
+            {
+                lblMessage.Text = Request.QueryString["msg"];
+            }
+        }
+
+        private int getDDLIndex(string empID)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.getDDLIndex(empID=" + empID + ")");
+            //throw new NotImplementedException();
+
+            int index = 0;
+
+            index = ddlDeptEmpList.Items.IndexOf(ddlDeptEmpList.Items.FindByValue(empID));
+
+            return index;
+        }
+
+        public void btnClick_CancelEdit(Object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.btnClick_CancelEdit(sender=" + sender + ")");
+
+            Server.Transfer("DelegateAuthority.aspx", false);
+        }
+
+        public void btnClick_EditDelegate(Object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.btnClick_EditDelegate(sender=" + sender + ")");
+
+            bool boolResult;
+            string msg, oldNewDelegatesChange;
+            Model.Delegate oldDelegate;
+            Model.Delegate newDelegate = new Model.Delegate();
+
+            if (ViewState["intDelegateID"] != null)
+            {
+                oldDelegate = Control.DelegateAuthorityControl.getDelegate(intDelegateID);
+
+                if (Control.DelegateAuthorityControl.parseDelegate(ddlDeptEmpList.SelectedValue, tbxFromDate.Text, tbxToDate.Text, ref newDelegate))
+                {
+                    oldNewDelegatesChange = Control.DelegateAuthorityControl.compareDelegates(oldDelegate, newDelegate);
+
+                    if (!oldNewDelegatesChange.Equals("Same"))
+                    {
+                        // not the same so process the edit
+
+                        //editDelegateEmpID = oldDelegate.EmployeeID;
+
+                        boolResult = Control.DelegateAuthorityControl.editDelegate(intDelegateID, ddlDeptEmpList.SelectedValue, tbxFromDate.Text, tbxToDate.Text);
+
+                        if (boolResult)
+                        {
+                            msg = "Change of Delegate details successful";
+                            System.Diagnostics.Debug.WriteLine(">>> DelegateAuthority.btnClick_EditDelegate msg=" + msg);
+                            System.Diagnostics.Debug.WriteLine(">>> oldNewDelegatesChange=" + oldNewDelegatesChange);
+                            System.Diagnostics.Debug.WriteLine(">>> currEmp.EmployeeID=" + currEmp.EmployeeID);
+                            Control.DelegateAuthorityControl.showDelegateDetails(newDelegate, "newDelegate");
+
+                            if (oldNewDelegatesChange.Contains("EmployeeID"))
+                            {
+                                // there's a change in assigned delegates, so have to send both FutureCancel 
+                                // (as you can't do an edit on an on-going assigned delegation) and New notices
+
+                                msg += Control.DelegateAuthorityControl.delegateChangeNotifications(currEmp, oldDelegate, newDelegate);
+                            }
+                            else
+                            {
+                                // no change in assigned employee, so don't have to send any New nor cancel notices, just a Change details notice
+                                msg += Control.DelegateAuthorityControl.delegateNotifications(currEmp, newDelegate, "Change");
+                            }
+
+                            Server.Transfer("DelegateAuthority.aspx?msg=" + msg, false);
+                        } // if (boolResult)
+                        else
+                        {
+                            msg = "ERROR: Change of Delegate details unsuccessful.  Edits reverted.";
+                            System.Diagnostics.Debug.WriteLine(">>> DelegateAuthority.btnClick_EditDelegate msg=" + msg);
+                            Server.Transfer("DelegateAuthority.aspx?DelegateID=" + intDelegateID + "&msg=" + msg, false);
+                        }
+                    } // if (!oldNewDelegatesChange.Equals("Same"))
+                } // if (Control.DelegateAuthorityControl.parseDelegate(ddlDeptEmpList.SelectedValue, tbxFromDate.Text, tbxToDate.Text, ref newDelegate))
+            } // if (ViewState["intDelegateID"] != null)
+        } // public void btnClick_EditDelegate(Object sender, EventArgs e)
 
         private void getSessionData()
         {
@@ -120,7 +248,7 @@ namespace LogicUniversity.WebView.Employee
             ddlDeptEmpList.DataSource = crt.getListDeptEmpsForDDL(currEmp.DepartmentID);
             ddlDeptEmpList.DataTextField = "combEmpNameID";
             ddlDeptEmpList.DataValueField = "EmployeeID";
-
+            
             // Bind the data to the control.
             ddlDeptEmpList.DataBind();
 
@@ -179,9 +307,37 @@ namespace LogicUniversity.WebView.Employee
         {
             System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.btnClick_AddDelegate(ddlDeptEmpList.SelectedItem.Value=" + ddlDeptEmpList.SelectedItem.Value + ")");
 
+            bool boolResult;
+
+            string msg;
+
             lblChosenEmp.Text = ddlDeptEmpList.SelectedItem.Text;
             lblFromDate.Text = tbxFromDate.Text;
             lblToDate.Text = tbxToDate.Text;
+
+            boolResult = Control.DelegateAuthorityControl.addDelegate(ddlDeptEmpList.SelectedValue, tbxFromDate.Text, tbxToDate.Text, DateTime.Now);
+
+            if (boolResult)
+            {
+                Model.Delegate newDelegate = new Model.Delegate();
+
+                msg = "Adding new Delegate successful";
+
+                if (Control.DelegateAuthorityControl.parseDelegate(ddlDeptEmpList.SelectedValue, tbxFromDate.Text, tbxToDate.Text, ref newDelegate)) {
+                    msg += Control.DelegateAuthorityControl.delegateNotifications(currEmp, newDelegate, "New");
+                }
+                else
+                    msg += ". Error on sending notifications and emails.";
+
+                Server.Transfer("DelegateAuthority.aspx?msg=" + msg, false);
+            }
+            else
+            {
+                msg = "ERROR: Adding new Delegate unsuccessful";
+                //System.Diagnostics.Debug.WriteLine(">>> DelegateAuthority.btnClick_EditDelegate msg=" + msg);
+                Server.Transfer("DelegateAuthority.aspx?msg=" + msg, false);
+            }
+
         }
 
         private void getDeptDelegates()

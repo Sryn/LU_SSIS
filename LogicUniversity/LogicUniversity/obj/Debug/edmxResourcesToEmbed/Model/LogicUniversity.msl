@@ -75,6 +75,7 @@
     <EntitySetMapping Name="DisbursementItems">
       <EntityTypeMapping TypeName="LogicUniversityModel.DisbursementItem">
         <MappingFragment StoreEntitySet="DisbursementItem">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
           <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
           <ScalarProperty Name="ItemID" ColumnName="ItemID" />

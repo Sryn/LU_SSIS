@@ -11,11 +11,14 @@ namespace LogicUniversity.WebView.Employee
     {
         int delegateID;
 
-        Model.Delegate aDelegate;
-
         DateTime currentDate = System.DateTime.Now.Date;
 
         Boolean boolEdit, boolCancel;
+
+        String returnMsg, strSessType = "";
+
+        Model.Employee currEmp = null;
+        Model.Delegate aDelegate;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,6 +26,8 @@ namespace LogicUniversity.WebView.Employee
             {
                 // not postback, i.e. first and only call when page loads
                 System.Diagnostics.Debug.WriteLine(">> CancelDelegate.Page_Load( 1 IsPostBack=" + IsCallback + ")");
+
+                getSessionData();
 
                 if (Request.QueryString["DelegateID"] != null)
                 {
@@ -42,7 +47,7 @@ namespace LogicUniversity.WebView.Employee
 
                             processDelegate();
 
-                            Server.Transfer("DelegateAuthority.aspx", true);
+                            Server.Transfer("DelegateAuthority.aspx?msg=" + returnMsg, false);
                         }
                     }
 
@@ -59,6 +64,32 @@ namespace LogicUniversity.WebView.Employee
             System.Diagnostics.Debug.WriteLine(">> CancelDelegate.Page_Load( 3 IsPostBack=" + IsCallback + ")");
         }
 
+        private void getSessionData()
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.getData()");
+
+            strSessType = Model.MySession.Current.type;
+
+            if (strSessType.Equals("Employee"))
+            {
+                currEmp = Model.Utilities.getCurrLoginEmp2(strSessType) as Model.Employee;
+            }
+            else
+                showPopUp("ERROR: Unknown or Illegal Employee Type Accessing this function.");
+
+        }
+
+        private void showPopUp(String msg)
+        {
+            System.Diagnostics.Debug.WriteLine(">> DelegateAuthority.showPopUp(msg)");
+
+            // all three look the same
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "PopupScript", "alert('" + confirmMsg + "');", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "ButtonClickScript", "alert('" + confirmMsg + "');", true);
+
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", "alert('" + msg + "');", true);
+        }
+
         private void processDelegate()
         {
             System.Diagnostics.Debug.WriteLine(">> CancelDelegate.processDelegate()");
@@ -69,14 +100,24 @@ namespace LogicUniversity.WebView.Employee
                 // can delete
                 lblResult.Text = "Can Delete";
 
-                lblResult.Text = Control.DelegateAuthorityControl.deleteFutureDelegateRow(delegateID).ToString();
+                if (Control.DelegateAuthorityControl.deleteFutureDelegateRow(delegateID)) {
+                    returnMsg = "Deletion of Delegate successful"; // success
+                    returnMsg += Control.DelegateAuthorityControl.delegateNotifications(currEmp, aDelegate, "FutureCancel");
+                }
+                else
+                    returnMsg = "ERROR: Delegate cannot be deleted"; // failure
             }
             else if (!boolEdit)
             {
                 // set Active to Disable
                 lblResult.Text = "set Active to Disable";
 
-                lblResult.Text = Control.DelegateAuthorityControl.setDelegateActiveToDisable(delegateID).ToString();
+                if(Control.DelegateAuthorityControl.setDelegateActiveToDisable(delegateID)) {
+                    returnMsg = "Cancellation of Delegate successful"; // success
+                    returnMsg += Control.DelegateAuthorityControl.delegateNotifications(currEmp, aDelegate, "CurrentCancel");
+                }
+                else
+                    returnMsg = "ERROR: Delegate cannot be cancelled"; // failure
             }
             else
             {
