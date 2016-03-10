@@ -43,6 +43,13 @@ namespace LogicUniversity.Model
         public String cancel { get; set; }
     }
 
+    public struct gvCollEInfoEle
+    {
+        public String deptName { get; set; }
+        public String collectionPointName { get; set; }
+        public String repNameID { get; set; }
+    }
+
     public partial class LogicUniversityEntities
     {
         // https://blogs.infosupport.com/improving-dbentityvalidationexception/

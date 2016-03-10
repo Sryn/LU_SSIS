@@ -46,3 +46,11 @@ C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\Lo
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.dll
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.pdb
 C:\Users\e0001302\Google Drive\SA41 AD Project\GitHub\LU_SSIS\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.csprojResolveAssemblyReference.cache
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll.config
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\bin\LogicUniversity.dll
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\bin\LogicUniversity.pdb
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\bin\EntityFramework.dll
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\bin\EntityFramework.xml
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.csprojResolveAssemblyReference.cache
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.dll
+C:\Users\HeinHtetZaw\Google Drive\SA41 AD Project\Hasrin\v8p4\LogicUniversity\LogicUniversity\obj\Debug\LogicUniversity.pdb

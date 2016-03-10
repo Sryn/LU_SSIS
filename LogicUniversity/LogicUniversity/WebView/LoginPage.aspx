@@ -38,7 +38,7 @@
 			</div>
 			<label for="username">EmployeeID</label>
 			<br/>
-			<asp:TextBox ID="txtEmployeeID" runat="server" Text="Emp00001"></asp:TextBox>
+			<asp:TextBox ID="txtEmployeeID" runat="server" Text="STR00001"></asp:TextBox>
 			<br/>
 			<label for="password">PIN</label>
 			<br/>
