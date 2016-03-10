@@ -133,7 +133,7 @@ namespace LogicUniversity.WebView.StoreEmployee
 
         private void getCollInfo()
         {
-            System.Diagnostics.Debug.WriteLine(">> CollectionInformation.getRelevantNotifications()");
+            System.Diagnostics.Debug.WriteLine(">> CollectionInformation.getCollInfo()");
             
             if (currStoreEmp != null)
             {

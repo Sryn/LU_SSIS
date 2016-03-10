@@ -50,6 +50,22 @@ namespace LogicUniversity.Model
         public String repNameID { get; set; }
     }
 
+    public struct gvAllDeptDisbursementEle
+    {
+        public int DisbursementID { get; set; }
+        public String deptName { get; set; }
+        public DateTime CollectionDate { get; set; }
+    }
+
+    public struct gvStoreDisbursementDetailsEle
+    {
+        public int requestID { get; set; }
+        public String itemDesc { get; set; }
+        public String quantityUOM { get; set; }
+        public DateTime requestDate { get; set; }
+        public String employeeName { get; set; }
+    }
+
     public partial class LogicUniversityEntities
     {
         // https://blogs.infosupport.com/improving-dbentityvalidationexception/

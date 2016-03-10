@@ -11,7 +11,7 @@ namespace LogicUniversity.WebView.StoreEmployee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Server.Transfer("~/WebView/Employee/Disbursements.aspx", false);
         }
     }
 }

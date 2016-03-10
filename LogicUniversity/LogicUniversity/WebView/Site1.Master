@@ -137,6 +137,7 @@
                     <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/CollectionInformation.aspx")%>'>Collection Information</a></li>
                     <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/NotCollected.aspx")%>'>Not Collected</a></li>
                     <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/DisbursementList.aspx")%>'>Disbursement List</a></li>
+                      <%--<li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>--%>
                     <%    if (semp.Role.Equals("StoreSupervisor") || semp.Role.Equals("StoreManager"))
                     {
                        %>             
