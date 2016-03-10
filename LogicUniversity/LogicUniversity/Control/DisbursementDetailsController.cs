@@ -36,6 +36,7 @@ namespace LogicUniversity.Control
                 temp.status = item.status;
                 temp.acknowledgeEmployeeName = item.Employee.Name;
                 temp.collectionPointName = item.CollectionPoint.CollectionPointName;
+                temp.DepartmentID = item.DepartmentID;
 
                 listOfDisbursementsInfo.Add(temp);
             }
@@ -67,6 +68,7 @@ namespace LogicUniversity.Control
                 temp.status = item.status;
                 temp.acknowledgeEmployeeName = item.Employee.Name;
                 temp.collectionPointName = item.CollectionPoint.CollectionPointName;
+                temp.DepartmentID = item.DepartmentID;
 
                 listOfDisbursementsInfo.Add(temp);
             }
