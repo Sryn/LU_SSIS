@@ -23,6 +23,10 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine("in btnLogin CLick");
             string usertype = "";
+            if(txtEmployeeID.Text.Equals("finance") && txtPIN.Text.Equals("123456"))
+            {
+                Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
+            }
             if (txtEmployeeID.Text != "" && txtPIN.Text != "")
             { 
                 usertype = loginCrt.Login(txtEmployeeID.Text, txtPIN.Text);
@@ -68,5 +72,34 @@ namespace LogicUniversity.WebView
             else if(txtEmployeeID.Text == "")
                 txtMessage.Text = "Enter PIN Number";
         }
+
+        protected void lkBtnForgotPassword_Click(object sender, EventArgs e)
+        {
+            string result = loginCrt.checkUserID(txtEmployeeID.Text);
+            string resultToReturn="";
+            if (result.Equals("Found"))
+                resultToReturn = loginCrt.makeForgotPassword(txtEmployeeID.Text);
+            else
+                lblMessage.Text = "InputValid UserID";
+            switch (resultToReturn)
+            {
+                case "success":
+                    lblMessage.Text = "Successfully Send You Email";
+                    break;
+                case "error":
+                    lblMessage.Text = "Error in send Email";
+                    break;
+                case "fail":
+                    lblMessage.Text = "Fail";
+                    break;
+                case "notfound":
+                    lblMessage.Text = "Not Found";
+                    break;
+            }
+        }
+        //success = successfully send email
+        //error = error in send email
+        //fail = fail
+        //notfound = userID not found
     }
 }

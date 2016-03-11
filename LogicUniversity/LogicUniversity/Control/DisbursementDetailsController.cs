@@ -24,7 +24,7 @@ namespace LogicUniversity.Control
             Employee currentEmployee = loginController.getEmployeeUserObject(EmpID);
 
 
-            listOfDisbursements = ctx.Disbursements.Where(x => x.DepartmentID == currentEmployee.DepartmentID && (x.status == "Collected" || x.status == "Ready")).ToList();
+            listOfDisbursements = ctx.Disbursements.Where(x => x.DepartmentID == currentEmployee.DepartmentID && (x.status == "Collected")).ToList();
 
             foreach (Disbursement item in listOfDisbursements)
             {
@@ -36,7 +36,6 @@ namespace LogicUniversity.Control
                 temp.status = item.status;
                 temp.acknowledgeEmployeeName = item.Employee.Name;
                 temp.collectionPointName = item.CollectionPoint.CollectionPointName;
-                temp.DepartmentID = item.DepartmentID;
 
                 listOfDisbursementsInfo.Add(temp);
             }
@@ -68,7 +67,6 @@ namespace LogicUniversity.Control
                 temp.status = item.status;
                 temp.acknowledgeEmployeeName = item.Employee.Name;
                 temp.collectionPointName = item.CollectionPoint.CollectionPointName;
-                temp.DepartmentID = item.DepartmentID;
 
                 listOfDisbursementsInfo.Add(temp);
             }

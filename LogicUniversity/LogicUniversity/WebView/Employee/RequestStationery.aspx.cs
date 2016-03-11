@@ -18,6 +18,18 @@ namespace LogicUniversity.WebView.Employee
                 return;
             if (!IsPostBack)
             {
+                if (Request["ItemIDToDelete"] != null)
+                {
+                    int id = Convert.ToInt32(Request["ItemIDToDelete"].ToString());
+                   //delete
+                }
+
+                if (Request["ItemID"] != null)
+                {
+                    int id = Convert.ToInt32(Request["ItemID"].ToString());
+                   //edit
+                }
+
                 foreach (Model.Category cat in catlist)
                 {
                     ddlCategory.Items.Add(new ListItem(cat.CategoryName, "" + cat.CategoryID));
@@ -64,7 +76,7 @@ namespace LogicUniversity.WebView.Employee
             }
             txtUnitOfMeasure.Text = itemList[ddlItemDescription.SelectedIndex].UOM;
         }
-
+       
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             if (ddlItemDescription.SelectedValue == null)

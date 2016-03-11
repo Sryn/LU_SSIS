@@ -6,26 +6,20 @@
     <br />
     <asp:GridView ID="gvAdjVoucher" runat="server">
           <Columns>                                                     
-              <asp:TemplateField HeaderText="Edit" >
+               <asp:TemplateField HeaderText="Approve" >
                         <ItemTemplate>
-                          <asp:HyperLink runat="server" ID="lnk_edit" 
-                              onClick ="return confirm('Are you sure to Edit?');"
-                              NavigateUrl='<%# "~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx?ItemCodeToEdit=" + Eval("ItemCode")%>' 
-                              Text="Edit"></asp:HyperLink>
+                          <asp:RadioButton ID="Rdn_Approve" GroupName ="Approve" runat="server" Checked="true"/>
                           
                           </ItemTemplate>
-             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Delete" >
-                        <ItemTemplate>
-                           <asp:HyperLink runat="server" ID="lnk_delete" 
-                                onClick ="return confirm('Are you sure to delete?');"
-                               NavigateUrl='<%# "~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx?ItemCodeToDelete=" + Eval("ItemCode")%>'
-                               commandName="lnk_delete"                                                       
-                                Text="Delete"></asp:HyperLink>
-                          
+                             </asp:TemplateField>
+                           <asp:TemplateField HeaderText="Reject">
+                            <ItemTemplate>
+                         
+                          <asp:RadioButton ID="Rdn_Reject" GroupName ="Approve" runat="server"/>
                           </ItemTemplate>
-             </asp:TemplateField>                       
+                       </asp:TemplateField>
          </Columns>
     </asp:GridView>
 &nbsp;
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
 </asp:Content>

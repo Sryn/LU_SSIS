@@ -1,266 +1,255 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="LogicUniversity.WebView.Employee.Site1" %>
 
 <!DOCTYPE html>
-  
-         
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen"/>
-   <!-- Latest compiled and minified CSS -->
- 
-    <link rel="stylesheet"href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
- 
-    <!-- Optional theme -->
- 
-    <link rel="stylesheet"href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"/>
- 
-    <!-- Latest compiled and minified JavaScript -->
- 
-    
+    <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen" />
+    <!-- Latest compiled and minified CSS -->
 
-    <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="~/css/Store_style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="~/css/emp.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="~/css/!emp_deptHead.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+
+    <!-- Optional theme -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/css/Store_style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/css/emp.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/css/!emp_deptHead.css" type="text/css" media="screen" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-   
+
     <style type="text/css">
         .auto-style1 {
             width: 20%;
         }
-       .grid_head {
-            height:65px;
-            font-family:'Arial Rounded MT';
-            font-size:25px;
-            background-color:whitesmoke;
+
+        .grid_head {
+            height: 65px;
+            font-family: 'Arial Rounded MT';
+            font-size: 25px;
+            background-color: whitesmoke;
         }
 
         .grid_row {
-          
-            font-family:Arial;
-            font-size:20px;
+            font-family: Arial;
+            font-size: 20px;
         }
 
-         .success1{
-           background-color: wheat;
-           height:50px;
+        .success1 {
+            background-color: white;
+            height: 50px;
         }
+
         .danger1 {
-            background-color:white;
-            height:50px;
+            background-color: lightskyblue;
+            height: 50px;
         }
-       .scrolling-table {
-        height:691px;
-        overflow-x:hidden;
-        overflow-y:scroll;
-        width:1550px;
-        margin-left:70px;
-        margin-top:100px;
-    }
-        .margingAlign {           
-        margin-left:80px;
-    }
-         .margingAlignTop {           
-        margin-left:80px;
-        margin-top:20px;
-    }
+
+        .scrolling-table {
+            height: 691px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            width: 1550px;
+            margin-left: 70px;
+            margin-top: 100px;
+        }
+
+        .margingAlign {
+            margin-left: 80px;
+        }
+
+        .margingAlignTop {
+            margin-left: 80px;
+            margin-top: 20px;
+        }
     </style>
+    <%--   <script type = "text/javascript" >
+        history.pushState(null, null, '/WebView/LoginPage.aspx');
+    window.addEventListener('popstate', function(event) {
+        history.pushState(null, null, '/WebView/LoginPage.aspx');
+    });
+    </script>--%>
 </head>
-      <% 
-                if (Session["type"] == null)
-                {
-                     Response.Redirect("~/WebView/LoginPage.aspx"); 
-                }                                             
-                else{  %>  
+<% 
+    if (Session["type"] == null)
+    {
+        Server.Transfer("~/WebView/LoginPage.aspx");
+    }
+    else
+    {  %>
 <body>
 
     <form id="form1" runat="server">
-       
+
         <div class="example">
             <div id="nav1">
                 <asp:Image ID="Image1" runat="server" Height="117px" ImageUrl="~/images/unilogo.png" Width="105px" />
-               
-                
+
+
             </div>
-             <div id="nav2">
-              <%--  --%>
-                <asp:Label ID="Label2" runat="server" Text="Logic University" font-family= "Courier New"  Font-Size="45px"></asp:Label>
-                
+            <div id="nav2">
+                <%--  --%>
+                <asp:Label ID="Label2" runat="server" Text="Logic University" font-family="Courier New" Font-Size="45px"></asp:Label>
             </div>
-         <% 
+            <% 
                 if (Session["type"].Equals("StoreEmployee"))
                 {
-                         LogicUniversity.Model.StoreEmployee semp = (LogicUniversity.Model.StoreEmployee)Session["User"];
-                    %>    
-
-                    <ul id="navv">
-                  
-                    <li><a href="#">Admin</a>
-                     <ul>                   
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
-                       </ul>
-                      </li>
-        
-                  
-        
-                    <li><a href="#">Report</a>
-                    <ul>                   
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/Reports.aspx")%>'>Reports</a></li>      
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RequisitionTrend.aspx")%>'>Requisition Trend</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/StationaryOrderBy.aspx")%>'>Stationary Ordered</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/StockCard.aspx")%>'>Stock Card</a></li>
+                    LogicUniversity.Model.StoreEmployee semp = (LogicUniversity.Model.StoreEmployee)Session["User"];
+            %>
+            <ul id="navv">
+                <li><a href="#">Admin</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
                     </ul>
-                    </li>
-                           
-        
-                    <li><a href="#">Inventory</a>
-                    <ul>              
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/InventoryList.aspx")%>'>Inventory List</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RaisePurchaseOrder.aspx")%>'>Raise Purchase Order</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RaiseAdjustmentVoucher.aspx")%>'>Raise Adjustment Voucher</a></li>                        
-                <%
-                    if (semp.Role.Equals("StoreSupervisor") || semp.Role.Equals("StoreManager"))
+                </li>
+                <li><a href="#">Report</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/Reports.aspx")%>'>Reports</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RequisitionTrend.aspx")%>'>Requisition Trend</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/StationaryOrderBy.aspx")%>'>Stationary Ordered</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/StockCard.aspx")%>'>Stock Card</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Inventory</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/InventoryList.aspx")%>'>Inventory List</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RaisePurchaseOrder.aspx")%>'>Raise Purchase Order</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/RaiseAdjustmentVoucher.aspx")%>'>Raise Adjustment Voucher</a></li>
+                        <%
+                            if (semp.Role.Equals("Store Supervisor") || semp.Role.Equals("Store Manager"))
+                            {
+                        %>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx")%>'>Approve Adjustment Voucher</a></li>
+                        <%   } %>
+                    </ul>
+                </li>
+                <li><a href="#">Requests</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/Request.aspx")%>'>Request</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/CollectionInformation.aspx")%>'>Collection Information</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/NotCollected.aspx")%>'>Not Collected</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/DisbursementList.aspx")%>'>Disbursement List</a></li>
+                        <%    if (semp.Role.Equals("Store Manager") || semp.Role.Equals("Store Supervisor"))
+                            {
+                        %>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/ChangeDeliveryDate.aspx")%>'>Change Delivery Date</a></li>
+                        <% 
+                            } %>
+                    </ul>
+                </li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
+            </ul>
+
+            <%   }
+
+
+
+
+                if (Session["type"].Equals("Employee"))
+                {
+                    LogicUniversity.Model.Employee emp = (LogicUniversity.Model.Employee)Session["User"];
+                    if (emp.Role.Equals("Department Head"))
                     {
-                       %>                       
-                     <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx")%>'>Approve Adjustment Voucher</a></li>
-                  <%   } %>
+            %>
+            <ul id="nav">
+                <li><a href="#">Admin</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeCollectionPoint.aspx")%>'>Change Collection Point</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeDepartmentRepresentative.aspx")%>'>Change Department Representative</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
                     </ul>
-                    </li>   
-
-
-                    <li><a href="#">Requests</a>
-                    <ul>     
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/Request.aspx")%>'>Request</a></li>         
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/CollectionInformation.aspx")%>'>Collection Information</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/NotCollected.aspx")%>'>Not Collected</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/DisbursementList.aspx")%>'>Disbursement List</a></li>
-                      <%--<li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>--%>
-                    <%    if (semp.Role.Equals("StoreSupervisor") || semp.Role.Equals("StoreManager"))
-                    {
-                       %>             
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/StoreEmployee/ChangeDeliveryDate.aspx")%>'>Change Delivery Date</a></li>
-                 <% 
-      
-                  } %>
+                </li>
+                <li><a href="#">Requests</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
                     </ul>
-                    </li>
-                          <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
+                </li>
+                <li><a href="#">Disbursements</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DisbursementsDetail.aspx")%>'>Disbursements Detail</a></li>
                     </ul>
-                   <%   }
-      %>
+                </li>
 
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequisitionApproval.aspx")%>'>Requisition Approval</a></li>
 
-
-
-             <% if (Session["type"].Equals("Employee"))
-            {
-               LogicUniversity.Model.Employee emp = (LogicUniversity.Model.Employee)Session["User"];
-                if (emp.Role.Equals("HeadDepartment"))
-                      {   
-          %>
-
-             <ul id="nav">
-                  
-                   <li><a href="#">Admin</a>
-                     <ul>                                
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeCollectionPoint.aspx")%>'>Change Collection Point</a></li>                       
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeDepartmentRepresentative.aspx")%>'>Change Department Representative</a></li>                     
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
-                       </ul>
-                        </li>
-                    <li><a href="#">Requests</a>
-                    <ul>                   
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
-                    </ul>
-                    </li>                   
-                      <li><a href="#">Disbursements</a>
-                      <ul>                   
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DisbursementsDetail.aspx")%>'>Disbursements Detail</a></li>
-                      </ul>
-                      </li>                                             
-         
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequisitionApproval.aspx")%>'>Requisition Approval</a></li>
-                                        
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DelegateAuthority.aspx")%>'>Delegate Authority</a></li>
-                        <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
-               </ul>
-        <%                    
-          
-          }%>
-
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DelegateAuthority.aspx")%>'>Delegate Authority</a></li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
+            </ul>
             <%
+                }
                 if (emp.Role.Equals("Department Head") || emp.Role.Equals("Delegate"))
-                { 
-                 %>
-                  <ul id="navvv">
-                  
-                   <li><a href="#">Admin</a>
-                     <ul>                                 
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeCollectionPoint.aspx")%>'>Change Collection Point</a></li>
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeDepartmentRepresentative.aspx")%>'>Change Department Representative</a></li>                     
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
-                       </ul>
-                    </li>
-                    <li><a href="#">Requests</a>
-                    <ul>                   
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
+                {
+            %>
+            <ul id="navvv">
+                <li><a href="#">Admin</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeCollectionPoint.aspx")%>'>Change Collection Point</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ChangeDepartmentRepresentative.aspx")%>'>Change Department Representative</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
                     </ul>
-                    </li>                                                           
-                      <li><a href="#">Disbursements</a>
-                      <ul>                   
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DisbursementsDetail.aspx")%>'>Disbursements Detail</a></li>
-                      </ul>
-                      </li>                                                             
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequisitionApproval.aspx")%>'>Requisition Approval</a></li>
-                       <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DelegateAuthority.aspx")%>'>Delegate Authority</a></li>
-                      <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
-                 </ul>
+                </li>
+                <li><a href="#">Requests</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Disbursements</a>
+                    <ul>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/Disbursements.aspx")%>'>Disbursements</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DisbursementsDetail.aspx")%>'>Disbursements Detail</a></li>
+                    </ul>
+                </li>
+                <%
+                    if (emp.Role.Equals("Department Head"))
+                    { %>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/DelegateAuthority.aspx")%>'>Delegate Authority</a></li>
+                <%} %>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequisitionApproval.aspx")%>'>Requisition Approval</a></li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
+            </ul>
             <%
-
-          }%> 
-             <%
+                }%>
+            <%
                 if (emp.Role.Equals("Employee"))
-                { 
-                 %>
-                  <ul id="navvvv">
-                  
-                   <li><a href="#">Admin</a>
-                     <ul>                                 
-                                     
-                     <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
-                     <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
-                       </ul>
-                    </li>
-                                   
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
-                    <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
-                                                                
-                   
-                     <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
-                 </ul>
-            <%
+                {
+            %>
+            <ul id="navvvv">
 
-          }%> 
-            <%
+                <li><a href="#">Admin</a>
+                    <ul>
 
-          }%> 
-       
-</div>
-        
-         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>   
-        </form>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/ChangePIN.aspx")%>'>Change PIN</a></li>
+                        <li><a href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>Log Out</a></li>
+                    </ul>
+                </li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/RequestStationery.aspx")%>'>Request Stationery</a></li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Employee/ViewRequest.aspx")%>'>View Request</a></li>
+                <li><a href='<%= Page.ResolveUrl("~/WebView/Notifications.aspx")%>'>Notifications</a></li>
+            </ul>
+            <%
+                }%>
+            <%
+                }%>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
 </body>
-     <%   
+<%   
     }%>
 </html>
 

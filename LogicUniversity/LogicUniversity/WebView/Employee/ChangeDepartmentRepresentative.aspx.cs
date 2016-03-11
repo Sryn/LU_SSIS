@@ -35,12 +35,12 @@ namespace LogicUniversity.WebView.Employee
                 System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.Page_Load( 1 IsPostBack=" + IsCallback + ")");
 
                 getSessionData();
-
+                fillDropDownList();
                 getCurrDeptRep();
 
                 saveCurrDeprRep(); // for use during email notification
 
-                fillDropDownList();
+                
 
                 bool showDevVariables = false;
                 toggleDevVariables(showDevVariables);
@@ -60,6 +60,7 @@ namespace LogicUniversity.WebView.Employee
                 else
                     showPopUp("ERROR: Unknown or Illegal Employee Type Accessing this function.");
             }
+            
 
             // runs everytime the page loads
             System.Diagnostics.Debug.WriteLine(">> ChangeDepartmentRepresentative.Page_Load( 3 IsPostBack=" + IsCallback + ")");

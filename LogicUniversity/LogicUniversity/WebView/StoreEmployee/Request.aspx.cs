@@ -10,7 +10,7 @@ namespace LogicUniversity.WebView.StoreEmployee
 {
     public partial class Request : System.Web.UI.Page
     {
-        //int count = 0;
+        int count = 0;
         Control.DisbursementController crt;
         List<Model.DisbursementItemViewModel> DisbursementList;  
         protected void Page_Load(object sender, EventArgs e)
@@ -69,11 +69,11 @@ namespace LogicUniversity.WebView.StoreEmployee
                    binCode, itemDescription, Convert.ToInt32(totalNeededQuantity),
                    department, Convert.ToInt32(needqty), unitOfMeasure,
                    Convert.ToInt32(actualQty), itemID,
-                   Convert.ToInt32(totalReceived), Convert.ToInt32(disbursementItemID)));
+                   Convert.ToInt32(totalReceived), Convert.ToInt32(disbursementItemID),""));
                    lblMessage.Text += "A"+actualQty + "T" + totalReceived+"\t\t";
 
             }
-
+            crt.confirmDisbursement(DisbursementList);
             gvDataList.DataSource = DisbursementList;
             gvDataList.DataBind();
 

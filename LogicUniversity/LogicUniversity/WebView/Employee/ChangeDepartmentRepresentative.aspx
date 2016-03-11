@@ -20,6 +20,7 @@
         <tr>
             <td><asp:Label ID="lblTxtDeptID" runat="server" Text="DepartmentID"></asp:Label></td>
             <td><asp:Label ID="lblDeptID" runat="server" Text="Label"></asp:Label></td>
+
         </tr>
         <tr>
             <td>Current Representative</td>

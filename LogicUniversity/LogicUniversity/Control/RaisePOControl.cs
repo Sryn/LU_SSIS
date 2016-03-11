@@ -13,6 +13,10 @@ namespace LogicUniversity.Control
         {
             ctx = new Model.LogicUniversityEntities();
         }
+        public Item getItemByItemID(string itemID)
+        {
+            return ctx.Items.Where(x=>x.ItemID==itemID).FirstOrDefault();
+        }
         public List<Category> getAllCategory()
         {
             return ctx.Categories.ToList();

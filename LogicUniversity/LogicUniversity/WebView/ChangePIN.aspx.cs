@@ -17,6 +17,11 @@ namespace LogicUniversity.WebView
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            if(!txtNewPIN.Text.Equals(txtConfirmNewPIN.Text))
+            {
+                lblMessage.Text = "New PIN and Confirm New PIN should same";
+                return;
+            }
             string result = lcrt.ChangePIN((object)Session["User"],(string)Session["type"], txtOldPIN.Text, txtNewPIN.Text);
             switch (result)
             {
@@ -24,7 +29,7 @@ namespace LogicUniversity.WebView
                     lblMessage.Text = "Successfully Changed";
                     break;
                 case "notfound":
-                    lblMessage.Text = "Wrong PIN";
+                    lblMessage.Text = "Old PIN is invalid";
                     break;
                 case "error":
                     lblMessage.Text = "Error in changing PIN";
