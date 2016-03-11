@@ -25,6 +25,7 @@ namespace LogicUniversity.Control
         // success = successfully saved
         // if requistionID is "", it is new
         // if not, it is edit
+        //EmpNotFound = Employee Id not found in Employee Table
         public string insertNewReqisition(List<RequisitionItem> ReqItem,string empID,string requisitionID)
         {
             System.DateTime today = DateTime.Today;
@@ -35,11 +36,18 @@ namespace LogicUniversity.Control
                 req.Date = today;
                 ctx.Requisitions.Add(req);
                 ctx.SaveChanges();
-
+                Employee emp = ctx.Employees.Where(x => x.EmployeeID == empID).FirstOrDefault();
+                if (emp == null)
+                    return "EmpNotFound";
                 foreach (RequisitionItem Item in ReqItem)
                 {
                     Item.RequisitionID = req.RequisitionID;
-                    Item.Status = "PendingApproval";
+                    if(emp.Role== "Department Head") { 
+                        Item.Status = "Approved";
+                        Item.Reson = "";
+                    }
+                    else
+                        Item.Status = "PendingApproval";
                     req.RequisitionItems.Add(Item);
                 }
                 ctx.SaveChanges();

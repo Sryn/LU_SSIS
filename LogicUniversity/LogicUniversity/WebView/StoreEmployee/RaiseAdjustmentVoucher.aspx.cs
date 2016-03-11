@@ -33,9 +33,9 @@ namespace LogicUniversity.WebView.StoreEmployee
                 }
                 txtUnifOfMeasure.Text = itemList[0].UOM;
 
-                if (Request["ItemCodeToDelete="] != null)
+                if (Request["ItemCodeToDelete"] != null)
                 {
-                    String id =Request["ItemCodeToDelete="].ToString();
+                    String id =Request["ItemCodeToDelete"].ToString();
                     _delete(id);
                 }
 
@@ -53,12 +53,51 @@ namespace LogicUniversity.WebView.StoreEmployee
         {
             System.Diagnostics.Debug.WriteLine("Delete Click" + itemid);
 
+            List<RaiseAdjustmentVoucherItem> POItemList;
+            if (Session["AdjItem"] == null)
+                POItemList = new List<RaiseAdjustmentVoucherItem>();
+            else
+                POItemList = (List<RaiseAdjustmentVoucherItem>)Session["AdjItem"];
+            foreach (RaiseAdjustmentVoucherItem rpov in POItemList)
+            {
+                if (rpov.ItemCode.Equals(itemid))
+                {
+                    POItemList.Remove(rpov);
+                    gridViewDataBind();
+                    return;
+                }
+            }
         }
 
         public void _Edit(String itemid)
         {
             System.Diagnostics.Debug.WriteLine("ReOrder Click" + itemid);
 
+            List<RaiseAdjustmentVoucherItem> POItemList;
+            if (Session["AdjItem"] == null)
+                POItemList = new List<RaiseAdjustmentVoucherItem>();
+            else
+                POItemList = (List<RaiseAdjustmentVoucherItem>)Session["AdjItem"];
+            foreach (RaiseAdjustmentVoucherItem rpov in POItemList)
+            {
+                if (rpov.ItemCode.Equals(itemid))
+                {
+                    POItemList.Remove(rpov);
+                    if (rpov.Quantity > 0)
+                    {
+                        txtQuantityToAdjust.Text = rpov.Quantity.ToString();
+                        rblIncreaseOrDecrease.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        txtQuantityToAdjust.Text = (rpov.Quantity*-1).ToString();
+                        rblIncreaseOrDecrease.SelectedIndex = 1;
+                    }
+                    txtReason.Text = rpov.Reason;
+                    gridViewDataBind();
+                    return;
+                }
+            }
         }
         private void gridViewDataBind()
         {

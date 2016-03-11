@@ -8,9 +8,8 @@ namespace LogicUniversity.Model
     public class DisbursementDetail
     {
         public int requestID { get; set; }
-
         public string employeeName { get; set; }
-        
+
         public string itemDesc { get; set; }
 
         public int quantity { get; set; }

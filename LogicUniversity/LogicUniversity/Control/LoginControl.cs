@@ -120,12 +120,58 @@ namespace LogicUniversity.Control
             }
                 return "notFound";
         }
-        //success = sucessfully sent
-        //failToSend = cant send
+        //success = successfully send email
+        //error = error in send email
         //fail = fail
+        //notfound = userID not found
         public string makeForgotPassword(string UserID)
         {
-            return "success";
+            EmailControl crt = new EmailControl();
+            string result = crt.sendEmailForForgotPIN(UserID);
+            return result;
+        }
+        public string forgotPINCheck(int code)
+        {
+            ForgotPassword fp = ctx.ForgotPasswords.Where(x => x.Code == code && x.Status == "Active").FirstOrDefault();
+            if (fp == null)
+                return "noFound";
+            else
+                return "found";
+        }
+        //invalid
+        //Disable
+        //notFound
+        //success
+        //fail
+        public string changeForgotPINCheck(int PIN,int code)
+        {
+            ForgotPassword fp = ctx.ForgotPasswords.Where(x => x.Code == code && x.Status == "Active").FirstOrDefault();
+            if (fp == null)
+                return "invalid";
+            fp.Status = "Disable";
+            ctx.SaveChanges();
+            string UserType = fp.UserID.Substring(0, 1);
+            if (UserType.Equals("S"))
+            {
+                StoreEmployee sEmp = ctx.StoreEmployees.Where(x => x.StoreEmployeeID == fp.UserID).FirstOrDefault();
+                if (sEmp == null)
+                    return "notFound";
+                sEmp.PIN = PIN + "";
+                ctx.SaveChanges();
+                return "success";
+            }
+            else if (UserType.Equals("E"))
+            {
+                Employee emp = ctx.Employees.Where(x => x.EmployeeID == fp.UserID).FirstOrDefault();
+                if (emp == null)
+                    return "notFound";
+                emp.PIN = PIN + "";
+                ctx.SaveChanges();
+                return "success";
+
+            }
+            else
+                return "fail";
         }
     }
 }

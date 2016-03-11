@@ -22,7 +22,7 @@ namespace LogicUniversity.Control
             disbursement.CollectionDate = DateTime.Today;
             disbursement.AcknowledgeEmployeeID = acknowledgeObject[0].acknowledgeEmpId;
             disbursement.status = "Collected";
-
+            int actualQty = 0;
 
             foreach (AcknowledgeModel item in acknowledgeObject)
             {
@@ -30,57 +30,50 @@ namespace LogicUniversity.Control
 
                 foreach (DisbursementItem eachItem in disbursementItemList)
                 {
-                    DisbursementItem disbursementItem = ctx.DisbursementItems.Where(x => x.DisbursementItemID == eachItem.DisbursementItemID).FirstOrDefault();
+                    actualQty = eachItem.Quantity.GetValueOrDefault() - eachItem.RemainingQty.GetValueOrDefault();
+                    //DisbursementItem disbursementItem = ctx.DisbursementItems.Where(x => x.DisbursementItemID == eachItem.DisbursementItemID).FirstOrDefault();
 
-                    if (eachItem.Quantity == disbursementItem.Quantity)
+                    if (item.quantityAccepted == actualQty)
                     {
-                        disbursementItem.RemainingQty = 0;
-                    }
-                    else
-                    {
-                        disbursementItem.RemainingQty = disbursementItem.Quantity - eachItem.Quantity;
-                        disbursementItem.Quantity = eachItem.Quantity;
-                        eachItem.Item.Quantity = (int)eachItem.Item.Quantity + (int)disbursementItem.Quantity - (int)eachItem.Quantity;
-                    }
-
-                    List<RequisitionItem> requisitionItemList = eachItem.RequisitionItems.ToList();
-
-                    foreach (RequisitionItem anotherEachItem in requisitionItemList)
-                    {
-                        if (eachItem.Quantity == disbursementItem.Quantity)
+                        eachItem.Status = "Collected";
+                        List<RequisitionItem> ReqItemList = ctx.RequisitionItems.Where(x => x.DisbursementItems.Any(y => y.DisbursementID == eachItem.DisbursementID)).ToList();
+                        foreach (RequisitionItem reqItem in ReqItemList)
                         {
-                            anotherEachItem.Status = "Collected";
+                            if (reqItem.Status.Equals("inProgress"))
+                            {
+                                reqItem.Status = "Collected";
+                            }
                         }
-                        else
+                    }
+                    else if (item.quantityAccepted < actualQty)
+                    {
+                        eachItem.Item.Quantity += actualQty-item.quantityAccepted;
+                        eachItem.RemainingQty += actualQty - item.quantityAccepted;
+                        List<RequisitionItem> ReqItemList = ctx.RequisitionItems.Where(x => x.DisbursementItems.Any(y => y.DisbursementID == eachItem.DisbursementID)).ToList();
+                        foreach(RequisitionItem reqItem in ReqItemList)
                         {
-                            anotherEachItem.Status = "Partial Fulfilled";
+                            reqItem.Status = "Partial Fulfilled";
                         }
-
-
                     }
 
                     StockTransaction stockTransaction = new StockTransaction();
                     stockTransaction.DepartmentID = eachItem.Disbursement.DepartmentID;
                     stockTransaction.ItemID = eachItem.ItemID;
-                    stockTransaction.Balance = eachItem.Item.Quantity - eachItem.Quantity;
+                    stockTransaction.Balance = eachItem.Item.Quantity;
                     stockTransaction.TransactionDate = DateTime.Today;
                     ctx.StockTransactions.Add(stockTransaction);
-
-
                 }
-
             }
-
             try
             {
                 ctx.SaveChanges();
                 return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message);
                 return "Error";
             }
-
         }
     }
 }

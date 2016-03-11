@@ -42,21 +42,18 @@ namespace LogicUniversity.Model
         public String edit { get; set; }
         public String cancel { get; set; }
     }
-
     public struct gvCollEInfoEle
     {
         public String deptName { get; set; }
         public String collectionPointName { get; set; }
         public String repNameID { get; set; }
     }
-
     public struct gvAllDeptDisbursementEle
     {
         public int DisbursementID { get; set; }
         public String deptName { get; set; }
         public DateTime CollectionDate { get; set; }
     }
-
     public struct gvStoreDisbursementDetailsEle
     {
         public int requestID { get; set; }
@@ -65,7 +62,6 @@ namespace LogicUniversity.Model
         public DateTime requestDate { get; set; }
         public String employeeName { get; set; }
     }
-
     public partial class LogicUniversityEntities
     {
         // https://blogs.infosupport.com/improving-dbentityvalidationexception/
@@ -262,7 +258,7 @@ namespace LogicUniversity.Model
             var loginCtrl = new Control.LoginControl();
 
             deptID = loginCtrl.getEmployeeUserObject(empID).DepartmentID;
-            
+
             return deptID;
         }
 
@@ -277,7 +273,8 @@ namespace LogicUniversity.Model
 
             Boolean boolResult = false;
 
-            using(var context = new LogicUniversityEntities()) {
+            using (var context = new LogicUniversityEntities())
+            {
                 Employee anEmployee = context.Employees.Find(EmployeeID);
 
                 if (anEmployee != null)

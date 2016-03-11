@@ -14,6 +14,44 @@ namespace LogicUniversity
     public interface IService1
     {
 
+        //03/09/2016 1.07pm
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetDisbursementsForAcknowledgement/{deptID}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementItemView> getDisbursementsForAcknowledgement(String deptID, String userID, String pinValue);
+
+
+        //03/09/2016 2.10pm
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetDisbursementsForAcknowledgementCollection/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementInfo> getDisbursementsForAcknowledgementCollection(String userID, String pinValue);
+
+
+        //03/09/2016 7.33pm
+        [WebInvoke(UriTemplate = "/AcknowledgeDisbursements", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string acknowledgeDisbursements(List<AcknowledgeObject> listForUpdate);
+
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateDisbursementListAllocation", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string updateDisbursementListAllocation(List<DisbursementItemView> listForUpdate);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateRetrieval", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string updateRetrieval(RetrievedObject update);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetRequestListForDisbursement/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementItemView> getRequestListForDisbursement(String userID, String pinValue);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetCategory/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<CategoryObject> getCategory(String userID, String pinValue);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetItemsInCategory/{cat}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<ItemObject> getItemsInCategory(string cat, String userID, String pinValue);
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/ForgotPIN", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string forgotPassword(forgotPin empId);
@@ -29,29 +67,33 @@ namespace LogicUniversity
         string changePassword(pinDetails value);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetEmployeeRole/{id}", ResponseFormat = WebMessageFormat.Json)]
-        EmployeeObject getEmployeeRole(String id);
+        [WebGet(UriTemplate = "/GetEmployeeRole/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        EmployeeObject getEmployeeRole(String userID, String pinValue);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetStoreRole/{id}", ResponseFormat = WebMessageFormat.Json)]
-        StoreEmpObject getStoreRole(String id);
+        [WebGet(UriTemplate = "/GetStoreRole/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        StoreEmpObject getStoreRole(String userID, String pinValue);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetDisbursementListByItem/{itemid}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementItemView> disbursementListByItem(String itemid, String userID, String pinValue);
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetRequisitions/{id}", ResponseFormat = WebMessageFormat.Json)]
-        List<requisitionApprovals> getListOfRequisition(String id);
+        [WebGet(UriTemplate = "/GetRequisitions/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<requisitionApprovals> getListOfRequisition(String userID, String pinValue);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/submitRequisitionApprovals", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string approveRequisitions(List<requisitionApprovals> approvalList);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetNotifications/{id}", ResponseFormat = WebMessageFormat.Json)]
-        List<NotificationList> getNotifications(String id);
+        [WebGet(UriTemplate = "/GetNotifications/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<NotificationList> getNotifications(String userID, String pinValue);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetDeptEmployees/{deptID}", ResponseFormat = WebMessageFormat.Json)]
-        List<deptEmp> getDeptEmployees(String deptID);
+        [WebGet(UriTemplate = "/GetDeptEmployees/{deptID}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<deptEmp> getDeptEmployees(String deptID, String userID, String pinValue);
 
 
         [OperationContract]
@@ -59,54 +101,59 @@ namespace LogicUniversity
         string changeRep(changeRepModel information);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetCollectionInfo", ResponseFormat = WebMessageFormat.Json)]
-        List<CollectionLocation> getCollectionInfo();
+        [WebGet(UriTemplate = "/GetCollectionInfo/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<CollectionLocation> getCollectionInfo(String userID, String pinValue);
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetCollectionPoint/{collectionPointID}", ResponseFormat = WebMessageFormat.Json)]
-        CollectionLocation getCollectionPoint(string collectionPointID);
+        [WebGet(UriTemplate = "/GetDeptDisbursement/{dept}/{disbursementID}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementItemView> getDeptDisbursements(string dept, string disbursementID, String userID, String pinValue);
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetAllCollectionInfo", ResponseFormat = WebMessageFormat.Json)]
-        List<CollectionInformation> getAllCollectionInfo();
-
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetDisbursement/{empID}", ResponseFormat = WebMessageFormat.Json)]
-        List<DisbursementInfo> getAllDeptDisbursements(String empID);
+        [WebGet(UriTemplate = "/GetCollectionPoint/{collectionPointID}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        CollectionLocation getCollectionPoint(string collectionPointID, String userID, String pinValue);
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetAllDisbursement", ResponseFormat = WebMessageFormat.Json)]
-        List<DisbursementInfo> getAllDisbursements();
+        [WebGet(UriTemplate = "/GetAllCollectionInfo/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<CollectionInformation> getAllCollectionInfo(String userID, String pinValue);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetDisbursement/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementInfo> getAllDeptDisbursements(String userID, String pinValue);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetAllDisbursement/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementInfo> getAllDisbursements(String userID, String pinValue);
 
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetDepartmentInfo/{deptId}", ResponseFormat = WebMessageFormat.Json)]
-        departmentInfo getDepartmentInfo(string deptId);
+        [WebGet(UriTemplate = "/GetDepartmentInfo/{deptId}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        departmentInfo getDepartmentInfo(string deptId, String userID, String pinValue);
 
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetDepartmentRep/{deptId}", ResponseFormat = WebMessageFormat.Json)]
-        EmployeeObject getDepartmentRep(string deptId);
+        [WebGet(UriTemplate = "/GetDepartmentRep/{deptId}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        EmployeeObject getDepartmentRep(string deptId, String userID, String pinValue);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/ChangeCollectionPoint", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         int changeCollection(changePoint information);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetItem/{itemCode}", ResponseFormat = WebMessageFormat.Json)]
-        itemObject getItem(string itemCode);
+        [WebGet(UriTemplate = "/GetItem/{itemCode}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        itemObject getItem(string itemCode, String userID, String pinValue);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetSuppliers/{itemCode}", ResponseFormat = WebMessageFormat.Json)]
-        List<suppliersObject> getSuppliers(string itemCode);
+        [WebGet(UriTemplate = "/GetSuppliers/{itemCode}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<suppliersObject> getSuppliers(string itemCode, String userID, String pinValue);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetDisbursementDetails/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
-        List<DisbursementDetailObject> getDisbursementDetail(string disbursementID);
+        [WebGet(UriTemplate = "/GetDisbursementDetails/{disbursementID}/{userID}/{pinValue}", ResponseFormat = WebMessageFormat.Json)]
+        List<DisbursementDetailObject> getDisbursementDetail(string disbursementID, String userID, String pinValue);
 
 
         [OperationContract]
@@ -116,6 +163,260 @@ namespace LogicUniversity
         // TODO: Add your service operations here
     }
 
+
+
+    [DataContract]
+    public class AcknowledgeObject
+    {
+        private int disbursementId;
+        private string acknowledgeEmpId;
+        private string deptId;
+        private int quantityAccepted;
+        private string itemId;
+        private string id;
+        private string pinValue;
+
+
+
+
+        public AcknowledgeObject(int disbursementId, string acknowledgeEmpId, string deptId, int quantityAccepted, string itemId, string id, string pinValue)
+        {
+            this.disbursementId = disbursementId;
+            this.acknowledgeEmpId = acknowledgeEmpId;
+            this.deptId = deptId;
+            this.quantityAccepted = quantityAccepted;
+            this.itemId = itemId;
+            this.id = id;
+            this.pinValue = pinValue;
+        }
+
+        [DataMember]
+        public int DisbursementId
+        {
+            get { return disbursementId; }
+            set { disbursementId = value; }
+        }
+
+
+        [DataMember]
+        public string AcknowledgeEmpId
+        {
+            get { return acknowledgeEmpId; }
+            set { acknowledgeEmpId = value; }
+        }
+
+        [DataMember]
+        public string DeptId
+        {
+            get { return deptId; }
+            set { deptId = value; }
+        }
+
+        [DataMember]
+        public int QuantityAccepted
+        {
+            get { return quantityAccepted; }
+            set { quantityAccepted = value; }
+        }
+
+
+        [DataMember]
+        public string ItemId
+        {
+            get { return itemId; }
+            set { itemId = value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
+        }
+
+    }
+
+
+
+
+    [DataContract]
+    public class ItemObject
+    {
+        private string itemID;
+        private string description;
+        private int quantity;
+        private int categoryID;
+        private int reorderLevel;
+        private int reorderQty;
+        private string qRCode;
+        private string binNo;
+
+
+
+        public ItemObject(string itemID, string description, int quantity, int categoryID, int reorderLevel, int reorderQty, string qRCode, string binNo)
+        {
+            this.itemID = itemID;
+            this.description = description;
+            this.quantity = quantity;
+            this.categoryID = categoryID;
+            this.reorderLevel = reorderLevel;
+            this.reorderQty = reorderQty;
+            this.qRCode = qRCode;
+            this.binNo = binNo;
+        }
+
+        [DataMember]
+        public string ItemID
+        {
+            get { return itemID; }
+            set { itemID = value; }
+        }
+
+
+        [DataMember]
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        [DataMember]
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+
+        [DataMember]
+        public int CategoryID
+        {
+            get { return categoryID; }
+            set { categoryID = value; }
+        }
+
+
+        [DataMember]
+        public int ReorderLevel
+        {
+            get { return reorderLevel; }
+            set { reorderLevel = value; }
+        }
+
+        [DataMember]
+        public int ReorderQty
+        {
+            get { return reorderQty; }
+            set { reorderQty = value; }
+        }
+
+
+        [DataMember]
+        public string QRCode
+        {
+            get { return qRCode; }
+            set { qRCode = value; }
+        }
+
+
+        [DataMember]
+        public string BinNo
+        {
+            get { return binNo; }
+            set { binNo = value; }
+        }
+
+
+    }
+
+
+
+
+    [DataContract]
+    public class RetrievedObject
+    {
+        private string itemID;
+        private int qty;
+        private string id;
+        private string pinValue;
+
+
+        public RetrievedObject(string itemID, int qty, string id, string pinValue)
+        {
+            this.itemID = itemID;
+            this.qty = qty;
+            this.id = id;
+            this.pinValue = pinValue;
+        }
+
+        [DataMember]
+        public string ItemID
+        {
+            get { return itemID; }
+            set { itemID = value; }
+        }
+
+
+        [DataMember]
+        public int Qty
+        {
+            get { return qty; }
+            set { qty = value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
+        }
+
+    }
+
+
+
+    [DataContract]
+    public class CategoryObject
+    {
+        private string categoryName;
+        private int categoryID;
+
+
+        public CategoryObject(string categoryName, int categoryID)
+        {
+            this.categoryName = categoryName;
+            this.categoryID = categoryID;
+        }
+
+        [DataMember]
+        public int CategoryID
+        {
+            get { return categoryID; }
+            set { categoryID = value; }
+        }
+
+
+        [DataMember]
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set { categoryName = value; }
+        }
+
+    }
 
 
 
@@ -143,8 +444,135 @@ namespace LogicUniversity
 
 
 
+    [DataContract]
+    public class DisbursementItemView
+    {
+        private string binCode;
+        private string itemID;
+        private string itemDescription;
+        private int totalNeededQty;
+        private string department;
+        private int needQty;
+        private string unitOfMeasure;
+        private int actualQty;
+        private int totalReceived;
+        private int disbursementItemID;
+        private string status;
+        private string id;
+        private string pinValue;
 
 
+        public DisbursementItemView(string binCode, string itemID, string itemDescription, int totalNeededQty, string department, int needQty, string unitOfMeasure, int actualQty, int totalReceived, int disbursementItemID, string status, string id, string pinValue)
+        {
+            this.binCode = binCode;
+            this.itemID = itemID;
+            this.itemDescription = itemDescription;
+            this.totalNeededQty = totalNeededQty;
+            this.department = department;
+            this.needQty = needQty;
+            this.unitOfMeasure = unitOfMeasure;
+            this.actualQty = actualQty;
+            this.totalReceived = totalReceived;
+            this.disbursementItemID = disbursementItemID;
+            this.status = status;
+            this.id = id;
+            this.pinValue = pinValue;
+        }
+
+
+        [DataMember]
+        public string BinCode
+        {
+            get { return binCode; }
+            set { binCode = value; }
+        }
+
+
+        [DataMember]
+        public string ItemID
+        {
+            get { return itemID; }
+            set { itemID = value; }
+        }
+
+        [DataMember]
+        public string ItemDescription
+        {
+            get { return itemDescription; }
+            set { itemDescription = value; }
+        }
+
+        [DataMember]
+        public int TotalNeededQty
+        {
+            get { return totalNeededQty; }
+            set { totalNeededQty = value; }
+        }
+
+        [DataMember]
+        public string Department
+        {
+            get { return department; }
+            set { department = value; }
+        }
+
+        [DataMember]
+        public int NeedQty
+        {
+            get { return needQty; }
+            set { needQty = value; }
+        }
+
+        [DataMember]
+        public string UnitOfMeasure
+        {
+            get { return unitOfMeasure; }
+            set { unitOfMeasure = value; }
+        }
+
+        [DataMember]
+        public int ActualQty
+        {
+            get { return actualQty; }
+            set { actualQty = value; }
+        }
+
+        [DataMember]
+        public int TotalReceived
+        {
+            get { return totalReceived; }
+            set { totalReceived = value; }
+        }
+
+        [DataMember]
+        public int DisbursementItemID
+        {
+            get { return disbursementItemID; }
+            set { disbursementItemID = value; }
+        }
+
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
+        }
+
+    }
 
     [DataContract]
     public class DisbursementDetailObject
@@ -214,30 +642,22 @@ namespace LogicUniversity
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     [DataContract]
     public class updateInventoryObject
     {
         private string itemID;
         private string supplierID;
         private int? quantity;
+        private string id;
+        private string pinValue;
 
-        public updateInventoryObject(string itemID, string supplierID, int? quantity)
+        public updateInventoryObject(string itemID, string supplierID, int? quantity, string id, string pinValue)
         {
             this.itemID = itemID;
             this.supplierID = supplierID;
             this.quantity = quantity;
+            this.id = id;
+            this.pinValue = pinValue;
         }
 
         [DataMember]
@@ -259,6 +679,20 @@ namespace LogicUniversity
         {
             get { return quantity; }
             set { quantity = (int?)value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
         }
 
     }
@@ -454,6 +888,8 @@ namespace LogicUniversity
     {
         string deptID;
         int newCollection;
+        string id;
+        string pinValue;
 
         public changePoint(string deptID, int newCollection)
         {
@@ -473,6 +909,20 @@ namespace LogicUniversity
         {
             get { return newCollection; }
             set { newCollection = value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
         }
 
     }
@@ -528,8 +978,11 @@ namespace LogicUniversity
         private string status;
         private string reason;
         private string uom;
+        private string id;
+        private string pinValue;
 
-        public requisitionApprovals(int requisitionForm, int requisitionItemID, string employeeName, string submittedDate, string itemDescription, string quantity, string status, string reason, string uom)
+
+        public requisitionApprovals(int requisitionForm, int requisitionItemID, string employeeName, string submittedDate, string itemDescription, string quantity, string status, string reason, string uom, string id, string pinValue)
         {
             this.requisitionForm = requisitionForm;
             this.requisitionItemID = requisitionItemID;
@@ -540,6 +993,8 @@ namespace LogicUniversity
             this.status = status;
             this.reason = reason;
             this.uom = uom;
+            this.id = id;
+            this.pinValue = pinValue;
         }
 
         [DataMember]
@@ -606,6 +1061,19 @@ namespace LogicUniversity
             set { uom = value; }
         }
 
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
+        }
 
     }
 
@@ -889,14 +1357,18 @@ namespace LogicUniversity
     [DataContract]
     public class changeRepModel
     {
-        private string currentRep = "";
-        private string newRep = "";
+        private string currentRep;
+        private string newRep;
+        private string id;
+        private string pinValue;
 
 
-        public changeRepModel(string currentRep, string newRep)
+        public changeRepModel(string currentRep, string newRep, string id, string pinValue)
         {
             this.currentRep = currentRep;
             this.newRep = newRep;
+            this.id = id;
+            this.pinValue = pinValue;
         }
 
         [DataMember]
@@ -911,6 +1383,20 @@ namespace LogicUniversity
         {
             get { return newRep; }
             set { newRep = value; }
+        }
+
+        [DataMember]
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        [DataMember]
+        public string PinValue
+        {
+            get { return pinValue; }
+            set { pinValue = value; }
         }
     }
 

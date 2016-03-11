@@ -14,9 +14,19 @@ namespace LogicUniversity.WebView.StoreEmployee
         RaisePOControl crt;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             crt = new RaisePOControl();
             if (!IsPostBack)
             {
+                if (Request["ItemID"] != null)
+                {
+                    String id = Request["ItemID"].ToString();
+                    Item item = crt.getItemByItemID(id);
+                    if (item != null)
+                    {
+                        //ddlCategory.SelectedValue =
+                    }
+                }
                 List<Category> catlist = crt.getAllCategory();
                 if (catlist != null)
                 {
@@ -61,13 +71,45 @@ namespace LogicUniversity.WebView.StoreEmployee
         }
         public void _delete(String itemid,String sid)
         {
-            System.Diagnostics.Debug.WriteLine("Delete Click" + itemid);
-
+            System.Diagnostics.Debug.WriteLine("Delete Click" + itemid +" - "+ sid);
+            List<RaisePOVoucherItem> POItemList;
+            if (Session["POItem"] == null)
+                POItemList = new List<RaisePOVoucherItem>();
+            else
+                POItemList = (List<RaisePOVoucherItem>)Session["POItem"];
+            foreach(RaisePOVoucherItem rpov in POItemList)
+            {
+                if(rpov.ItemID.Equals(itemid) && rpov.SupplierID.Equals(sid))
+                {
+                    POItemList.Remove(rpov);
+                    gridViewDataBind();
+                    return;
+                }
+            }
         }
 
         public void _Edit(String itemid,String sid)
         {
             System.Diagnostics.Debug.WriteLine("ReOrder Click" + itemid);
+            List<RaisePOVoucherItem> POItemList;
+            if (Session["POItem"] == null)
+                POItemList = new List<RaisePOVoucherItem>();
+            else
+                POItemList = (List<RaisePOVoucherItem>)Session["POItem"];
+            foreach (RaisePOVoucherItem rpov in POItemList)
+            {
+                if (rpov.ItemID.Equals(itemid) && rpov.SupplierID.Equals(sid))
+                {
+                    POItemList.Remove(rpov);
+                    ddlCategory.SelectedItem.Text = rpov.Category;
+                    ddlDescription.SelectedItem.Text = rpov.Description;
+                    ddlSupplierName.SelectedValue = rpov.SupplierID;
+                    txtRequiredDelivereyDate.Text = rpov.RequiredDeliveryDate.ToString("yyyy-MM-dd");
+                    txtQuantityToOrder.Text = rpov.Quantity.ToString();
+                    gridViewDataBind();
+                    return;
+                }
+            }
 
         }
         private void gridViewDataBind()
@@ -119,6 +161,8 @@ namespace LogicUniversity.WebView.StoreEmployee
             POItemList.Add(poit_temp);
             Session["POItem"] = POItemList;
             gridViewDataBind();
+            txtQuantityToOrder.Text = string.Empty;
+            txtRequiredDelivereyDate.Text = string.Empty;
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
