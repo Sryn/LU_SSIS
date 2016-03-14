@@ -154,6 +154,13 @@ namespace LogicUniversity.Model
                     currEmp = MySession.Current.User as Model.Employee;
                 }
             }
+            else if (strSessType.Equals("Finance"))
+            {
+                if (MySession.Current.User != null)
+                {
+                    currEmp = MySession.Current.User as Model.Employee;
+                }
+            }
             else if (strSessType.Equals("StoreEmployee"))
             {
                 if (MySession.Current.User != null)
@@ -175,6 +182,8 @@ namespace LogicUniversity.Model
             getCurrLoginEmp(ref newEmployee, ref newStoreEmployee);
 
             if (empType.Equals("Employee"))
+                return newEmployee;
+            else if (empType.Equals("Finance"))
                 return newEmployee;
             else if (empType.Equals("StoreEmployee"))
                 return newStoreEmployee;
@@ -363,6 +372,49 @@ namespace LogicUniversity.Model
 
             return deptHead;
         }
+
+        public static System.Web.UI.Control FindControlRecursive(System.Web.UI.Control rootControl, string controlID)
+        {
+            //System.Diagnostics.Debug.WriteLine(">> Utilities.FindControlRecursive(rootControl, controlID=" + controlID + ")");
+            // http://stackoverflow.com/questions/28327229/asp-net-find-control-by-id
+
+            if (rootControl.ID == controlID) return rootControl;
+
+            foreach (System.Web.UI.Control controlToSearch in rootControl.Controls)
+            {
+                //System.Diagnostics.Debug.WriteLine(">>> controlToSearch.ID=" + controlToSearch.ID);
+
+                System.Web.UI.Control controlToReturn = FindControlRecursive(controlToSearch, controlID);
+
+                if (controlToReturn != null)
+                    return controlToReturn;
+            }
+
+            return null;
+        }
+
+        public static Model.Item getItem(String itemID)
+        {
+            //System.Diagnostics.Debug.WriteLine(">> Utilities.getItem( itemID=" + itemID + " )");
+
+            Model.Item currItem = null;
+
+            using (var context = new LogicUniversityEntities())
+            {
+                try
+                {
+                    currItem = context.Items.Where(x => x.ItemID == itemID).Single();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR @ getItem: Exception Caught e=" + e);
+                }
+            }
+
+            return currItem;
+
+        }
+
     }
 
 }
