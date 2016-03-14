@@ -80,6 +80,7 @@
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
     <Content Include="WebView\ChangePIN.aspx" />
+    <Content Include="WebView\Employee\CancelDelegate.aspx" />
     <Content Include="WebView\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="WebView\Employee\ChangeDepartmentRepresentative.aspx" />
     <Content Include="WebView\Employee\DelegateAuthority.aspx" />
@@ -237,6 +238,13 @@
     </Compile>
     <Compile Include="WebView\ChangePIN.aspx.designer.cs">
       <DependentUpon>ChangePIN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Employee\CancelDelegate.aspx.cs">
+      <DependentUpon>CancelDelegate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Employee\CancelDelegate.aspx.designer.cs">
+      <DependentUpon>CancelDelegate.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebView\Employee\ChangeCollectionPoint.aspx.cs">
       <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>

@@ -128,10 +128,10 @@ namespace LogicUniversity.Control
 
                 // don't do this as it sends to the entire CC list for every TO email sent
                 // but I'm doing this temporarily until emailCtrl.SendEmail works with an email list for TO
-                foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
-                    empIdEmailToList.Add(empIdEmail);
+                //foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
+                //    empIdEmailToList.Add(empIdEmail);
 
-                msg = sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList);
+                msg = sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList, empIdEmailCCList);
 
             }
             else
@@ -171,54 +171,43 @@ namespace LogicUniversity.Control
             return notiMsg;
         }
 
-        public string sendNotiAndEmails(Employee currEmp, string emailSubject, string emailBody, string notiMsg, List<Model.empIdEmail> empIdEmailToList)
+        public string sendNotiAndEmails(Employee currEmp, string emailSubject, string emailBody, string notiMsg, List<Model.empIdEmail> empIdEmailToList, List<Model.empIdEmail> empIdEmailCcList)
         {
             System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList)");
 
-            string notiRtnMsg = "", msg = "";
+            string msg = "";
 
-            int successfulNotiSentCount = 0;
+            List<String> justEmpEmailToList = new List<String>();
+            List<String> justEmpEmailCcList = new List<String>();
 
-            List<String> justEmpEmailList = new List<String>();
+            List<Model.empIdEmail> empIdEmailNotiList = getAllNotiRecipientsList(empIdEmailToList, empIdEmailCcList);
 
-            if (empIdEmailToList.Count != 0)
+            if (empIdEmailNotiList.Count != 0)
             {
-                // send an email one-by-one to every email listed in empIdEmailToList
+                msg = sendNotifications(currEmp, notiMsg, empIdEmailNotiList);
 
-                RegexUtilities regexUtil = new RegexUtilities();
-                EmailControl emailCtrl = new EmailControl();
+                justEmpEmailToList = getJustEmpEmailList(empIdEmailToList, ref msg);
+                justEmpEmailCcList = getJustEmpEmailList(empIdEmailCcList, ref msg);
 
-                foreach (Model.empIdEmail empIdEmail in empIdEmailToList)
-                {
-                    notiRtnMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
-
-                    try
-                    {
-                        successfulNotiSentCount += int.Parse(notiRtnMsg);
-                    }
-                    catch (Exception e)
-                    {
-                        System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                        msg += notiRtnMsg;
-                    }
-
-                    justEmpEmailList.Add(empIdEmail.Email);
-                }
-
-                msg += "; Notifications sent: " + successfulNotiSentCount;
+                //msg += "; Notifications sent: " + successfulNotiSentCount;
 
                 //foreach (String empEmail in justEmpEmailList)
                 //{
-                string empEmail = currEmp.Email; // temporary until emailCtrl.SendEmail works with an email list for TO
+                //string empEmail = currEmp.Email; // temporary until emailCtrl.SendEmail works with an email list for TO
 
-                if (regexUtil.IsValidEmail(empEmail))
-                {
+                //if (regexUtil.IsValidEmail(empEmail))
+                //{
                     // valid email, so send
+                if (justEmpEmailToList.Count > 0)
+                {
+                    EmailControl emailCtrl = new EmailControl();
+
                     try
                     {
-                        List<string> toList = new List<string>();
-                        toList.Add(empEmail);
-                        emailCtrl.SendEmail(toList, emailSubject, emailBody, justEmpEmailList);
+                        //List<string> toList = new List<string>();
+                        //toList.Add(empEmail);
+                        //emailCtrl.SendEmail(toList, emailSubject, emailBody, justEmpEmailList);
+                        emailCtrl.SendEmail(justEmpEmailToList, emailSubject, emailBody, justEmpEmailCcList);
 
                         msg += "; Emails sent.";
                     }
@@ -226,23 +215,124 @@ namespace LogicUniversity.Control
                     {
                         // send email error
                         System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                        msg += " SendEmail Exception caught for " + empEmail;
+                        msg += "; Error sending email(s)";
                     }
                 }
                 else
                 {
-                    // invalid email found
-                    msg += ", Invalid email: " + empEmail;
+                    msg += "; No valid email address found to send notifications to";
                 }
+                //}
+                //else
+                //{
+                //    // invalid email found
+                //    msg += ", Invalid email: " + empEmail;
+                //}
                 //}
             }
             else
             {
                 // ERROR: cannot get any recipient emails
-                msg += "ERROR: Cannot get any recipient emails.";
+                msg += "ERROR: Cannot get any recipient email addresses.";
             }
 
             return msg;
+        }
+
+        /// <summary>
+        /// Returns a List&lt;string&gt; of just the REGEX validified email of each empIdEmail in empIdEmailList<para />
+        /// message is added to to mention success/errors of email REGEX verifications
+        /// </summary>
+        /// <param name="empIdEmailList"></param>
+        /// <returns></returns>
+        private List<string> getJustEmpEmailList(List<empIdEmail> empIdEmailList, ref string message)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getJustEmpEmailToList( empIdEmailToList)");
+
+            RegexUtilities regexUtil = new RegexUtilities();
+
+            List<String> justEmpEmailList = new List<String>();
+
+            if(empIdEmailList != null && empIdEmailList.Count > 0) {
+                foreach (empIdEmail anEmpIdEmail in empIdEmailList)
+                {
+                    if (regexUtil.IsValidEmail(anEmpIdEmail.Email))
+                    {
+                        // add valid email to list
+                        justEmpEmailList.Add(anEmpIdEmail.Email);
+                    }
+                    else
+                    {
+                        // invalid email found
+                        message += ", Invalid email: " + anEmpIdEmail.Email;
+                    }
+                }
+            }
+
+            return justEmpEmailList;
+        }
+
+        /// <summary>
+        /// Sends a notification with notiMsg as the message to each recipient in the empIdEmailNotiList, with the sender set as currEmp<para />
+        /// Returns a string message saying number of notifications sent
+        /// </summary>
+        /// <param name="currEmp"></param>
+        /// <param name="notiMsg"></param>
+        /// <param name="empIdEmailNotiList"></param>
+        /// <returns></returns>
+        private string sendNotifications(Employee currEmp, string notiMsg, List<Model.empIdEmail> empIdEmailNotiList)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.sendNotifications( currEmp, notiMsg, empIdEmailNotiList)");
+
+            string notiRtnMsg = "", parseMsg;
+            int successfulNotiSentCount = 0;
+
+            foreach (Model.empIdEmail empIdEmail in empIdEmailNotiList)
+            {
+                parseMsg = sendNotification(empIdEmail.EmployeeID, notiMsg, currEmp.EmployeeID);
+
+                try
+                {
+                    successfulNotiSentCount += int.Parse(parseMsg);
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
+                    notiRtnMsg += parseMsg;
+                }
+
+            }
+
+            notiRtnMsg += "; Notifications sent: " + successfulNotiSentCount;
+
+            return notiRtnMsg;
+        }
+
+        /// <summary>
+        /// Returns a List<Model.empIdEmail> of the combined contents of empIdEmailToList and empIdEmailCcList
+        /// </summary>
+        /// <param name="empIdEmailToList"></param>
+        /// <param name="empIdEmailCcList"></param>
+        /// <returns></returns>
+        private List<empIdEmail> getAllNotiRecipientsList(List<empIdEmail> empIdEmailToList, List<empIdEmail> empIdEmailCcList)
+        {
+            System.Diagnostics.Debug.WriteLine(">> CollectionPointControl.getAllNotiRecipientsList(empIdEmailToList, empIdEmailCcList)");
+
+            List<Model.empIdEmail> empIdEmailNotiList = new List<empIdEmail>();
+
+            if (empIdEmailToList != null && empIdEmailToList.Count != 0)
+            {
+                foreach (Model.empIdEmail anEmpIdEmail in empIdEmailToList)
+                    empIdEmailNotiList.Add(anEmpIdEmail);
+            }
+
+            if (empIdEmailCcList != null && empIdEmailCcList.Count != 0)
+            {
+                foreach (Model.empIdEmail anEmpIdEmail in empIdEmailCcList)
+                    empIdEmailNotiList.Add(anEmpIdEmail);
+            }
+
+            return empIdEmailNotiList;
         }
 
         public string sendNotification(string toEmpID, string notiMsg, string fromEmpID)
@@ -270,7 +360,7 @@ namespace LogicUniversity.Control
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(">>> ERROR: Exception Caught e=" + e);
-                    rtnMsg += " ERROR: sendNotification for empID=" + toEmpID;
+                    rtnMsg += "; ERROR: sendNotification for empID=" + toEmpID;
                 }
             }
 

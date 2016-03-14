@@ -557,10 +557,10 @@ namespace LogicUniversity.Control
 
                 // don't do this as it sends to the entire CC list for every TO email sent
                 // but I'm doing this temporarily until emailCtrl.SendEmail works with an email list for TO
-                foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
-                    empIdEmailToList.Add(empIdEmail);
+                //foreach (Model.empIdEmail empIdEmail in empIdEmailCCList)
+                //    empIdEmailToList.Add(empIdEmail);
 
-                rtnMsg = crt.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList);
+                rtnMsg = crt.sendNotiAndEmails(currEmp, emailSubject, emailBody, notiMsg, empIdEmailToList, empIdEmailCCList);
 
             }
             else

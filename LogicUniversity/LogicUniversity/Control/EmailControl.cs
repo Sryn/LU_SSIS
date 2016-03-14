@@ -21,11 +21,11 @@ namespace LogicUniversity.Control
         public string sendForAdjReviewed(List<Model.RequisitionItem> reqItemList)
         {
             Model.Employee emp;
-            Model.Requisition requistion;
+            //Model.Requisition requistion;
             string subject = "Stationery Requisition – Reviewed";
             List<string> toList;
             List<string> ccList;
-            string cc;
+            //string cc;
             string body;
 
             Dictionary<string, List<string>> toSendList = new Dictionary<string, List<string>>();
@@ -160,7 +160,7 @@ namespace LogicUniversity.Control
                 string subject = "Reset PIN ";
                 SendEmail(tolist, subject, body, new List<string>());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "error";
             }
@@ -307,7 +307,7 @@ namespace LogicUniversity.Control
                 message.To = to;
                 message.Cc = cc;
                 message.Subject = subject;
-                message.BodyFormat = System.Web.Mail.MailFormat.Html;
+                message.BodyFormat = System.Web.Mail.MailFormat.Html; // System.Net.Mail.MailMessage.IsBodyHtml
                 message.Body = body;
                 System.Web.Mail.SmtpMail.SmtpServer = "smtp.gmail.com";
 
@@ -320,7 +320,7 @@ namespace LogicUniversity.Control
                 email.Start();
                 return 1;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }

@@ -190,7 +190,7 @@ font-family:Arial; font-size:19px;"
                 Visible="false" OnClick="btnClick_CancelEdit" />
                 <asp:Button ID="btnEditDelegate" cssClass="btn-custom2" 
                     style="box-shadow: 5px 5px 10px grey;"  runat="server" 
-                    Text="Change" Visible="false" OnClick="btnClick_EditDelegate" />
+                    Text="Change" Visible="false" OnClick="btnClick_EditDelegate" ValidationGroup="frmDelegateAuth" />
 
                 
             </td>
