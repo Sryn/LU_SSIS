@@ -14,7 +14,6 @@ namespace LogicUniversity.WebView.Finance
         FinanceController crt;
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             if (!IsPostBack)
             {
                 if (Request["IDToDelete"] != null)
@@ -33,16 +32,10 @@ namespace LogicUniversity.WebView.Finance
         }
         public void Retrieve()
         {
-=======
->>>>>>> origin/master
             crt = new FinanceController();
             gvDataList.DataSource = crt.getSupplierList();
             gvDataList.DataBind();
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             Supplier sp = new Supplier();
@@ -72,12 +65,7 @@ namespace LogicUniversity.WebView.Finance
             sp.Email = txtEmail.Text;
             sp.GSTRegistration = txtGSTRegistration.Text;
             crt.insertNewSupplier(sp);
-<<<<<<< HEAD
             
-=======
-            gvDataList.DataSource = crt.getSupplierList();
-            gvDataList.DataBind();
->>>>>>> origin/master
         }
 
         protected void btnClearAll_Click(object sender, EventArgs e)
@@ -91,7 +79,6 @@ namespace LogicUniversity.WebView.Finance
             txtEmail.Text = string.Empty;
             txtGSTRegistration.Text = string.Empty;
         }
-<<<<<<< HEAD
 
         protected void gvDataList_RowCreated(object sender, GridViewRowEventArgs e)
         {
@@ -110,7 +97,5 @@ namespace LogicUniversity.WebView.Finance
             gvDataList.PageIndex = e.NewPageIndex;
             Retrieve();
         }
-=======
->>>>>>> origin/master
     }
 }

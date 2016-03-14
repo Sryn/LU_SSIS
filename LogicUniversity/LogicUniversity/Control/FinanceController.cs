@@ -16,11 +16,7 @@ namespace LogicUniversity.Control
         }
         public string insertNewSupplier(Supplier s)
         {
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> origin/master
             ctx.Suppliers.Add(s);
             ctx.SaveChanges();
             return "";
@@ -50,11 +46,7 @@ namespace LogicUniversity.Control
         public string insertItem(Item item)
         {
             Item temp = ctx.Items.Where(x => x.ItemID == item.ItemID).FirstOrDefault();
-<<<<<<< HEAD
             if (temp == null)
-=======
-            if(temp == null)
->>>>>>> origin/master
                 ctx.Items.Add(item);
             else
             {
@@ -73,11 +65,7 @@ namespace LogicUniversity.Control
         public string insertCategory(Category cat)
         {
             Category category = ctx.Categories.Where(x => x.CategoryID == cat.CategoryID).FirstOrDefault();
-<<<<<<< HEAD
             if (category == null)
-=======
-            if(category==null)
->>>>>>> origin/master
             {
                 ctx.Categories.Add(cat);
             }
@@ -175,11 +163,7 @@ namespace LogicUniversity.Control
                 }
             }
 
-<<<<<<< HEAD
             if (rtnBool)
-=======
-            if(rtnBool)
->>>>>>> origin/master
             {
                 // just save each SupplierItem in newLstSupplierItem into table SupplierItem
                 foreach (Model.SupplierItem newSupplierItem in newLstSupplierItem)

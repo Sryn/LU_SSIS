@@ -68,27 +68,29 @@
         runat="server" OnPageIndexChanging="gvAdjVoucher_PageIndexChanging" OnRowCreated="gvAdjVoucher_RowCreated">
         <PagerStyle CssClass="pagination-ys" />
           <Columns>                                                     
-               <asp:TemplateField HeaderText="Approve" >
+              <asp:TemplateField HeaderText="Edit" >
                         <ItemTemplate>
-                          <asp:RadioButton ID="Rdn_Approve" GroupName ="Approve" runat="server" Checked="true"/>
+                          <asp:HyperLink runat="server" ID="lnk_edit" 
+                              onClick ="return confirm('Are you sure to Edit?');"
+                              NavigateUrl='<%# "~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx?ItemCodeToEdit=" + Eval("ItemCode")%>' 
+                              Text="Edit"></asp:HyperLink>
                           
                           </ItemTemplate>
-                             </asp:TemplateField>
-                           <asp:TemplateField HeaderText="Reject">
-                            <ItemTemplate>
-                         
-                          <asp:RadioButton ID="Rdn_Reject" GroupName ="Approve" runat="server"/>
+             </asp:TemplateField>
+             <asp:TemplateField HeaderText="Delete" >
+                        <ItemTemplate>
+                           <asp:HyperLink runat="server" ID="lnk_delete" 
+                                onClick ="return confirm('Are you sure to delete?');"
+                               NavigateUrl='<%# "~/WebView/StoreEmployee/ApproveAdjustmentVoucher.aspx?ItemCodeToDelete=" + Eval("ItemCode")%>'
+                               commandName="lnk_delete"                                                       
+                                Text="Delete"></asp:HyperLink>
+                          
                           </ItemTemplate>
-                       </asp:TemplateField>
+             </asp:TemplateField>                       
          </Columns>
     </asp:GridView>
-<<<<<<< HEAD
                                     </div>
                 </div>
         </div>
 &nbsp;</div>
-=======
-&nbsp;
-    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
->>>>>>> origin/master
 </asp:Content>

@@ -23,15 +23,10 @@
                 ID="lblEmpID" runat="server" Text="Label"></asp:Label></td>
         </tr>
         <tr>
-<<<<<<< HEAD
             <td><asp:Label style="text-shadow: 10px 10px 22px #ffffcc; font-family:Arial; font-size:19px;"
                 ID="lblTxtDeptID" runat="server" Text="DepartmentID"></asp:Label></td>
             <td><asp:Label style="text-shadow: 10px 10px 22px #ffffcc; font-family:Arial; font-size:19px;"
                 ID="lblDeptID" runat="server" Text="Label"></asp:Label></td>
-=======
-            <td><asp:Label ID="lblTxtDeptID" runat="server" Text="DepartmentID"></asp:Label></td>
-            <td><asp:Label ID="lblDeptID" runat="server" Text="Label"></asp:Label></td>
->>>>>>> origin/master
 
         </tr>
         <tr>

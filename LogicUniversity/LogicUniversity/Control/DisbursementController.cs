@@ -397,11 +397,7 @@ namespace LogicUniversity.Control
                             temp_disburItem.Quantity = disItem.RemainingQty;
                             temp_disburItem.RequestDate = disItem.RequestDate;
                             temp_disburItem.RemainingQty = disItem.RemainingQty;
-<<<<<<< HEAD
                             temp_disburItem.Status = "Not Allocated";
-=======
-                            temp_disburItem.Status = "Not Collected";
->>>>>>> origin/master
                             disItem.RemainingQty = 0;
                             dis.DisbursementItems.Add(temp_disburItem);
                             ctx.SaveChanges();
@@ -424,11 +420,7 @@ namespace LogicUniversity.Control
                     temp_disburItem.Quantity = disItem.RemainingQty;
                     temp_disburItem.RequestDate = disItem.RequestDate;
                     temp_disburItem.RemainingQty = disItem.RemainingQty;
-<<<<<<< HEAD
                     temp_disburItem.Status = "Not Allocated";
-=======
-                    temp_disburItem.Status = "Not Collected";
->>>>>>> origin/master
                     disItem.RemainingQty = 0;
                     temp_disbur.DisbursementItems.Add(temp_disburItem);
                     ctx.Disbursements.Add(temp_disbur);

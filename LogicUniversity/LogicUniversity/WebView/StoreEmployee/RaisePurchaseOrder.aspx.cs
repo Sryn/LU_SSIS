@@ -14,7 +14,6 @@ namespace LogicUniversity.WebView.StoreEmployee
         RaisePOControl crt;
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             MultiView1.Visible = true;
             crt = new RaisePOControl();
             if (!IsPostBack)
@@ -22,12 +21,6 @@ namespace LogicUniversity.WebView.StoreEmployee
                
                 txtQuantityToOrder.Text = "0";
                 txtRequiredDelivereyDate.Text = System.DateTime.Today.ToString();
-=======
-            
-            crt = new RaisePOControl();
-            if (!IsPostBack)
-            {
->>>>>>> origin/master
                 if (Request["ItemID"] != null)
                 {
                     String id = Request["ItemID"].ToString();
@@ -175,14 +168,10 @@ namespace LogicUniversity.WebView.StoreEmployee
             Session["POItem"] = POItemList;
             gridViewDataBind();
             txtQuantityToOrder.Text = string.Empty;
-<<<<<<< HEAD
             txtQuantityToOrder.Text = "0";
             txtRequiredDelivereyDate.Text = string.Empty;
             txtRequiredDelivereyDate.Text = System.DateTime.Today.ToString();
             btnConfirm.Visible = true;
-=======
-            txtRequiredDelivereyDate.Text = string.Empty;
->>>>>>> origin/master
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)

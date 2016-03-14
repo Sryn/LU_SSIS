@@ -38,7 +38,6 @@ namespace LogicUniversity.WebView {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
-<<<<<<< HEAD
         
         /// <summary>
         /// Label1 control.
@@ -48,7 +47,5 @@ namespace LogicUniversity.WebView {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-=======
->>>>>>> origin/master
     }
 }

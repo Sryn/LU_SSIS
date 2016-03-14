@@ -119,15 +119,11 @@ namespace LogicUniversity
 
         public string updateDisbursementListAllocation(List<DisbursementItemView> listForUpdate)
         {
-<<<<<<< HEAD
 
             String id = decrypt(listForUpdate[0].Id);
             String pinValue = decrypt(listForUpdate[0].PinValue);
 
             if (CheckLogin(id, pinValue))
-=======
-            if (CheckLogin(listForUpdate[0].Id, listForUpdate[0].PinValue))
->>>>>>> origin/master
             {
                 DisbursementController disbursementController = new DisbursementController();
                 List<DisbursementItemViewModel> disbursementItemViewModelList = new List<DisbursementItemViewModel>();
@@ -368,17 +364,10 @@ namespace LogicUniversity
 
         public List<requisitionApprovals> getListOfRequisition(String userID, String pinValue)
         {
-<<<<<<< HEAD
 
             userID = decrypt(userID);
             pinValue = decrypt(pinValue);
 
-=======
-
-            userID = decrypt(userID);
-            pinValue = decrypt(pinValue);
-
->>>>>>> origin/master
             if (CheckLogin(userID, pinValue))
             {
 
@@ -394,7 +383,6 @@ namespace LogicUniversity
                 if (staff.Role.Equals("Department Head"))
                 {
                     List<LogicUniversity.Model.RequisitionApproval> pendingApprovals = requistionApprovalController.getAllRequisitionToApprove(staff.DepartmentID);
-<<<<<<< HEAD
 
                     foreach (RequisitionApproval pendingItem in pendingApprovals)
                     {
@@ -402,15 +390,6 @@ namespace LogicUniversity
                         list.Add(item);
                     }
 
-=======
-
-                    foreach (RequisitionApproval pendingItem in pendingApprovals)
-                    {
-                        requisitionApprovals item = new requisitionApprovals(pendingItem.RequisitionForm, pendingItem.RequisitionItemID, pendingItem.EmployeeName, pendingItem.SubmittedDate, pendingItem.ItemDescription, pendingItem.Quantity, pendingItem.Status, pendingItem.Reason, pendingItem.UnitOfMeasurement, "", "");
-                        list.Add(item);
-                    }
-
->>>>>>> origin/master
                     return list;
                 }
                 else
@@ -497,28 +476,15 @@ namespace LogicUniversity
 
             if (CheckLogin(userID, pinValue))
             {
-<<<<<<< HEAD
-
-                CollectionInformationController collectioninfoController = new CollectionInformationController();
-                List<CollectionInformation> collectionInfoList = new List<CollectionInformation>();
-=======
 
                 CollectionInformationController collectioninfoController = new CollectionInformationController();
                 List<CollectionInformation> collectionInfoList = new List<CollectionInformation>();
 
                 List<Model.CollectionInformation> collectionList = new List<Model.CollectionInformation>();
->>>>>>> origin/master
 
-                List<Model.CollectionInformation> collectionList = new List<Model.CollectionInformation>();
-
-<<<<<<< HEAD
 
                 collectionList = collectioninfoController.getListCollectionInformation();
 
-=======
-                collectionList = collectioninfoController.getListCollectionInformation();
-
->>>>>>> origin/master
                 foreach (Model.CollectionInformation item in collectionList)
                 {
                     collectionInfoList.Add(new CollectionInformation(item.EmployeeID, item.PIN, item.Email, item.Name, item.DepartmentID, item.Role, item.deptName, item.collectionPointName));
@@ -544,26 +510,14 @@ namespace LogicUniversity
             {
 
 
-<<<<<<< HEAD
-
-                CollectionPointControl collectionControl = new CollectionPointControl();
-                List<CollectionPoint> listCollectionPoint = new List<CollectionPoint>();
-                List<CollectionLocation> listCollectionLocation = new List<CollectionLocation>();
-=======
 
                 CollectionPointControl collectionControl = new CollectionPointControl();
                 List<CollectionPoint> listCollectionPoint = new List<CollectionPoint>();
                 List<CollectionLocation> listCollectionLocation = new List<CollectionLocation>();
 
                 listCollectionPoint = collectionControl.getListCollectionPoint();
->>>>>>> origin/master
 
-                listCollectionPoint = collectionControl.getListCollectionPoint();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
                 foreach (CollectionPoint item in listCollectionPoint)
                 {
                     listCollectionLocation.Add(new CollectionLocation(item.CollectionPointID, item.CollectionPointName, item.Time, item.FirstCollectionDate, item.SecondCollectionDate));
@@ -591,17 +545,10 @@ namespace LogicUniversity
 
                 CollectionPointControl collectionControl = new CollectionPointControl();
                 Department dept = collectionControl.getDepartment(id);
-<<<<<<< HEAD
 
                 return (new departmentInfo(dept.DepartmentID, dept.DepartmentName, Convert.ToInt32(dept.CollectionPointID)));
             }
 
-=======
-
-                return (new departmentInfo(dept.DepartmentID, dept.DepartmentName, Convert.ToInt32(dept.CollectionPointID)));
-            }
-
->>>>>>> origin/master
             else
             {
                 return (new departmentInfo("", "", 0));
@@ -614,21 +561,12 @@ namespace LogicUniversity
             deptId = decrypt(deptId);
             userID = decrypt(userID);
             pinValue = decrypt(pinValue);
-<<<<<<< HEAD
 
             if (CheckLogin(userID, pinValue))
             {
                 CollectionPointControl collectionControl = new CollectionPointControl();
                 Employee emp = collectionControl.getDeptRep(deptId);
 
-=======
-
-            if (CheckLogin(userID, pinValue))
-            {
-                CollectionPointControl collectionControl = new CollectionPointControl();
-                Employee emp = collectionControl.getDeptRep(deptId);
-
->>>>>>> origin/master
                 return (new EmployeeObject(emp.EmployeeID, emp.PIN, emp.Email, emp.Name, emp.DepartmentID, emp.Role));
             }
             else
@@ -653,7 +591,6 @@ namespace LogicUniversity
 
         public itemObject getItem(string itemID, String userID, String pinValue)
         {
-<<<<<<< HEAD
             itemID = decrypt(itemID);
             userID = decrypt(userID);
             pinValue = decrypt(pinValue);
@@ -673,26 +610,6 @@ namespace LogicUniversity
             {
                 return new itemObject("", "", 0, "", 0, 0, 0, "", "");
 
-=======
-            userID = decrypt(userID);
-            pinValue = decrypt(pinValue);
-
-            if (CheckLogin(userID, pinValue))
-            {
-
-                UpdateInventoryControl inventoryControl = new UpdateInventoryControl();
-
-                Item itemRetrieved = inventoryControl.getQuantity(itemID);
-
-                return new itemObject(itemRetrieved.ItemID, itemRetrieved.Description,
-                                      itemRetrieved.Quantity, itemRetrieved.UOM, itemRetrieved.CategoryID,
-                                      itemRetrieved.ReorderLevel, itemRetrieved.Quantity, itemRetrieved.QRCode, itemRetrieved.BinNo);
-            }
-            else
-            {
-                return new itemObject("", "", 0, "", 0, 0, 0, "", "");
-
->>>>>>> origin/master
             }
         }
 
@@ -788,17 +705,10 @@ namespace LogicUniversity
 )
         {
             disbursementID = decrypt(disbursementID);
-<<<<<<< HEAD
 
             userID = decrypt(userID);
             pinValue = decrypt(pinValue);
 
-=======
-
-            userID = decrypt(userID);
-            pinValue = decrypt(pinValue);
-
->>>>>>> origin/master
             if (CheckLogin(userID, pinValue))
             {
 

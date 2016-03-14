@@ -1,18 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Finance/FinanceMasterPage.Master" AutoEventWireup="true" CodeBehind="ManageItem.aspx.cs" Inherits="LogicUniversity.WebView.Finance.ManageItem" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<<<<<<< HEAD
     <style type="text/css">
         .auto-style2 {
             width: 43px;
         }
     </style>
-=======
->>>>>>> origin/master
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table>
         <tr>
-<<<<<<< HEAD
             <td colspan="2"><asp:Label ID="Label1" runat="server" 
                 style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px;"
                 Text="Manage Item"></asp:Label></td>
@@ -190,53 +186,6 @@
             <td><asp:Button cssClass="btn-custom"    
                     style="box-shadow: 5px 5px 10px grey;" class="btn btn-lg btn-block btn-info"
                 ID="btnClearAll" runat="server" Text="Clear All" /></td>
-=======
-            <td colspan="2"><asp:Label ID="Label1" runat="server" Text="Manage Item"></asp:Label></td>
-        </tr>
-        <tr>
-            <td colspan="2"><asp:Label ID="lblMessage" runat="server" Text=""></asp:Label></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label3" runat="server" Text="ItemID"></asp:Label></td>
-            <td><asp:TextBox ID="txtItemID" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label4" runat="server" Text="Description"></asp:Label></td>
-            <td><asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label5" runat="server" Text="Quantity"></asp:Label></td>
-            <td><asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label6" runat="server" Text="Unit Of Measure"></asp:Label></td>
-            <td><asp:TextBox ID="txtUOM" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label7" runat="server" Text="Category"></asp:Label></td>
-            <td><asp:DropDownList ID="ddlCategory" runat="server"></asp:DropDownList></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label8" runat="server" Text="Reoder Level"></asp:Label></td>
-            <td><asp:TextBox ID="txtReorderLevel" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label9" runat="server" Text="Reorder Quantity"></asp:Label></td>
-            <td><asp:TextBox ID="txtReorderQuantity" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label10" runat="server" Text="QR Code"></asp:Label></td>
-            <td><asp:FileUpload ID="fuplQRCode" runat="server" /></td>
-        </tr>
-        <tr>
-            <td><asp:Label ID="Label11" runat="server" Text="Bin No"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="txtBinNo" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" /></td>
-            <td><asp:Button ID="btnClearAll" runat="server" Text="Clear All" /></td>
->>>>>>> origin/master
         </tr>
     </table>
 </asp:Content>

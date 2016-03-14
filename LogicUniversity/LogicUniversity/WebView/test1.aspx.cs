@@ -15,11 +15,8 @@ namespace LogicUniversity.WebView
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             // Label1.Text = System.Web.HttpContext.Current.Request.UrlReferrer.Host+"<br>";
             
-=======
->>>>>>> origin/master
 
         }
 

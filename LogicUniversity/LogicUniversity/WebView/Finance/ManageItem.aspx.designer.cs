@@ -49,7 +49,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtItemID;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidatorAccount control.
         /// </summary>
         /// <remarks>
@@ -59,8 +58,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorAccount;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -79,7 +76,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -89,8 +85,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -109,7 +103,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtQuantity;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -128,8 +121,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -148,7 +139,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtUOM;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -158,8 +148,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label7 control.
         /// </summary>
         /// <remarks>
@@ -196,7 +184,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtReorderLevel;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator4 control.
         /// </summary>
         /// <remarks>
@@ -215,8 +202,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label9 control.
         /// </summary>
         /// <remarks>
@@ -235,7 +220,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtReorderQuantity;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
@@ -254,8 +238,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// Label10 control.
         /// </summary>
         /// <remarks>
@@ -292,7 +274,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtBinNo;
         
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator6 control.
         /// </summary>
         /// <remarks>
@@ -302,8 +283,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
         
         /// <summary>
-=======
->>>>>>> origin/master
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

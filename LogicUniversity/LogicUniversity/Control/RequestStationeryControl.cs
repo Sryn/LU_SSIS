@@ -56,11 +56,7 @@ namespace LogicUniversity.Control
         // if requistionID is "", it is new
         // if not, it is edit
         //EmpNotFound = Employee Id not found in Employee Table
-<<<<<<< HEAD
         public string insertNewReqisition(List<RequisitionItem> ReqItem, string empID, string requisitionID)
-=======
-        public string insertNewReqisition(List<RequisitionItem> ReqItem,string empID,string requisitionID)
->>>>>>> origin/master
         {
             System.DateTime today = DateTime.Today;
             if (requisitionID.Equals(""))
@@ -76,12 +72,8 @@ namespace LogicUniversity.Control
                 foreach (RequisitionItem Item in ReqItem)
                 {
                     Item.RequisitionID = req.RequisitionID;
-<<<<<<< HEAD
                     if (emp.Role == "Department Head")
                     {
-=======
-                    if(emp.Role== "Department Head") { 
->>>>>>> origin/master
                         Item.Status = "Approved";
                         Item.Reson = "";
                     }

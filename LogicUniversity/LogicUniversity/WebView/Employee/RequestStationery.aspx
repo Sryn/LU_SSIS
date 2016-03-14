@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Site2.Master" AutoEventWireup="true" CodeBehind="RequestStationery.aspx.cs" Inherits="LogicUniversity.WebView.Employee.RequestStationery" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Site1.Master" AutoEventWireup="true" CodeBehind="RequestStationery.aspx.cs" Inherits="LogicUniversity.WebView.Employee.RequestStationery" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -121,7 +121,6 @@ font-size:16px;" height="56px" Width="220px"
 
     <br />
     <br />
-<<<<<<< HEAD
     <div id="mainContainer" class="container" style="width:98%; position:relative; margin-left:-1%;" >  
             <div class="shadowBox">                           
                                 <div class="table-responsive"> 
@@ -130,13 +129,6 @@ font-size:16px;" height="56px" Width="220px"
         CssClass="table table-hover table-bordered"
         RowStyle-CssClass="grid_row" HorizontalAlign="Center"
         HeaderStyle-BackColor="WhiteSmoke" OnRowCreated="gvData_RowCreated">
-=======
-    <asp:Label ID="Label5" runat="server" Text="Requested Quantity:"></asp:Label>
-    <asp:TextBox ID="txtRequestQty" runat="server"></asp:TextBox>
-    <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
-    <br />
-    <asp:GridView ID="gvData" runat="server">
->>>>>>> origin/master
       
        
              <Columns>

@@ -4,7 +4,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<<<<<<< HEAD
    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -369,27 +368,4 @@
     </form>
 </body>
   
-=======
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <asp:TreeView ID="TreeView1" runat="server"></asp:TreeView>
-                </td>
-                <td>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
-                </td>
-            </tr>
-        </table>
-        
-    </div>
-    </form>
-</body>
->>>>>>> origin/master
 </html>

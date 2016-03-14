@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<<<<<<< HEAD
      <br />
     <br />
     <table>
@@ -48,17 +47,11 @@ font-size:16px;" ReadOnly="True"></asp:TextBox></td>
 font-size:19px;"></asp:Label>
                     </td>
             <td>
-=======
-    <asp:Label ID="Label1" runat="server" Text="Next Delivery Date"></asp:Label>
-    <asp:TextBox ID="txtFirstCollectionDate" runat="server"></asp:TextBox>
-    <asp:Label ID="Label3" runat="server" Text="Change To"></asp:Label>
->>>>>>> origin/master
     <asp:RadioButtonList ID="rdblFirstCollectionDate" runat="server">
         <asp:ListItem>Monday</asp:ListItem>
         <asp:ListItem>Tuesday</asp:ListItem>
         <asp:ListItem>Wednesday</asp:ListItem>
     </asp:RadioButtonList>
-<<<<<<< HEAD
                 </td>
              </tr>
          <tr>
@@ -90,17 +83,11 @@ font-size:19px;"></asp:Label>
         style="text-shadow: 10px 10px 22px #ffffcc; font-family:Arial; font-size:19px;"></asp:Label>
                     </td>
             <td>
-=======
-    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-    <asp:TextBox ID="txtSecondCollectionDate" runat="server"></asp:TextBox>
-    <asp:Label ID="Label4" runat="server" Text="Change To"></asp:Label>
->>>>>>> origin/master
     <asp:RadioButtonList ID="rdblSecondCollectionDate" runat="server">
         <asp:ListItem>Thursday</asp:ListItem>
         <asp:ListItem>Friday</asp:ListItem>
         <asp:ListItem>Saturday</asp:ListItem>
     </asp:RadioButtonList>
-<<<<<<< HEAD
                 </td>
             </tr>
          <tr>
@@ -121,7 +108,4 @@ font-size:19px;"></asp:Label>
 </td>
 </tr>
         </table>
-=======
-    <asp:Button ID="btnChangeDeliveryDate" runat="server" Text="Change Delivery Date" OnClick="btnChangeDeliveryDate_Click" />
->>>>>>> origin/master
 </asp:Content>

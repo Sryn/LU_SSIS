@@ -7,10 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Threading;
-<<<<<<< HEAD
 using LogicUniversity.Model;
-=======
->>>>>>> origin/master
 
 namespace LogicUniversity.Control
 {
@@ -115,15 +112,6 @@ namespace LogicUniversity.Control
 
 
         //success = successfully send email
-        public string sendEmailToRepresentativeToCollect(string DeptID)
-        {
-            //To build email and send
-            return "success";
-        }
-
-
-
-        //success = successfully send email
         //error = error in send email
         //fail = fail
         //notfound = userID not found
@@ -155,7 +143,6 @@ namespace LogicUniversity.Control
             ctx.SaveChanges();
             List<string> tolist = new List<string>();
             tolist.Add(email);
-<<<<<<< HEAD
 
             string[] strList = HttpContext.Current.Request.Url.AbsoluteUri.Split('/');
             string[] strNewList = strList.Take(strList.Count() - 1).ToArray();
@@ -164,8 +151,6 @@ namespace LogicUniversity.Control
             {
                 url += str + "/";
             }
-=======
->>>>>>> origin/master
             try
             {
                 string body = "Dear " + name + ",\r\n";
@@ -175,11 +160,7 @@ namespace LogicUniversity.Control
                 string subject = "Reset PIN ";
                 SendEmail(tolist, subject, body, new List<string>());
             }
-<<<<<<< HEAD
             catch (Exception ex)
-=======
-            catch(Exception ex)
->>>>>>> origin/master
             {
                 return "error";
             }
@@ -196,11 +177,7 @@ namespace LogicUniversity.Control
 
             foreach (Model.Employee emp in empList)
             {
-<<<<<<< HEAD
                 if (emp.Email != null)
-=======
-                if(emp.Email!=null)
->>>>>>> origin/master
                     toList.Add(emp.Email);
                 noti = new Model.Notification();
                 noti.UserID = emp.EmployeeID;
@@ -209,7 +186,6 @@ namespace LogicUniversity.Control
                 noti.FromUser = sEmpID;
                 ctx.Notifications.Add(noti);
                 ctx.SaveChanges();
-<<<<<<< HEAD
             }
             foreach (Model.StoreEmployee sEmp in sEmpList)
             {
@@ -237,35 +213,6 @@ namespace LogicUniversity.Control
         //    string from = "logicuniversity.edu.sg@gmail.com";
         //    string password = "logicuniversity@123";
 
-=======
-            }
-            foreach (Model.StoreEmployee sEmp in sEmpList)
-            {
-                if (sEmp.Email != null)
-                    ccList.Add(sEmp.Email);
-                noti = new Model.Notification();
-                noti.UserID = sEmp.StoreEmployeeID;
-                noti.NotificationDate = DateTime.Today;
-                noti.Message = "Date for Stationery Collection has been changed To " + clp.FirstCollectionDate + " and " + clp.SecondCollectionDate + ".";
-                noti.FromUser = sEmpID;
-                ctx.Notifications.Add(noti);
-                ctx.SaveChanges();
-            }
-
-            string body = "Dear All, <br><br>";
-            body += "Please be informed that the delivery date for collection has been changed To "+clp.FirstCollectionDate + " and "+clp.SecondCollectionDate+".<br><br>";
-            body += "This is a system generated email, please do not reply.";
-
-            string subject = "Change of Delivery Date for Stationery Collection";
-            SendEmail(toList, subject, body, ccList);
-            return "success";
-        }
-        //public async Task SendEmail(string to, string subject, string body,List<string> cclist)
-        //{
-        //    string from = "logicuniversity.edu.sg@gmail.com";
-        //    string password = "logicuniversity@123";
-            
->>>>>>> origin/master
         //    using (MailMessage mm = new MailMessage(from,to))
         //    {
         //        mm.Subject = subject;
@@ -290,11 +237,7 @@ namespace LogicUniversity.Control
             Model.Supplier sup = (Model.Supplier)ctx.Suppliers.Where(x => x.SupplierID == po.SupplierID).FirstOrDefault();
             List<string> toEmail = new List<string>();
             toEmail.Add(sup.Email);
-<<<<<<< HEAD
             string subject = "Issuance of PO# " + po.PurchaseOrderID + " to " + sup.SupplierName;
-=======
-            string subject = "Issuance of PO# "+po.PurchaseOrderID+" to "+sup.SupplierName;
->>>>>>> origin/master
             List<string> ccList = new List<string>();
             List<Model.StoreEmployee> sEmpList = ctx.StoreEmployees.Where(x => x.StoreEmployeeID != po.StoreEmployeeID).ToList();
             if (sEmpList != null)
@@ -325,11 +268,7 @@ namespace LogicUniversity.Control
         //Real Email Code Begin
         public void SendEmail(List<string> toList, string subject, string body, List<string> cclist)
         {
-<<<<<<< HEAD
             string to = "", cc = "";
-=======
-            string to="",cc ="";
->>>>>>> origin/master
             foreach (string temp_to in toList)
                 to += temp_to + ";";
             foreach (string temp_cc in cclist)

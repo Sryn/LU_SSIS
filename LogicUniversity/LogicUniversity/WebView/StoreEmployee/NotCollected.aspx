@@ -60,7 +60,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<<<<<<< HEAD
     <div style="width:90%; margin-left:100px;">
     <asp:Label ID="Label1" 
            style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px;" 
@@ -77,11 +76,6 @@
         HeaderStyle-BackColor="WhiteSmoke"  AllowPaging="True" PageSize="2" 
         OnRowCreated="gvDataList_RowCreated" OnPageIndexChanging="gvDataList_PageIndexChanging">
         <PagerStyle CssClass="pagination-ys"/>
-=======
-    <asp:Label ID="Label1" runat="server" Text="Not Collected"></asp:Label>
-    <asp:GridView ID="gvDataList" runat="server" OnRowCreated="gvDataList_RowCreated">
-
->>>>>>> origin/master
           <Columns>
        <asp:TemplateField HeaderText="Not Collected" >
                         <ItemTemplate>
@@ -95,10 +89,6 @@
             </Columns>
 
     </asp:GridView>
-<<<<<<< HEAD
                                     </div></div></div>
         </div>
-=======
-
->>>>>>> origin/master
 </asp:Content>
