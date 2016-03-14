@@ -13,15 +13,41 @@ namespace LogicUniversity.WebView
         protected void Page_Load(object sender, EventArgs e)
         {
             crt = new Control.LoginControl();
-            lblMessage.Text = Request.QueryString["code"];
+            if (Request.QueryString["code"] == null)
+                Response.Redirect("loginPage");
+            string result = crt.forgotPINCheck(Convert.ToInt32(Request.QueryString["code"]));
+            if(result.Equals("noFound"))
+                Response.Redirect("loginPage");
+
         }
 
         protected void btnChange_Click(object sender, EventArgs e)
         {
-            //string enddate = DateTime.Today.AddMonths(1).AddDays(-1).ToString();
-            //string startdate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).ToString();
-            //System.Diagnostics.Debug.WriteLine("enddate - " + enddate);
-            //System.Diagnostics.Debug.WriteLine("startdate - " + startdate);
+            string result = "";
+            if (!txtConfirmPIN.Text.Equals(txtPIN.Text))
+                lblMessage.Text = "Confirm PIN and PIN must same!";
+            else
+            {
+                result = crt.changeForgotPINCheck(Convert.ToInt32(txtPIN.Text), Convert.ToInt32(Request.QueryString["code"]));
+            }
+            switch (result)
+            {
+                case "success":
+                    Response.Redirect("~/WebView/LoginPage.aspx");
+                    break;
+                case "fail":
+                    lblMessage.Text = "Fail";
+                    break;
+                case "invalid":
+                    lblMessage.Text = "invalid";
+                    break;
+                case "Disable":
+                    lblMessage.Text = "Disable";
+                    break;
+                case "notFound":
+                    lblMessage.Text = "notFound";
+                    break;
+            }
         }
     }
 }

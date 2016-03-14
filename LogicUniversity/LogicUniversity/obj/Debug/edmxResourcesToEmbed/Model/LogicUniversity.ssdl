@@ -62,7 +62,7 @@
     <Property Name="CollectionPointID" Type="int" />
     <Property Name="AcknowledgeEmployeeID" Type="varchar" MaxLength="50" />
     <Property Name="DepartmentID" Type="varchar" MaxLength="50" />
-    <Property Name="status" Type="nchar" MaxLength="10" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DisbursementItem">
     <Key>

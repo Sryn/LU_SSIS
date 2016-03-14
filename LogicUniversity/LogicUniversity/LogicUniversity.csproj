@@ -67,20 +67,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\!emp_deptHead.css" />
-    <Content Include="css\animate.css" />
-    <Content Include="css\emp.css" />
-    <Content Include="css\font-awesome.min.css" />
-    <Content Include="css\Store_style.css" />
-    <Content Include="css\style.css" />
-    <Content Include="css\style1.css" />
-    <Content Include="css\style3.css" />
-    <Content Include="images\calendar.png" />
-    <Content Include="images\cm-mockup01-o.jpg" />
-    <Content Include="images\photo_bg.jpg" />
-    <Content Include="images\photo_bg1.jpg" />
-    <Content Include="images\profilePicture.jpg" />
-    <Content Include="images\unilogo.png" />
     <Content Include="Model\LogicUniversity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LogicUniversity.edmx</DependentUpon>
@@ -94,7 +80,6 @@
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
     <Content Include="WebView\ChangePIN.aspx" />
-    <Content Include="WebView\Employee\CancelDelegate.aspx" />
     <Content Include="WebView\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="WebView\Employee\ChangeDepartmentRepresentative.aspx" />
     <Content Include="WebView\Employee\DelegateAuthority.aspx" />
@@ -104,6 +89,11 @@
     <Content Include="WebView\Employee\RequestStationery.aspx" />
     <Content Include="WebView\Employee\RequisitionApproval.aspx" />
     <Content Include="WebView\Employee\ViewRequest.aspx" />
+    <Content Include="WebView\Finance\FinanceHomePage.aspx" />
+    <Content Include="WebView\Finance\ManageItem.aspx" />
+    <Content Include="WebView\Finance\ManageSupplier.aspx" />
+    <Content Include="WebView\Finance\ManageSupplierAndItem.aspx" />
+    <Content Include="WebView\Finance\MangeCategory.aspx" />
     <Content Include="WebView\ForgotPassword.aspx" />
     <Content Include="WebView\LoginPage.aspx" />
     <Content Include="WebView\Notifications.aspx" />
@@ -122,10 +112,12 @@
     <Content Include="WebView\StoreEmployee\StockCard.aspx" />
     <Content Include="WebView\StoreEmployee\StoreEmployeeHome.aspx" />
     <Content Include="WebView\test.aspx" />
+    <Content Include="WebView\test1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\Acknowledge.cs" />
     <Compile Include="Control\AdjustmentVoucherControl.cs" />
+    <Compile Include="Control\ChangeDeliveryController.cs" />
     <Compile Include="Control\ChangeRepresentativeControl.cs" />
     <Compile Include="Control\CollectionInformationController.cs" />
     <Compile Include="Control\CollectionPointControl.cs" />
@@ -133,6 +125,8 @@
     <Compile Include="Control\DisbursementController.cs" />
     <Compile Include="Control\DisbursementDetailsController.cs" />
     <Compile Include="Control\EmailControl.cs" />
+    <Compile Include="Control\FinanceController.cs" />
+    <Compile Include="Control\InventoryListController.cs" />
     <Compile Include="Control\LoginControl.cs" />
     <Compile Include="Control\NotiListControl.cs" />
     <Compile Include="Control\RaisePOControl.cs" />
@@ -175,6 +169,7 @@
     <Compile Include="Model\ForgotPassword.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\InventroyListModel.cs" />
     <Compile Include="Model\Item.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -193,6 +188,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LogicUniversity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\NotCollectedModel.cs" />
     <Compile Include="Model\Notification.cs">
       <DependentUpon>LogicUniversity.tt</DependentUpon>
     </Compile>
@@ -241,13 +237,6 @@
     </Compile>
     <Compile Include="WebView\ChangePIN.aspx.designer.cs">
       <DependentUpon>ChangePIN.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebView\Employee\CancelDelegate.aspx.cs">
-      <DependentUpon>CancelDelegate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebView\Employee\CancelDelegate.aspx.designer.cs">
-      <DependentUpon>CancelDelegate.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebView\Employee\ChangeCollectionPoint.aspx.cs">
       <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
@@ -311,6 +300,48 @@
     </Compile>
     <Compile Include="WebView\Employee\ViewRequest.aspx.designer.cs">
       <DependentUpon>ViewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\FinanceHomePage.aspx.cs">
+      <DependentUpon>FinanceHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\FinanceHomePage.aspx.designer.cs">
+      <DependentUpon>FinanceHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\FinanceMasterPage.Master.cs">
+      <DependentUpon>FinanceMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\FinanceMasterPage.Master.designer.cs">
+      <DependentUpon>FinanceMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageItem.aspx.cs">
+      <DependentUpon>ManageItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageItem.aspx.designer.cs">
+      <DependentUpon>ManageItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageSupplier.aspx.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageSupplier.aspx.designer.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageSupplierAndItem.aspx.cs">
+      <DependentUpon>ManageSupplierAndItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\ManageSupplierAndItem.aspx.designer.cs">
+      <DependentUpon>ManageSupplierAndItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebView\Finance\MangeCategory.aspx.cs">
+      <DependentUpon>MangeCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\Finance\MangeCategory.aspx.designer.cs">
+      <DependentUpon>MangeCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebView\ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
@@ -445,9 +476,19 @@
     <Compile Include="WebView\test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebView\test1.aspx.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebView\test1.aspx.designer.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\" />
+    <Folder Include="images\" />
+    <Folder Include="src\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -466,6 +507,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="WebView\Site1.Master" />
+    <Content Include="WebView\Finance\FinanceMasterPage.Master" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LogicUniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LogicUniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdjVoucher">
           <Key>
             <PropertyRef Name="AdjVoucherID" />
@@ -67,7 +67,7 @@
           <Property Name="CollectionPointID" Type="int" />
           <Property Name="AcknowledgeEmployeeID" Type="varchar" MaxLength="50" />
           <Property Name="DepartmentID" Type="varchar" MaxLength="50" />
-          <Property Name="status" Type="nchar" MaxLength="10" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DisbursementItem">
           <Key>
@@ -681,7 +681,8 @@
             <End Role="SupplierItem" EntitySet="SupplierItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LogicUniversityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -736,8 +737,8 @@
           <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Active" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Delegate_Employee" FromRole="Delegate" ToRole="Employee" />
-          <Property Name="Active" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -760,7 +761,7 @@
           <Property Name="CollectionPointID" Type="Int32" />
           <Property Name="AcknowledgeEmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CollectionPoint" Relationship="Self.FK_Disbursement_CollectionPoint" FromRole="Disbursement" ToRole="CollectionPoint" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Disbursement_Department" FromRole="Disbursement" ToRole="Department" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Disbursement_Employee" FromRole="Disbursement" ToRole="Employee" />
@@ -776,10 +777,10 @@
           <Property Name="Quantity" Type="Int32" />
           <Property Name="RequestDate" Type="DateTime" Precision="0" />
           <Property Name="RemainingQty" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Disbursement" Relationship="Self.FK_DisbursementItem_Disbursement" FromRole="DisbursementItem" ToRole="Disbursement" />
           <NavigationProperty Name="Item" Relationship="Self.FK_DisbursementItem_Item" FromRole="DisbursementItem" ToRole="Item" />
           <NavigationProperty Name="RequisitionItems" Relationship="Self.DisbursementRequestItem" FromRole="DisbursementItem" ToRole="RequisitionItem" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -1428,11 +1429,11 @@
           <EntitySetMapping Name="Delegates">
             <EntityTypeMapping TypeName="LogicUniversityModel.Delegate">
               <MappingFragment StoreEntitySet="Delegate">
-                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="DelegateID" ColumnName="DelegateID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1460,13 +1461,13 @@
           <EntitySetMapping Name="DisbursementItems">
             <EntityTypeMapping TypeName="LogicUniversityModel.DisbursementItem">
               <MappingFragment StoreEntitySet="DisbursementItem">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
                 <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
                 <ScalarProperty Name="RemainingQty" ColumnName="RemainingQty" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

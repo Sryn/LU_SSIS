@@ -51,6 +51,7 @@ namespace LogicUniversity.WebView
             if(lblDeptID != null)
                 lblDeptID.Visible = showDevVariables;
 
+
             if(lblEmpID != null)
                 lblEmpID.Visible = showDevVariables;
 
@@ -82,8 +83,8 @@ namespace LogicUniversity.WebView
                         lblNotiTitle.Text = "ERROR: Unknown Employee Type = " + strSessType;
                 }
 
-                if (NotificationGridView != null)
-                {
+           //     if (NotificationGridView != null)
+           //     {
                     if (lstNotification != null)
                     {
                         if (lstNotification.Count == 0)
@@ -93,11 +94,12 @@ namespace LogicUniversity.WebView
                         }
                         else
                         {
-                            NotificationGridView.DataSource = lstNotification;
-                            NotificationGridView.DataBind();
+                            Session["NotiList"] = lstNotification;
+                         //   NotificationGridView.DataSource = lstNotification;
+                        //   NotificationGridView.DataBind();
                         }
                     }
-                }
+              //  }
             }
         }
 
@@ -151,12 +153,12 @@ namespace LogicUniversity.WebView
             }
         }
 
-        protected void newPageNotificationGridView(object sender, GridViewPageEventArgs e)
+       /* protected void newPageNotificationGridView(object sender, GridViewPageEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(">> Notification.newPageNotificationGridView([e.NewPageIndex=" + e.NewPageIndex + "])");
 
             NotificationGridView.PageIndex = e.NewPageIndex;
             NotificationGridView.DataBind();
-        }
+        }*/
     }
 }

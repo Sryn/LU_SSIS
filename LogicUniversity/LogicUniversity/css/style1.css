@@ -17,19 +17,19 @@ body {
     -webkit-border-radius:3px;
 }
 .ProfileImg{
-   margin-left:1190px;
-   margin-top:-500px;
+   margin-left:1300px;
+   margin-top:-540px;
    position:absolute;
   
 }
 .forWelcome {
-    margin-left: 1190px;
-    margin-top: -290px;
+    margin-left: 1330px;
+    margin-top: -200px;
     position: absolute;
 }
 .forname{
-   margin-left:1320px;
-   margin-top:-290px;
+   margin-left:1510px;
+   margin-top:-200px;
    position:absolute;
   
 }
@@ -38,6 +38,7 @@ body {
      height:605px;
      margin-left:990px;
      margin-top:-610px;
+     width:500px;
    background:white;
    position:relative;
 }

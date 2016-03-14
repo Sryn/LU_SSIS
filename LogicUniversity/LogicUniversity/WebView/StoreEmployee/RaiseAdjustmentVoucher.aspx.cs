@@ -20,6 +20,9 @@ namespace LogicUniversity.WebView.StoreEmployee
                 return;
             if (!IsPostBack)
             {
+                txtQuantityToAdjust.Text = "0";
+                txtReason.Text = "Reason";
+                btnConfirm.Visible = false;
                 foreach (Model.Category cat in catlist)
                 {
                     ddlCategory.Items.Add(new ListItem(cat.CategoryName, "" + cat.CategoryID));
@@ -33,9 +36,9 @@ namespace LogicUniversity.WebView.StoreEmployee
                 }
                 txtUnifOfMeasure.Text = itemList[0].UOM;
 
-                if (Request["ItemCodeToDelete="] != null)
+                if (Request["ItemCodeToDelete"] != null)
                 {
-                    String id =Request["ItemCodeToDelete="].ToString();
+                    String id =Request["ItemCodeToDelete"].ToString();
                     _delete(id);
                 }
 
@@ -53,18 +56,58 @@ namespace LogicUniversity.WebView.StoreEmployee
         {
             System.Diagnostics.Debug.WriteLine("Delete Click" + itemid);
 
+            List<RaiseAdjustmentVoucherItem> POItemList;
+            if (Session["AdjItem"] == null)
+                POItemList = new List<RaiseAdjustmentVoucherItem>();
+            else
+                POItemList = (List<RaiseAdjustmentVoucherItem>)Session["AdjItem"];
+            foreach (RaiseAdjustmentVoucherItem rpov in POItemList)
+            {
+                if (rpov.ItemCode.Equals(itemid))
+                {
+                    POItemList.Remove(rpov);
+                    gridViewDataBind();
+                    return;
+                }
+            }
         }
 
         public void _Edit(String itemid)
         {
             System.Diagnostics.Debug.WriteLine("ReOrder Click" + itemid);
 
+            List<RaiseAdjustmentVoucherItem> POItemList;
+            if (Session["AdjItem"] == null)
+                POItemList = new List<RaiseAdjustmentVoucherItem>();
+            else
+                POItemList = (List<RaiseAdjustmentVoucherItem>)Session["AdjItem"];
+            foreach (RaiseAdjustmentVoucherItem rpov in POItemList)
+            {
+                if (rpov.ItemCode.Equals(itemid))
+                {
+                    POItemList.Remove(rpov);
+                    if (rpov.Quantity > 0)
+                    {
+                        txtQuantityToAdjust.Text = rpov.Quantity.ToString();
+                        rblIncreaseOrDecrease.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        txtQuantityToAdjust.Text = (rpov.Quantity*-1).ToString();
+                        rblIncreaseOrDecrease.SelectedIndex = 1;
+                    }
+                    txtReason.Text = rpov.Reason;
+                    gridViewDataBind();
+                    return;
+                }
+            }
         }
         private void gridViewDataBind()
         {
             if (Session["AdjItem"] != null)
             {
                 gvList.DataSource = (List<RaiseAdjustmentVoucherItem>)Session["AdjItem"];
+                btnConfirm.Visible = true;
                 gvList.DataBind();
             }
             else
@@ -111,7 +154,9 @@ namespace LogicUniversity.WebView.StoreEmployee
             Session["AdjItem"] = AdjItemList;
             gridViewDataBind();
             txtQuantityToAdjust.Text = "";
-            txtReason.Text = "";
+            txtReason.Text = "Reason";
+            txtQuantityToAdjust.Text = "0";
+            btnConfirm.Visible = true;
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,8 +192,9 @@ namespace LogicUniversity.WebView.StoreEmployee
                 lblMessage.Text = crt.insertNewAdjustementVoucher((List<RaiseAdjustmentVoucherItem>)Session["AdjItem"], ((Model.StoreEmployee)Session["User"]).StoreEmployeeID);
                 Session["AdjItem"] = null;
                 gridViewDataBind();
-                txtQuantityToAdjust.Text = "";
-                txtReason.Text = "";
+                txtQuantityToAdjust.Text = "0";
+                txtReason.Text = "Reason";
+                btnConfirm.Visible = false;
             }
         }
     }

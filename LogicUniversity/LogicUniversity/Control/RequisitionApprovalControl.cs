@@ -32,6 +32,7 @@ namespace LogicUniversity.Control
         public string ApproveRequisition(List<Model.RequisitionApproval> reqlist)
         {
             Model.RequisitionItem requisition;
+            List<Model.RequisitionItem> requisitionItemList = new List<Model.RequisitionItem>();
             foreach (Model.RequisitionApproval req in reqlist)
             {
                 requisition = ctx.RequisitionItems.Where(x => x.RequisitionItemID == req.RequisitionItemID).FirstOrDefault();
@@ -44,7 +45,10 @@ namespace LogicUniversity.Control
                 }
                 requisition.Reson = req.Reason;
                 ctx.SaveChanges();
+                requisitionItemList.Add(requisition);
             }
+            Control.EmailControl emailCrt = new Control.EmailControl();
+            string result = emailCrt.sendForAdjReviewed(requisitionItemList);
             return "success";
         }        
     }

@@ -17,6 +17,7 @@ namespace LogicUniversity.Model
         private int actualQty;
         private int totalReceived;
         private int disbursementItemID;
+        private string status;
 
         public int DisbursementItemID
         {
@@ -28,7 +29,9 @@ namespace LogicUniversity.Model
         {
 
         }
-        public DisbursementItemViewModel(string binCode, string itemDescription, int totalNeededQty, string department, int needQty, string unitOfMeasure, int actualQty, string itemID, int totalReceived, int disbursementItemID)
+
+
+        public DisbursementItemViewModel(string binCode, string itemDescription, int totalNeededQty, string department, int needQty, string unitOfMeasure, int actualQty, string itemID, int totalReceived, int disbursementItemID, string status)
         {
             this.binCode = binCode;
             this.itemDescription = itemDescription;
@@ -40,6 +43,7 @@ namespace LogicUniversity.Model
             this.itemID = itemID;
             this.totalReceived = totalReceived;
             this.disbursementItemID = disbursementItemID;
+            this.status = status;
         }
 
         public int TotalReceived
@@ -156,5 +160,23 @@ namespace LogicUniversity.Model
                 actualQty = value;
             }
         }
+
+
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+
+            set
+            {
+                status = value;
+            }
+        }
+
+
+
     }
 }

@@ -26,6 +26,7 @@ namespace LogicUniversity.WebView.StoreEmployee
         {
             if (!IsPostBack)
             {
+               Tt.Style.Add("display", "none");
                 // not postback, i.e. first and only call when page loads
                 System.Diagnostics.Debug.WriteLine(">> CollectionInformation.Page_Load( 1 IsPostBack=" + IsCallback + ")");
 
@@ -133,7 +134,7 @@ namespace LogicUniversity.WebView.StoreEmployee
 
         private void getCollInfo()
         {
-            System.Diagnostics.Debug.WriteLine(">> CollectionInformation.getRelevantNotifications()");
+            System.Diagnostics.Debug.WriteLine(">> CollectionInformation.getCollInfo()");
             
             if (currStoreEmp != null)
             {
@@ -238,6 +239,19 @@ namespace LogicUniversity.WebView.StoreEmployee
             }
 
             return newLstGvCollInfo;
+        }
+
+        protected void gvColllInfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvColllInfo.PageIndex = e.NewPageIndex;
+            getSessionData();
+
+            bool showDevVariables = false;
+            toggleDevVariables(showDevVariables);
+
+            showVariables(); // includes both dev and non-dev variables
+
+            getCollInfo();
         }
 
     }

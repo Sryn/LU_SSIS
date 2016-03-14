@@ -19,7 +19,7 @@ namespace LogicUniversity.Control
         // Delegate = Employee is delegate;
         public string Login(string UserID, string PIN)
         {
-            string UserType = UserID.Substring(0, 1);
+            string UserType = UserID.Substring(0, 1).ToUpper();
             if (UserType.Equals("S"))
             {
                 System.Diagnostics.Debug.WriteLine("StoreClerk Login");
@@ -58,6 +58,43 @@ namespace LogicUniversity.Control
                     return "EmployeeFound";
                 }
             }
+            else if (UserType.Equals("F"))
+            {
+                System.Diagnostics.Debug.WriteLine("Finance Employee Login");
+
+                try
+                {
+                    Employee emp = ctx.Employees.Where(x => x.EmployeeID == UserID && x.PIN == PIN).Single();
+
+                    if (emp == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Employee Not Found");
+                        return "NotFound";
+                    }
+                    if (emp.Role != "Department Head")
+                    {
+                        Model.Delegate del = ctx.Delegates.Where(x => x.EmployeeID == emp.EmployeeID && x.ToDate >= DateTime.Today && x.FromDate <= DateTime.Today).FirstOrDefault();
+                        if (del == null)
+                        {
+                            return "FinanceEmployeeFound";
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("Delegate");
+                            return "Delegate";
+                        }
+                    }
+                    else
+                    {
+                        return "FinanceEmployeeFound";
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: Finance Employee Login e=" + e);
+                }
+            }
             return "NotFound";
         }
         public Employee getEmployeeUserObject(string empid)
@@ -72,7 +109,7 @@ namespace LogicUniversity.Control
         // success = successfully changed
         // notfound = user not found
         // error = type is not equal both StoreEmployee and Employee
-        public string ChangePIN(Object user,string type,string oldPIN,string newPIN)
+        public string ChangePIN(Object user, string type, string oldPIN, string newPIN)
         {
             string result = "error";
             if (type.Equals("StoreEmployee"))
@@ -118,14 +155,60 @@ namespace LogicUniversity.Control
                     return "notFound";
                 return "Found";
             }
-                return "notFound";
+            return "notFound";
         }
-        //success = sucessfully sent
-        //failToSend = cant send
+        //success = successfully send email
+        //error = error in send email
         //fail = fail
+        //notfound = userID not found
         public string makeForgotPassword(string UserID)
         {
-            return "success";
+            EmailControl crt = new EmailControl();
+            string result = crt.sendEmailForForgotPIN(UserID);
+            return result;
+        }
+        public string forgotPINCheck(int code)
+        {
+            ForgotPassword fp = ctx.ForgotPasswords.Where(x => x.Code == code && x.Status == "Active").FirstOrDefault();
+            if (fp == null)
+                return "noFound";
+            else
+                return "found";
+        }
+        //invalid
+        //Disable
+        //notFound
+        //success
+        //fail
+        public string changeForgotPINCheck(int PIN, int code)
+        {
+            ForgotPassword fp = ctx.ForgotPasswords.Where(x => x.Code == code && x.Status == "Active").FirstOrDefault();
+            if (fp == null)
+                return "invalid";
+            fp.Status = "Disable";
+            ctx.SaveChanges();
+            string UserType = fp.UserID.Substring(0, 1);
+            if (UserType.Equals("S"))
+            {
+                StoreEmployee sEmp = ctx.StoreEmployees.Where(x => x.StoreEmployeeID == fp.UserID).FirstOrDefault();
+                if (sEmp == null)
+                    return "notFound";
+                sEmp.PIN = PIN + "";
+                ctx.SaveChanges();
+                return "success";
+            }
+            else if (UserType.Equals("E"))
+            {
+                Employee emp = ctx.Employees.Where(x => x.EmployeeID == fp.UserID).FirstOrDefault();
+                if (emp == null)
+                    return "notFound";
+                emp.PIN = PIN + "";
+                ctx.SaveChanges();
+                return "success";
+
+            }
+            else
+                return "fail";
         }
     }
 }

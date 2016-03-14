@@ -1,0 +1,371 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FinanceMasterPage.master.cs" Inherits="LogicUniversity.WebView.Finance.FinanceMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+   <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Logic University</title>
+
+     <link rel="stylesheet" href="~/css/style1.css" type="text/css" media="screen"/> 
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+     <link href="~/Content/bootstrap.cosmo.min.css" rel="stylesheet" />  
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" /> 
+    <!-- Bootstrap Core CSS -->
+    <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+
+    <!-- MetisMenu CSS -->
+    <link href="~/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" media="screen"/>
+
+    <!-- DataTables CSS -->
+    <link href="~/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" media="screen" rel="stylesheet"/>
+
+    <!-- DataTables Responsive CSS -->
+    <link href="~/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" media="screen"/>
+
+    <!-- Custom CSS -->
+    <link href="~/dist/css/sb-admin-2.css" rel="stylesheet" media="screen"/>
+
+    <!-- Custom Fonts -->
+    <link href="~/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen"/>
+
+  
+    <!-- Timeline CSS -->
+    <link href="~/dist/css/timeline.css" rel="stylesheet"  media="screen"/>
+
+    <!-- Morris Charts CSS -->
+    <link href="~/bower_components/morrisjs/morris.css" rel="stylesheet" media="screen"/>
+
+    
+   
+
+    <style type="text/css">
+        #current:hover {
+            border-radius:20px;
+            background: #7788aa url(~/images/bg.png) repeat-x 0 -20px;
+            color: black;
+            border-top: 1px solid #f8f8f8;
+            box-shadow: 0 2px 2px rgba(0,0,0, .7); /*some css3*/
+            -moz-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            text-shadow: 0 2px 2px rgba(255,255,255, 0.7);
+        }
+       .current1 {
+            border-radius:20px;
+            background: #7788aa url(~/images/bg.png) repeat-x 0 -20px;
+            color: black;
+            border-top: 1px solid #f8f8f8;
+            box-shadow: 0 2px 2px rgba(0,0,0, .7); /*some css3*/
+            -moz-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            text-shadow: 0 2px 2px rgba(255,255,255, 0.7);
+        }
+      .current1:hover {
+            border-radius:20px;
+            background: #7788aa url(~/images/bg.png) repeat-x 0 -20px;
+            color: black;
+            border-top: 1px solid #f8f8f8;
+            box-shadow: 0 2px 2px rgba(0,0,0, .7); /*some css3*/
+            -moz-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+            text-shadow: 0 2px 2px rgba(255,255,255, 0.7);
+        }
+
+     </style>
+    <script type="text/javascript">
+
+    window.onload = function () {
+        var strCook = document.cookie;
+        if (strCook.indexOf("!~") != 0) {
+            var intS = strCook.indexOf("!~");
+            var intE = strCook.indexOf("~!");
+            var strPos = strCook.substring(intS + 2, intE);
+            document.getElementById("grdWithScroll").scrollTop = strPos;
+        }
+    }
+    function SetDivPosition() {
+        var intY = document.getElementById("grdWithScroll").scrollTop;
+        document.cookie = "yPos=!~" + intY + "~!";
+    }
+</script>
+   
+    <style type="text/css">
+        .auto-style1 {
+            width: 20%;
+        }
+       .inputstl { 
+        padding: 9px; 
+        border: solid 1px #0077B0; 
+        width:200px;
+        outline: 0; 
+        background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF)); 
+        background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px); 
+        box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+        -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+        -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+
+      }
+        .h1 {
+             text-shadow: 0 0 3px white;
+        }
+        .btnSize {
+            width:190px;
+        }
+       .grid_head {
+            height:65px;
+            font-family:'Arial Rounded MT';
+            font-size:25px;
+            background-color:whitesmoke;
+        }
+
+        .grid_row {
+          
+            font-family:Arial;
+            font-size:20px;
+        }
+
+         .success1{
+           background-color: white;
+           height:50px;
+        }
+        .danger1 {
+            background-color:lightpink;
+            height:50px;
+        }
+       .scrolling-table {
+        height:691px;
+        overflow-x:hidden;
+        overflow-y:scroll;
+        width:1550px;
+        margin-left:10px;
+        margin-top:10px;
+    }
+        .margingAlign {           
+        margin-left:80px;
+
+    }
+         .margingAlignTop {           
+        margin-left:30px;
+        margin-top:20px;
+    }
+  .btn-custom {
+      width:160px;
+      height:45px;
+      font-family:Arial;
+      font-size:25px;
+      font-weight:bold;
+
+      -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+
+  background-color: hsl(199, 24%, 45%) !important; 
+  background-repeat: repeat-x; 
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8eef1", endColorstr="#577c8e"); 
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#e8eef1), to(#577c8e)); 
+  background-image: -moz-linear-gradient(top, #e8eef1, #577c8e); 
+  background-image: -ms-linear-gradient(top, #e8eef1, #577c8e);
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e8eef1), color-stop(100%, #577c8e)); 
+   background-image: -webkit-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: -o-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: linear-gradient(#e8eef1, #577c8e); 
+   border-color: #577c8e #577c8e hsl(199, 24%, 33%); 
+   color: #333 !important; 
+   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.79); 
+   -webkit-font-smoothing: antialiased;
+}
+
+  .btn-custom1 {
+      width:160px;
+      height:45px;
+      font-family:Arial;
+      font-size:19px;
+      font-weight:bold;
+
+      -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+
+  background-color: hsl(199, 24%, 45%) !important; 
+  background-repeat: repeat-x; 
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8eef1", endColorstr="#577c8e"); 
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#e8eef1), to(#577c8e)); 
+  background-image: -moz-linear-gradient(top, #e8eef1, #577c8e); 
+  background-image: -ms-linear-gradient(top, #e8eef1, #577c8e);
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e8eef1), color-stop(100%, #577c8e)); 
+   background-image: -webkit-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: -o-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: linear-gradient(#e8eef1, #577c8e); 
+   border-color: #577c8e #577c8e hsl(199, 24%, 33%); 
+   color: #333 !important; 
+   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.79); 
+   -webkit-font-smoothing: antialiased;
+}
+  .btn-custom2 {
+      width:100px;
+      height:35px;
+      font-family:Arial;
+      font-size:19px;
+      font-weight:bold;
+
+      -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+
+  background-color: hsl(199, 24%, 45%) !important; 
+  background-repeat: repeat-x; 
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8eef1", endColorstr="#577c8e"); 
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#e8eef1), to(#577c8e)); 
+  background-image: -moz-linear-gradient(top, #e8eef1, #577c8e); 
+  background-image: -ms-linear-gradient(top, #e8eef1, #577c8e);
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e8eef1), color-stop(100%, #577c8e)); 
+   background-image: -webkit-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: -o-linear-gradient(top, #e8eef1, #577c8e); 
+   background-image: linear-gradient(#e8eef1, #577c8e); 
+   border-color: #577c8e #577c8e hsl(199, 24%, 33%); 
+   color: #333 !important; 
+   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.79); 
+   -webkit-font-smoothing: antialiased;
+}
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+        
+       
+
+</head>
+
+   
+<body>
+    <form id="form1" runat="server">       
+
+    <div id="wrapper">
+
+        <div style="margin-top:2%;">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+            <div class="navbar-header">
+               <asp:Image  style="margin-top:-10%;"   ID="Image1" class="navbar-brand" runat="server" Height="140px" ImageUrl="~/images/unilogo.png" Width="140px" />
+             
+             
+                 <asp:Label ID="Label2" 
+                    CssClass="navbar-brand" runat="server" Text="Logic University" font-family= "Courier New"  Font-Size="45px"></asp:Label>
+      
+                </div>
+   
+            <ul class="nav navbar-top-links navbar-right">
+               
+                <li class="dropdown">
+                  
+                    <a id="current" class="dropdown-toggle" data-toggle="dropdown" 
+                        style="font-family:'Arial Rounded MT'; font-size:x-large;" href="#">Admin</a>   
+                                                  
+                    <ul class="dropdown-menu dropdown-messages">
+                       
+                       
+                      <li class="divider"></li>
+                        <li><a style="font-family:'Arial Rounded MT'; font-size:large;" href='<%= Page.ResolveUrl("~/WebView/LoginPage.aspx")%>'>
+                            <i class="fa fa-sign-out fa-fw"></i> 
+                            Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li id="current">
+                           <a id="current" style="font-family:'Arial Rounded MT'; 
+                            font-size:x-large;" href='<%= Page.ResolveUrl("~/WebView/Finance/MangeCategory.aspx")%>'>
+                   
+                    ManageCategory</a></li>
+                 <li id="current">
+                           <a id="current" style="font-family:'Arial Rounded MT'; 
+                            font-size:x-large;" href='<%= Page.ResolveUrl("~/WebView/Finance/ManageItem.aspx")%>'>
+                   
+                    ManageItem</a></li>
+                 <li id="current">
+                           <a id="current" style="font-family:'Arial Rounded MT'; 
+                            font-size:x-large;" href='<%= Page.ResolveUrl("~/WebView/Finance/ManageSupplier.aspx")%>'>
+                   
+                    ManageSupplier</a></li>
+                 <li id="current">
+                           <a id="current" style="font-family:'Arial Rounded MT'; 
+                            font-size:x-large;" href='<%= Page.ResolveUrl("~/WebView/Finance/ManageSupplierAndItem.aspx")%>'>
+                   
+                    ManageSupplierAndItem</a></li>
+                  
+            </ul>
+       
+         
+
+
+           
+          
+        </nav>
+
+        </div>
+                    </div>
+                    <!-- /.panel .chat-panel -->
+    
+               <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12" style="margin-left:100px; margin-top:20px;">
+                    <asp:ContentPlaceHolder  ID ="ContentPlaceHolder1" runat="server">
+       
+               
+                    </asp:ContentPlaceHolder>
+                    
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+                   </div>
+           
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src='<%= Page.ResolveUrl("~/bower_components/jquery/dist/jquery.min.js")%>'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src='<%= Page.ResolveUrl("~/bower_components/bootstrap/dist/js/bootstrap.min.js")%>'></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src='<%= Page.ResolveUrl("~/bower_components/metisMenu/dist/metisMenu.min.js")%>'></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src='<%= Page.ResolveUrl("~/bower_components/raphael/raphael-min.js")%>'></script>
+    <script src='<%= Page.ResolveUrl("~/bower_components/morrisjs/morris.min.js")%>'></script>
+    <script src='<%= Page.ResolveUrl("~/js/morris-data.js")%>'></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src='<%= Page.ResolveUrl("~/dist/js/sb-admin-2.js")%>'></script>
+
+        
+   
+
+    <script src='<%= Page.ResolveUrl("~/bower_components/datatables/media/js/jquery.dataTables.min.js")%>'></script>
+    <script src='<%= Page.ResolveUrl("~/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js")%>'></script>
+
+   
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+    </form>
+</body>
+  
+</html>

@@ -24,7 +24,6 @@
     <form id="form2" runat="server">
 	<div class="container">
 		<div class="top">		    
-		<asp:Label ID="txtMessage" runat="server"></asp:Label>		   
 		</div>
         <div class="img">
          <asp:Image ID="Image1" runat="server" Height="290px" ImageUrl="~/images/unilogo.png" Width="250px" />
@@ -36,17 +35,21 @@
                
 				<h2>Logic University</h2>
 			</div>
-			<label for="username">EmployeeID</label>
+			<label for="username">
+		    <asp:Label ID="txtMessage" ForeColor="Red" Font-Size="Large" runat="server"></asp:Label>	<br />	   
+            <asp:Label ID="lblMessage" ForeColor="Red" Font-Size="Large" runat="server"></asp:Label>
+            <br />
+            EmployeeID</label>
 			<br/>
-			<asp:TextBox ID="txtEmployeeID" runat="server" Text="STR00001"></asp:TextBox>
+			<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
 			<br/>
 			<label for="password">PIN</label>
 			<br/>
-			<asp:TextBox ID="txtPIN" runat="server" Text="000000"></asp:TextBox>
+			<asp:TextBox ID="txtPIN" runat="server" TextMode="Password"></asp:TextBox>
 			<br/>
 			<asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
 			<br/>
-			 <asp:LinkButton ID="lkBtnForgotPassword" runat="server">Forgot Password?</asp:LinkButton>
+			 <asp:LinkButton ID="lkBtnForgotPassword" runat="server" OnClick="lkBtnForgotPassword_Click">Forgot Password?</asp:LinkButton>
 		
              </div>
 	</div>

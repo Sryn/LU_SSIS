@@ -59,6 +59,52 @@ namespace LogicUniversity.Control
                 adjV.AdjVoucherItems.Add(adjvItem);
             }
             ctx.SaveChanges();
+            List<AdjVoucherItem> adjItemList = ctx.AdjVoucherItems.Where(x => x.AdjVoucherID == adjV.AdjVoucherID).ToList();
+            Boolean toManager = false;
+            Boolean toSupervisor = false;
+            List<SupplierItem> sitemList;
+            decimal totalCost = 0;
+            foreach(AdjVoucherItem adjitem in adjItemList)
+            {
+                if (toManager == true && toSupervisor == true)
+                    break;
+                sitemList = ctx.SupplierItems.Where(x => x.ItemID == adjitem.ItemID).ToList();
+                totalCost = 0;
+                foreach(SupplierItem sp in sitemList)
+                {
+                    totalCost += sp.Price.GetValueOrDefault();
+                }
+                totalCost /= sitemList.Count;
+                totalCost *= adjitem.Quantity.GetValueOrDefault();
+                if (totalCost > 100)
+                    toSupervisor = true;
+                else
+                    toManager = true;
+            }
+
+            EmailControl emailCrt = new EmailControl();
+            Notification noti;
+            string name = ((StoreEmployee)ctx.StoreEmployees.Where(x => x.StoreEmployeeID==sEmpID).FirstOrDefault()).Name;
+            if (toManager) { 
+                emailCrt.sendforAdjApproval(sEmpID, "Store Manager");
+                noti = new Notification();
+                noti.UserID = ((StoreEmployee)ctx.StoreEmployees.Where(x => x.Role == "Store Manager").FirstOrDefault()).StoreEmployeeID;
+                noti.FromUser = sEmpID;
+                noti.NotificationDate = DateTime.Today;
+                noti.Message = name+"’s Stock Adjustment Voucher is pending your approval.";
+                ctx.Notifications.Add(noti);
+                ctx.SaveChanges();
+            }
+            if (toSupervisor) { 
+                emailCrt.sendforAdjApproval(sEmpID, "Store Supervisor");
+                noti = new Notification();
+                noti.UserID = ((StoreEmployee)ctx.StoreEmployees.Where(x => x.Role == "Store Supervisor").FirstOrDefault()).StoreEmployeeID;
+                noti.FromUser = sEmpID;
+                noti.NotificationDate = DateTime.Today;
+                noti.Message = name + "’s Stock Adjustment Voucher is pending your approval.";
+                ctx.Notifications.Add(noti);
+                ctx.SaveChanges();
+            }
             return "success";
         }
         public List<RaiseAdjustmentVoucherItem> getToApproveAdjItemList(string sempID)

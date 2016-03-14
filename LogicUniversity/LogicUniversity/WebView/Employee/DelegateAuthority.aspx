@@ -1,27 +1,100 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Site1.Master" AutoEventWireup="true" CodeBehind="DelegateAuthority.aspx.cs" Inherits="LogicUniversity.WebView.Employee.DelegateAuthority" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        table
+        {
+            border: 1px solid #ccc;
+        }
+        table th
+        {
+            background-color: #F7F7F7;
+            color: black;
+            font-weight: bold;
+        }
+        table th, table td
+        {
+            padding: 5px;
+            border-color: #ccc;
+        }
+        .Pager span
+        {
+            color: black;
+            background-color: #F7F7F7;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            width: 20px;
+            margin-right: 3px;
+            line-height: 150%;
+            border: 1px solid #ccc;
+        }
+        .Pager a
+        {
+            text-align: center;
+            display: inline-block;
+            width: 20px;
+            border: 1px solid #ccc;
+            color: black;
+          
+            margin-right: 3px;
+            line-height: 150%;
+            text-decoration: none;
+        }
+        .highlight
+        {
+          background-color:black;
+            color:black;
+            font-weight:bold;
+            font-size:14px;
+        }
+     
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Label ID="lblTitle" runat="server" Text="Delegate Authority"></asp:Label>
-    <table class="auto-style1">
+     <div style="width:90%; margin-left:100px;">
+    <asp:Label ID="lblTitle"  style="font-family:'Arial Rounded MT'; 
+font-weight:bold; font-size:40px;"
+        runat="server" 
+        Text="Delegate Authority"></asp:Label>
+    <table class="auto-style1" style="width:50%;">
         <tr>
-            <td><asp:Label ID="lblTxtSessType" runat="server" Text="Session[type]"></asp:Label></td>
-            <td><asp:Label ID="lblSessType" runat="server" Text="Label"></asp:Label></td>
+            <td><asp:Label ID="lblTxtSessType" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text="Session[type]"></asp:Label></td>
+            <td><asp:Label ID="lblSessType" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text="Label"></asp:Label></td>
             <td></td>
         </tr>
         <tr>
-            <td><asp:Label ID="lblTxtEmpID" runat="server" Text="EmployeeID"></asp:Label></td>
-            <td><asp:Label ID="lblEmpID" runat="server" Text="Label"></asp:Label></td>
+            <td><asp:Label ID="lblTxtEmpID" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text="EmployeeID"></asp:Label></td>
+            <td><asp:Label ID="lblEmpID" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                Text="Label"></asp:Label></td>
             <td></td>
         </tr>
         <tr>
-            <td><asp:Label ID="lblTxtDeptID" runat="server" Text="DepartmentID"></asp:Label></td>
-            <td><asp:Label ID="lblDeptID" runat="server" Text="Label"></asp:Label></td>
+            <td><asp:Label ID="lblTxtDeptID" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                Text="DepartmentID"></asp:Label></td>
+            <td><asp:Label ID="lblDeptID" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                 Text="Label"></asp:Label></td>
             <td></td>
         </tr>
         <tr>
-            <td>Delegate To</td>
-            <td><asp:DropDownList ID="ddlDeptEmpList" runat="server" ></asp:DropDownList></td>
+            <td><asp:Label ID="Label1" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                Text="DelegateTo"></asp:Label></td>
+            <td><asp:DropDownList ID="ddlDeptEmpList" runat="server" style="box-shadow: 5px 5px 8px grey; font-family:Arial; 
+font-size:16px;" height="56px" Width="220px"></asp:DropDownList></td>
             <%-- http://www.dotnetspider.com/forum/203479-Date-validation-ASP-NET.aspx --%>
             <%-- http://stackoverflow.com/questions/133051/what-is-the-difference-between-visibilityhidden-and-displaynone --%>
             <td><asp:TextBox ID="tbxTodaysDate" runat="server" style="display:none"></asp:TextBox></td>
@@ -32,9 +105,13 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>From Date</td>
+            <td><asp:Label ID="Label2" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                Text="FromDate"></asp:Label></td>
             <td>
-                <asp:TextBox ID="tbxFromDate" runat="server"></asp:TextBox>
+                <asp:TextBox ID="tbxFromDate" runat="server" 
+                    style="box-shadow: 5px 5px 8px grey; font-family:Arial; font-size:16px;"
+                    ></asp:TextBox>
                 <asp:ImageButton ID="imgBtnCalFromDate" runat="server" Height="22px" ImageUrl="~/Images/calendar.png" OnClick="imgBtnCalFromDate_Click" />
             </td>
             <td>
@@ -59,9 +136,11 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>To Date</td>
+            <td><asp:Label ID="Label3" runat="server" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                Text="ToDate"></asp:Label></td>
             <td>
-                <asp:TextBox ID="tbxToDate" runat="server"></asp:TextBox>
+                <asp:TextBox style="box-shadow: 5px 5px 8px grey; font-family:Arial; font-size:16px;" ID="tbxToDate" runat="server"></asp:TextBox>
                 <asp:ImageButton ID="imgBtnCalToDate" runat="server" Height="22px" ImageUrl="~/Images/calendar.png" OnClick="imgBtnCalToDate_Click" />
             </td>
             <td>
@@ -82,9 +161,15 @@
             </td>
         </tr>
         <tr>
-            <td><asp:Label ID="lblChosenEmp" runat="server" Text=""></asp:Label></td>
-            <td><asp:Label ID="lblFromDate" runat="server" Text=""></asp:Label></td>
-            <td><asp:Label ID="lblToDate" runat="server" Text=""></asp:Label></td>
+            <td><asp:Label ID="lblChosenEmp" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text=""></asp:Label></td>
+            <td><asp:Label ID="lblFromDate" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text=""></asp:Label></td>
+            <td><asp:Label ID="lblToDate" style="text-shadow: 10px 10px 22px #ffffcc; 
+font-family:Arial; font-size:19px;"
+                runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -93,10 +178,21 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" Visible="false" OnClick="btnClick_CancelEdit" /></td>
             <td>
-                <asp:Button ID="btnAddDelegate" runat="server" Text="Add" OnClick="btnClick_AddDelegate" ValidationGroup="frmDelegateAuth" />
-                <asp:Button ID="btnEditDelegate" runat="server" Text="Change" Visible="false" OnClick="btnClick_EditDelegate" />
+
+            <asp:Button ID="btnAddDelegate" cssClass="btn-custom2" 
+                    style="box-shadow: 5px 5px 10px grey;" runat="server" 
+                    Text="Add" OnClick="btnClick_AddDelegate" 
+                    ValidationGroup="frmDelegateAuth" />
+                
+                <asp:Button ID="btnCancelEdit" cssClass="btn-custom2" 
+                style="box-shadow: 5px 5px 10px grey;" runat="server" Text="Cancel" 
+                Visible="false" OnClick="btnClick_CancelEdit" />
+                <asp:Button ID="btnEditDelegate" cssClass="btn-custom2" 
+                    style="box-shadow: 5px 5px 10px grey;"  runat="server" 
+                    Text="Change" Visible="false" OnClick="btnClick_EditDelegate" />
+
+                
             </td>
         </tr>
         <tr>
@@ -109,10 +205,22 @@
         </tr>
     </table>
     <hr />
+    <div id="mainContainer" class="container" style="width:98%; position:relative; margin-left:-1%;" >  
+            <div class="shadowBox">                           
+                                <div class="table-responsive">
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowMessageBox="True" ForeColor="Red" ValidationGroup="frmDelegateAuth" />
-    <asp:Label ID="lblDeptDelGVTitle" runat="server" Text="Delegates History"></asp:Label>
-    <asp:GridView ID="DeptDelegatesGridView" runat="server" AutoGenerateColumns="false" AllowPaging="true" OnPageIndexChanging="newPageDeptDelegatesGridView" PagerSettings-Mode="NumericFirstLast">
-        <Columns>
+    <asp:Label ID="lblDeptDelGVTitle" style="font-family:'Arial Rounded MT'; 
+font-weight:bold; font-size:40px;"
+        runat="server" Text="Delegates History"></asp:Label>
+    
+     <asp:GridView ID="DeptDelegatesGridView" HeaderStyle-CssClass="grid_head" 
+        CssClass="table table-hover table-bordered"
+        RowStyle-CssClass="grid_row" HorizontalAlign="Center"
+        HeaderStyle-BackColor="WhiteSmoke"
+         runat="server" AutoGenerateColumns="false" 
+         AllowPaging="true" OnPageIndexChanging="newPageDeptDelegatesGridView" PagerSettings-Mode="NumericFirstLast">
+          <PagerStyle CssClass="pagination-ys"  />
+          <Columns>
             <asp:BoundField DataField="empNameID" HeaderText="Name" />
             <asp:BoundField DataField="fromDate" HeaderText="From Date" />
             <asp:BoundField DataField="toDate" HeaderText="To Date" />
@@ -133,4 +241,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+                                    </div></div></div></div>
 </asp:Content>

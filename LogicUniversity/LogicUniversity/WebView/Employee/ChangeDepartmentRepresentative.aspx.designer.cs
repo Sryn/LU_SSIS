@@ -76,6 +76,15 @@ namespace LogicUniversity.WebView.Employee {
         protected global::System.Web.UI.WebControls.Label lblDeptID;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// lblCurrDeptRep control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCurrDeptRep;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// ddlNewDeptRep control.

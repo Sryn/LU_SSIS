@@ -216,7 +216,9 @@ namespace LogicUniversity.Control
                     // valid email, so send
                     try
                     {
-                        emailCtrl.SendEmail(empEmail, emailSubject, emailBody, justEmpEmailList);
+                        List<string> toList = new List<string>();
+                        toList.Add(empEmail);
+                        emailCtrl.SendEmail(toList, emailSubject, emailBody, justEmpEmailList);
 
                         msg += "; Emails sent.";
                     }

@@ -76,6 +76,15 @@ namespace LogicUniversity.WebView.Employee {
         protected global::System.Web.UI.WebControls.Label lblDeptID;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// ddlDeptEmpList control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbxTodaysDate;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// tbxFromDate control.
@@ -137,6 +155,15 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar calFromDate;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// tbxToDate control.
@@ -211,15 +238,6 @@ namespace LogicUniversity.WebView.Employee {
         protected global::System.Web.UI.WebControls.Label lblToDate;
         
         /// <summary>
-        /// btnCancelEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
-        
-        /// <summary>
         /// btnAddDelegate control.
         /// </summary>
         /// <remarks>
@@ -227,6 +245,15 @@ namespace LogicUniversity.WebView.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddDelegate;
+        
+        /// <summary>
+        /// btnCancelEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
         
         /// <summary>
         /// btnEditDelegate control.

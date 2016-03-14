@@ -51,7 +51,7 @@ namespace LogicUniversity.WebView.Employee
         public void ReOrder(int Requisitionid)
         {
             System.Diagnostics.Debug.WriteLine("ReOrder Click" + Requisitionid);
-            
+            reqlistcrt.ReorderRequisition(Requisitionid);
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -141,6 +141,20 @@ namespace LogicUniversity.WebView.Employee
         protected void gvList_RowCreated(object sender, GridViewRowEventArgs e)
         {
             
+        }
+
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList.PageIndex = e.NewPageIndex;
+            reqlistcrt = new Control.RequestListControl();
+
+
+            gvList.DataSource = reqlistcrt.getRequisitionListItem("", "All", ((Model.Employee)Session["User"]).EmployeeID);
+            gvList.DataBind();
+
+            // To check the status to show edit and delete button
+            check();
+            AddRowSpanToGridView();
         }
 
      

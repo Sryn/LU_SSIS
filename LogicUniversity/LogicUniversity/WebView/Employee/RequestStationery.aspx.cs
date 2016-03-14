@@ -12,12 +12,17 @@ namespace LogicUniversity.WebView.Employee
         Control.RequestStationeryControl reqCrt;
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnClearAll.Visible = false;
+            btnSubmit.Visible = false;
+          
             reqCrt = new Control.RequestStationeryControl();
             List<Model.Category> catlist = reqCrt.getAllCategory();
             if (catlist == null)
                 return;
             if (!IsPostBack)
             {
+                txtRequestQty.Text = "0";
+
                 foreach (Model.Category cat in catlist)
                 {
                     ddlCategory.Items.Add(new ListItem(cat.CategoryName, "" + cat.CategoryID));
@@ -31,6 +36,59 @@ namespace LogicUniversity.WebView.Employee
                 }
                 txtUnitOfMeasure.Text = itemList[0].UOM;
                 lblTodayDate.Text = DateTime.Today.Date.ToShortDateString();
+                if (Request["ItemIDToDelete"] != null)
+                {
+                    string id = Request["ItemIDToDelete"];
+                    if (Session["ReqItem"] != null)
+                    {
+                        List<Model.RequisitionItem> temp_List = (List<Model.RequisitionItem>)Session["ReqItem"];
+                        foreach(Model.RequisitionItem temp in temp_List)
+                        {
+                            if (temp.ItemID.Equals(id))
+                            {
+                                temp_List.Remove(temp);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (Request["ItemID"] != null)
+                {
+                    string id = Request["ItemID"];
+                    if (Session["ReqItem"] != null)
+                    {
+                        List<Model.RequisitionItem> temp_List = (List<Model.RequisitionItem>)Session["ReqItem"];
+                        foreach (Model.RequisitionItem temp in temp_List)
+                        {
+                            if (temp.ItemID.Equals(id))
+                            {
+                                temp_List.Remove(temp);
+                                ddlCategory.SelectedValue = reqCrt.getCategoryIDbyItemID(temp.ItemID);
+                                ddlItemDescription.SelectedValue = temp.ItemID;
+                                txtUnitOfMeasure.Text = reqCrt.getUOMByItemID(temp.ItemID);
+                                txtRequestQty.Text = temp.Quantity.GetValueOrDefault().ToString();
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (Request["RequisitionFormID"] != null)
+                {
+                    int id = Convert.ToInt32(Request["RequisitionFormID"].ToString());
+                    List<Model.RequisitionItem> temp_List = reqCrt.getRequisitionItemByReqID(id);
+                    Model.RequisitionItem temp = temp_List[0];
+                    temp_List.Remove(temp);
+                    foreach(Model.RequisitionItem req in temp_List)
+                    {
+                        req.Reson = "";
+                        req.Status = "";
+                    }
+                    Session["ReqItem"] = temp_List;
+                    ddlCategory.SelectedValue = reqCrt.getCategoryIDbyItemID(temp.ItemID);
+                    ddlItemDescription.SelectedValue = temp.ItemID;
+                    txtUnitOfMeasure.Text = reqCrt.getUOMByItemID(temp.ItemID);
+                    txtRequestQty.Text = temp.Quantity.GetValueOrDefault().ToString();
+                }
             }
             gridViewDataBind();
         }
@@ -41,6 +99,8 @@ namespace LogicUniversity.WebView.Employee
             {
                 gvData.DataSource = (List<Model.RequisitionItem>)Session["ReqItem"];
                 gvData.DataBind();
+                btnClearAll.Visible = true;
+                btnSubmit.Visible = true;
             }
         }
 
@@ -64,9 +124,11 @@ namespace LogicUniversity.WebView.Employee
             }
             txtUnitOfMeasure.Text = itemList[ddlItemDescription.SelectedIndex].UOM;
         }
-
+       
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            btnSubmit.Visible = true;
+            btnClearAll.Visible = true;
             if (ddlItemDescription.SelectedValue == null)
                 return;
 
@@ -91,7 +153,7 @@ namespace LogicUniversity.WebView.Employee
             ReqItem.Add(temp);
             Session["ReqItem"] = ReqItem;
             gridViewDataBind();
-            txtRequestQty.Text = "";
+            txtRequestQty.Text = "0";
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -108,7 +170,9 @@ namespace LogicUniversity.WebView.Employee
                 Session["ReqItem"] = null;
                 gvData.DataSource = null;
                 gvData.DataBind();
-                txtRequestQty.Text = "";
+                txtRequestQty.Text = "0";
+                btnClearAll.Visible = false;
+                btnSubmit.Visible = false;
             }
         }
 
@@ -117,7 +181,16 @@ namespace LogicUniversity.WebView.Employee
             Session["ReqItem"] = null;
             gvData.DataSource = null;
             gvData.DataBind();
-            txtRequestQty.Text = "";
+            txtRequestQty.Text = "0";
+            btnClearAll.Visible = false;
+            btnSubmit.Visible = false;
+        }
+
+        protected void gvData_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[2].Style.Add("display", "none");
+            e.Row.Cells[3].Style.Add("display", "none");
+            //e.Row.Cells[4].Style.Add("display", "none");
         }
     }
 }

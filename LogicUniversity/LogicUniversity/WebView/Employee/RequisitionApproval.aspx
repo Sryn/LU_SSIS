@@ -1,19 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Site1.Master" AutoEventWireup="true" CodeBehind="RequisitionApproval.aspx.cs" Inherits="LogicUniversity.WebView.Employee.Requisition_Approval" %>
+﻿
+<%@ Page Title="" Language="C#" MasterPageFile="~/WebView/Site1.Master" AutoEventWireup="true" CodeBehind="RequisitionApproval.aspx.cs" Inherits="LogicUniversity.WebView.Employee.Requisition_Approval" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Label ID="Label1" runat="server" Text="Requisition Approval"></asp:Label>
+     <div style="width:90%; margin-left:100px;">
+    <asp:Label  style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px;" 
+        ID="Label1" runat="server" Text="Requisition Approval"></asp:Label>
     <br />
-    <asp:Label ID="Label2" runat="server" Text="Department Name:"></asp:Label>
-    <asp:Label ID="lblDearptmentName" runat="server"></asp:Label>
+    <br />
+    <br />
+    <asp:Label style="font-family:Arial; font-size:16px;"
+         ID="Label2" runat="server" Text="Department Name:"></asp:Label>
+    <asp:Label  style="font-family:Arial; font-size:16px;" ID="lblDearptmentName" runat="server"></asp:Label>
     <br />
    
 
+     <div id="mainContainer" class="container" style="width:98%; position:relative; margin-left:-5%;" >  
+            <div class="shadowBox">                           
+                                <div class="table-responsive"> 
 
-
+                                     <div class="scrolling-table1">
     <asp:GridView ID="gvDataList"  runat="server" AutoGenerateColumns="False" 
-                     CellPadding="4" Height="40px" Width="494px" Font-Bold="True" 
+                     CellPadding="4" Height="40px" Width="694px" Font-Bold="True" 
                      Font-Size="Large" ForeColor="#333333" GridLines="None"
+         HeaderStyle-CssClass="grid_head" 
+        CssClass="table table-hover table-bordered"
+        RowStyle-CssClass="grid_row" HorizontalAlign="Center"
+        HeaderStyle-BackColor="WhiteSmoke" OnRowCreated="gvDataList_RowCreated"
                      >
                      <AlternatingRowStyle BackColor="White" />
                      <Columns>
@@ -63,6 +76,11 @@
                      <SortedDescendingHeaderStyle BackColor="#4870BE" />
                  </asp:GridView>
     <br />
-    <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                                    </div></div></div></div>
+    <br />
+    <br />
+    <asp:Button  cssClass="btn-custom" style="box-shadow: 5px 5px 10px grey;" 
+        ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
 &nbsp;
+         </div>
 </asp:Content>

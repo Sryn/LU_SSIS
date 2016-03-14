@@ -3,19 +3,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="margingAlignTop">
-    <asp:Label ID="Label1" runat="server" Text="Request"></asp:Label>
+    <asp:Label ID="Label1" runat="server" 
+         style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px;"  Text="Request"></asp:Label>
     <br />
     <asp:Label ID="lblMessage" runat="server"></asp:Label>
     <br />
         </div>
+
+     <div id="mainContainer" class="container" style="width:98%; position:relative; margin-left:-1%;" >  
+            <div class="shadowBox">                           
+                                <div class="table-responsive">   
      <div class="scrolling-table">
     <asp:GridView ID="gvDataList"  HeaderStyle-CssClass="grid_head" 
         CssClass="table table-hover table-bordered"
         RowStyle-CssClass="grid_row" HorizontalAlign="Center"
         HeaderStyle-BackColor="WhiteSmoke"
         runat="server" OnRowCreated="gvDataList_RowCreated" 
-        style="margin-right: 0px"  OnRowDataBound="gvDataList_RowDataBound" OnDataBound="gvDataList_DataBound" 
+        style="margin-right: 0px"  OnRowDataBound="gvDataList_RowDataBound" 
+        OnDataBound="gvDataList_DataBound" 
         >
         <Columns>
         <asp:TemplateField HeaderText="ActualQty" >
@@ -43,6 +50,7 @@
     </asp:GridView>
     <br />
          </div>
+                                    </div></div></div>
      <br /> <br />
       <div class="margingAlign">
     <asp:Button ID="btnConfirm" runat="server" OnClick="btnConfirm_Click" Text="Confirm" />

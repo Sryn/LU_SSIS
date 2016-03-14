@@ -15,8 +15,30 @@ namespace LogicUniversity.Control
         //success = successfully deleted
         public string DeleteRequisition(int requisitionID)
         {
-            List<Model.Requisition> req = ctx.Requisitions.ToList();
-            req = null;
+            Model.Requisition req = ctx.Requisitions.Where(x => x.RequisitionID == requisitionID).FirstOrDefault();
+            List<Model.RequisitionItem> toRemove = new List<Model.RequisitionItem>();
+            foreach(Model.RequisitionItem reqitem in req.RequisitionItems)
+            {
+                toRemove.Add(reqitem);
+            }
+            foreach(Model.RequisitionItem reqitem in toRemove)
+            {
+                ctx.RequisitionItems.Remove(reqitem);
+            }
+            ctx.Requisitions.Remove(req);
+            ctx.SaveChanges();
+            return "success";
+        }
+        public string ReorderRequisition(int requisitionID)
+        {
+            Model.Requisition req = ctx.Requisitions.Where(x => x.RequisitionID == requisitionID).FirstOrDefault();
+            Model.Requisition toAdd = new Model.Requisition();
+            toAdd = req;
+            foreach(Model.RequisitionItem reqitem in req.RequisitionItems)
+            {
+                toAdd.RequisitionItems.Add(reqitem);
+            }
+            ctx.Requisitions.Add(toAdd);
             ctx.SaveChanges();
             return "success";
         }

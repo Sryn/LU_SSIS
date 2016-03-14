@@ -43,11 +43,11 @@
     <EntitySetMapping Name="Delegates">
       <EntityTypeMapping TypeName="LogicUniversityModel.Delegate">
         <MappingFragment StoreEntitySet="Delegate">
-          <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="DelegateID" ColumnName="DelegateID" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -75,13 +75,13 @@
     <EntitySetMapping Name="DisbursementItems">
       <EntityTypeMapping TypeName="LogicUniversityModel.DisbursementItem">
         <MappingFragment StoreEntitySet="DisbursementItem">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="DisbursementItemID" ColumnName="DisbursementItemID" />
           <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
           <ScalarProperty Name="ItemID" ColumnName="ItemID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
           <ScalarProperty Name="RemainingQty" ColumnName="RemainingQty" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -23,8 +23,19 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine("in btnLogin CLick");
             string usertype = "";
+            //if(txtEmployeeID.Text.Equals("finance") && txtPIN.Text.Equals("123456"))
+            //{
+            //    Model.Employee emp = loginCrt.getEmployeeUserObject(txtEmployeeID.Text);
+            //    if (emp == null)
+            //        return;
+            //    System.Diagnostics.Debug.WriteLine("===FinanceFound======");
+            //    System.Diagnostics.Debug.WriteLine(emp.Role);
+            //    Session["User"] = emp;
+            //    Session["type"] = "Finance";
+            //    Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
+            //}
             if (txtEmployeeID.Text != "" && txtPIN.Text != "")
-            { 
+            {
                 usertype = loginCrt.Login(txtEmployeeID.Text, txtPIN.Text);
                 switch (usertype)
                 {
@@ -33,7 +44,7 @@ namespace LogicUniversity.WebView
                         txtMessage.Text = "Not Found";
                         break;
                     case "StoreFound":
-                        Model.StoreEmployee semp= loginCrt.getStoreEmployeeUserObject(txtEmployeeID.Text);
+                        Model.StoreEmployee semp = loginCrt.getStoreEmployeeUserObject(txtEmployeeID.Text);
                         if (semp == null)
                             return;
                         Session["type"] = "StoreEmployee";
@@ -61,12 +72,53 @@ namespace LogicUniversity.WebView
                         Session["User"] = delEmp;
                         Response.Redirect("~/WebView/Employee/EmployeeHome.aspx");
                         break;
+                    case "FinanceEmployeeFound":
+                        Model.Employee femp = loginCrt.getEmployeeUserObject(txtEmployeeID.Text);
+                        if (femp == null)
+                            return;
+                        System.Diagnostics.Debug.WriteLine("===FinanceEmpFound======");
+                        System.Diagnostics.Debug.WriteLine(femp.Role);
+                        Session["User"] = femp;
+                        Session["type"] = "Finance";
+                        Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
+                        break;
                 }
             }
-            else if(txtEmployeeID.Text == "")
+            else if (txtEmployeeID.Text == "")
                 txtMessage.Text = "Enter Employee ID";
-            else if(txtEmployeeID.Text == "")
+            else if (txtEmployeeID.Text == "")
                 txtMessage.Text = "Enter PIN Number";
         }
+
+        protected void lkBtnForgotPassword_Click(object sender, EventArgs e)
+        {
+            string result = loginCrt.checkUserID(txtEmployeeID.Text);
+            string resultToReturn="";
+            txtMessage.Visible = false;
+            lblMessage.Visible = true;
+            if (result.Equals("Found"))
+                resultToReturn = loginCrt.makeForgotPassword(txtEmployeeID.Text);
+            else
+                lblMessage.Text = "InputValid UserID";
+            switch (resultToReturn)
+            {
+                case "success":
+                    lblMessage.Text = "Successfully Send You Email";
+                    break;
+                case "error":
+                    lblMessage.Text = "Error in send Email";
+                    break;
+                case "fail":
+                    lblMessage.Text = "Fail";
+                    break;
+                case "notfound":
+                    lblMessage.Text = "Not Found";
+                    break;
+            }
+        }
+        //success = successfully send email
+        //error = error in send email
+        //fail = fail
+        //notfound = userID not found
     }
 }

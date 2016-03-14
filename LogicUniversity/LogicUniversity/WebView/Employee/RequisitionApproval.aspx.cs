@@ -46,5 +46,14 @@ namespace LogicUniversity.WebView.Employee
             gvDataList.DataSource = crt.getAllRequisitionToApprove(((Model.Employee)Session["User"]).DepartmentID);
             gvDataList.DataBind();
         }
+
+        protected void gvDataList_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[1].Style.Add("display", "none");
+         //   gvAdjVoucher.HeaderRow.Cells[2].Visible = false;
+
+            e.Row.Cells[0].Style.Add("display", "none");
+          //  gvAdjVoucher.HeaderRow.Cells[10].Visible = false;
+        }
     }
 }

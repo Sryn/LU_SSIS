@@ -3,19 +3,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     &nbsp;
-    <br /><asp:Image ID="Image2"  runat="server" ImageUrl="~/images/cm-mockup01-o.jpg" Width="980px" Height="605px" />
-     <div class="all">
+    <div style="margin-left:0px">
+    <br /><asp:Image ID="Image2"   runat="server" ImageUrl="~/images/cm-mockup01-o.jpg" Width="980px" Height="605px" />
      </div>
-
+       
     <div class="ProfileImg">
-    <asp:Image ID="Image1" class="img-circle" style="border-radius: 50%;" runat="server" ImageUrl="~/images/profilePicture.jpg" Width="190px" height="160px"/>
+    <asp:Image ID="Image1" class="img-circle" style="border-radius: 50%;" runat="server" 
+        ImageUrl="~/images/profilePicture.jpg" Width="380px" height="300px"/>
      </div>
 
     <div class="forWelcome">
-    <asp:Label ID="Label1" runat="server" Text="Welcome" font-family= "Raleway" Font-Size="XX-Large"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Welcome" font-family= "Raleway" Font-Size="40px"></asp:Label>
         </div>
     <div class="forname">
-    <asp:Label ID="Label2" runat="server" Text="Shwe Yee" font-family= "Raleway" Font-Size="XX-Large" Width="146px"></asp:Label>
+    <asp:Label ID="Label2" runat="server" Text="Shwe Yee" font-family= "Raleway" Font-Size="40px" Width="280px"></asp:Label>
         </div>
 &nbsp;
 </asp:Content>
