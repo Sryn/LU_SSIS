@@ -14,6 +14,7 @@ namespace LogicUniversity.WebView.Finance
         FinanceController crt;
         protected void Page_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             if (!IsPostBack)
             {
                 if (Request["IDToDelete"] != null)
@@ -30,6 +31,11 @@ namespace LogicUniversity.WebView.Finance
                 crt = new FinanceController();
                 Retrieve();
             }
+=======
+            crt = new FinanceController();
+            gvData.DataSource = crt.getAllCategoryList();
+            gvData.DataBind();
+>>>>>>> origin/master
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -42,6 +48,7 @@ namespace LogicUniversity.WebView.Finance
             Category cat = new Category();
             cat.CategoryName = txtCategory.Text.Trim();
             crt.insertCategory(cat);
+<<<<<<< HEAD
             Retrieve();
             txtCategory.Text = "";
         }
@@ -67,6 +74,11 @@ namespace LogicUniversity.WebView.Finance
 
 
             }
+=======
+            gvData.DataSource = crt.getAllCategoryList();
+            gvData.DataBind();
+            txtCategory.Text = "";
+>>>>>>> origin/master
         }
     }
 }

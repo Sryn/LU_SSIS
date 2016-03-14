@@ -36,6 +36,7 @@
 				<h2>Logic University</h2>
 			</div>
 			<label for="username">
+<<<<<<< HEAD
 		    <asp:Label ID="txtMessage" ForeColor="Red" Font-Size="Large" runat="server"></asp:Label>	<br />	   
             <asp:Label ID="lblMessage" ForeColor="Red" Font-Size="Large" runat="server"></asp:Label>
             <br />
@@ -46,6 +47,17 @@
 			<label for="password">PIN</label>
 			<br/>
 			<asp:TextBox ID="txtPIN" runat="server" TextMode="Password"></asp:TextBox>
+=======
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+            <br />
+            EmployeeID</label>
+			<br/>
+			<asp:TextBox ID="txtEmployeeID" runat="server" Text="finance"></asp:TextBox>
+			<br/>
+			<label for="password">PIN</label>
+			<br/>
+			<asp:TextBox ID="txtPIN" runat="server"  Text="123456"></asp:TextBox>
+>>>>>>> origin/master
 			<br/>
 			<asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
 			<br/>

@@ -11,13 +11,21 @@ namespace LogicUniversity.WebView.Finance
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
            /* if (!IsPostBack)
+=======
+            if (!IsPostBack)
+>>>>>>> origin/master
             {
                 TreeView1.Nodes.Add(new TreeNode("Manage Category", "", "", "~/WebView/Finance/MangeCategory.aspx", ""));
                 TreeView1.Nodes.Add(new TreeNode("Manage Item", "", "", "~/WebView/Finance/ManageItem.aspx", ""));
                 TreeView1.Nodes.Add(new TreeNode("Manage Supplier", "", "", "~/WebView/Finance/ManageSupplier.aspx", ""));
                 TreeView1.Nodes.Add(new TreeNode("Manage Supplier And Item", "", "", "~/WebView/Finance/ManageSupplierAndItem.aspx", ""));
+<<<<<<< HEAD
             }*/
+=======
+            }
+>>>>>>> origin/master
         }
     }
 }

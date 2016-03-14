@@ -47,6 +47,7 @@ namespace LogicUniversity.WebView.StoreEmployee
 
         }
 
+<<<<<<< HEAD
         protected void gvAdjVoucher_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvAdjVoucher.PageIndex = e.NewPageIndex;
@@ -175,6 +176,28 @@ namespace LogicUniversity.WebView.StoreEmployee
             }
 
 
+=======
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < gvAdjVoucher.Rows.Count; i++)
+            {
+
+              
+
+                RadioButton rdn_Approve = (RadioButton)gvAdjVoucher.Rows[i].Cells[1].FindControl("Rdn_Approve");// to check the Radio Button from gridview
+                RadioButton rdn_Reject = (RadioButton)gvAdjVoucher.Rows[i].Cells[1].FindControl("Rdn_Reject");// to check the Radio from gridview
+
+                if (rdn_Approve.Checked == true)
+                {
+                    Button1.Text = "A";
+                }
+                // add the object 3 args constructure to list
+
+                else if (rdn_Reject.Checked == true)
+                { Button1.Text = "R";  }
+               // add the object 3 args constructure to list
+            }
+>>>>>>> origin/master
         }
     }
 }

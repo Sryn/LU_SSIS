@@ -13,6 +13,7 @@ namespace LogicUniversity.WebView.StoreEmployee {
     public partial class ChangeDeliveryDate {
         
         /// <summary>
+<<<<<<< HEAD
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -22,6 +23,8 @@ namespace LogicUniversity.WebView.StoreEmployee {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label1 control.
         /// </summary>
         /// <remarks>

@@ -22,6 +22,7 @@ namespace LogicUniversity.WebView.StoreEmployee
                     int id = Convert.ToInt32(Request["DisbursementID"].ToString());
                     string result = crt.changeToNotCollected(id);                    
                 }
+<<<<<<< HEAD
                 Retrieve();
             }
         }
@@ -31,6 +32,14 @@ namespace LogicUniversity.WebView.StoreEmployee
             gvDataList.DataBind();
             AddRowSpanToGridView();
         }
+=======
+                gvDataList.DataSource = crt.getToNotCollectedList();
+                gvDataList.DataBind();
+                AddRowSpanToGridView();
+            }
+        }
+
+>>>>>>> origin/master
         public void AddRowSpanToGridView()
         {
             for (int rowIndex = gvDataList.Rows.Count - 2; rowIndex >= 0; rowIndex--)
@@ -57,6 +66,7 @@ namespace LogicUniversity.WebView.StoreEmployee
                         currentRow.Cells[1].RowSpan = previousRow.Cells[1].RowSpan + 1;
                         currentRow.Cells[0].RowSpan = previousRow.Cells[0].RowSpan + 1;
                     }
+<<<<<<< HEAD
 
                     previousRow.Cells[6].Style.Add("display", "none");
                     previousRow.Cells[3].Style.Add("display", "none");
@@ -66,11 +76,23 @@ namespace LogicUniversity.WebView.StoreEmployee
                 }
             }
 
+=======
+
+                    previousRow.Cells[6].Style.Add("display", "none");
+                    previousRow.Cells[3].Style.Add("display", "none");
+                    previousRow.Cells[2].Style.Add("display", "none");
+                    previousRow.Cells[1].Style.Add("display", "none");
+                    previousRow.Cells[0].Style.Add("display", "none");
+                }
+            }
+
+>>>>>>> origin/master
 
         }
 
         protected void gvDataList_RowCreated(object sender, GridViewRowEventArgs e)
         {
+<<<<<<< HEAD
            // e.Row.Cells[6].Style.Add("display", "none");
          //   e.Row.Cells[3].Style.Add("display", "none");
         //    e.Row.Cells[11].Style.Add("display", "none");
@@ -80,6 +102,11 @@ namespace LogicUniversity.WebView.StoreEmployee
         {
             gvDataList.PageIndex = e.NewPageIndex;
             Retrieve();
+=======
+            e.Row.Cells[6].Style.Add("display", "none");
+         //   e.Row.Cells[3].Style.Add("display", "none");
+        //    e.Row.Cells[11].Style.Add("display", "none");
+>>>>>>> origin/master
         }
     }
 }

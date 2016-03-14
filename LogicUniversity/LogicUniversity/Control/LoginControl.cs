@@ -180,7 +180,11 @@ namespace LogicUniversity.Control
         //notFound
         //success
         //fail
+<<<<<<< HEAD
         public string changeForgotPINCheck(int PIN, int code)
+=======
+        public string changeForgotPINCheck(int PIN,int code)
+>>>>>>> origin/master
         {
             ForgotPassword fp = ctx.ForgotPasswords.Where(x => x.Code == code && x.Status == "Active").FirstOrDefault();
             if (fp == null)

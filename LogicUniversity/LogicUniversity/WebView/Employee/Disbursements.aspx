@@ -2,9 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
+<<<<<<< HEAD
      <div style="width:90%; margin-left:100px;">
     <asp:Label  style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px;" 
         ID="lblTitle" runat="server" Text="Disbursements"></asp:Label>
+=======
+    <asp:Label ID="lblTitle" runat="server" Text="Disbursements"></asp:Label>
+>>>>>>> origin/master
     <table class="auto-style1">
         <tr>
             <td>&nbsp;</td>
@@ -75,5 +79,8 @@
     </asp:GridView>
     <br />
     <asp:Button ID="btnBackToDisbursements" runat="server" Text="Back To Disbursements" Visible="false" OnClick="btnClick_BackToDisbursements" />
+<<<<<<< HEAD
 </div>
+=======
+>>>>>>> origin/master
 </asp:Content>

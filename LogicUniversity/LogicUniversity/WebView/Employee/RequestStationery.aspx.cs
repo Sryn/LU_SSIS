@@ -21,7 +21,21 @@ namespace LogicUniversity.WebView.Employee
                 return;
             if (!IsPostBack)
             {
+<<<<<<< HEAD
                 txtRequestQty.Text = "0";
+=======
+                if (Request["ItemIDToDelete"] != null)
+                {
+                    int id = Convert.ToInt32(Request["ItemIDToDelete"].ToString());
+                   //delete
+                }
+
+                if (Request["ItemID"] != null)
+                {
+                    int id = Convert.ToInt32(Request["ItemID"].ToString());
+                   //edit
+                }
+>>>>>>> origin/master
 
                 foreach (Model.Category cat in catlist)
                 {

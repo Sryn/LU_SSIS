@@ -49,6 +49,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtCategory;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidatorAccount control.
         /// </summary>
         /// <remarks>
@@ -58,6 +59,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorAccount;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

@@ -49,6 +49,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtSupplierID;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidatorAccount control.
         /// </summary>
         /// <remarks>
@@ -58,6 +59,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorAccount;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +79,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtSupplierName;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +89,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -103,6 +109,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtContactName;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -112,6 +119,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtPhoneNo;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -139,6 +149,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label7 control.
         /// </summary>
         /// <remarks>
@@ -157,6 +169,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtFaxNo;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator4 control.
         /// </summary>
         /// <remarks>
@@ -166,6 +179,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label8 control.
         /// </summary>
         /// <remarks>
@@ -184,6 +199,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
@@ -193,6 +209,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -211,6 +229,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator6 control.
         /// </summary>
         /// <remarks>
@@ -220,6 +239,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// Label9 control.
         /// </summary>
         /// <remarks>
@@ -238,6 +259,7 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox txtGSTRegistration;
         
         /// <summary>
+<<<<<<< HEAD
         /// RequiredFieldValidator7 control.
         /// </summary>
         /// <remarks>
@@ -247,6 +269,8 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
+=======
+>>>>>>> origin/master
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

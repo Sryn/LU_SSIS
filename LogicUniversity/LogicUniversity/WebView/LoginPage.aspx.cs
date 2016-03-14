@@ -94,8 +94,11 @@ namespace LogicUniversity.WebView
         {
             string result = loginCrt.checkUserID(txtEmployeeID.Text);
             string resultToReturn="";
+<<<<<<< HEAD
             txtMessage.Visible = false;
             lblMessage.Visible = true;
+=======
+>>>>>>> origin/master
             if (result.Equals("Found"))
                 resultToReturn = loginCrt.makeForgotPassword(txtEmployeeID.Text);
             else

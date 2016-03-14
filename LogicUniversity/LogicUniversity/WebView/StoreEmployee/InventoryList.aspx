@@ -53,6 +53,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<<<<<<< HEAD
     <asp:Label ID="Label1" runat="server" 
          style="font-family:'Arial Rounded MT'; font-weight:bold; font-size:40px; margin-left:40px;"  Text="Inventory List"></asp:Label>
 
@@ -60,10 +61,14 @@
                         <div id="mainContainer" class="container" style="width:98%; position:relative; margin-left:2%;" >  
             <div class="shadowBox">                           
                                 <div class="table-responsive">   
+=======
+    <asp:Label ID="Label1" runat="server" Text="Inventory List"></asp:Label>
+>>>>>>> origin/master
     <asp:GridView ID="gvDataList" runat="server"
         OnRowCreated="gvDataList_RowCreated" OnRowDataBound="gvDataList_RowDataBound"
          HeaderStyle-CssClass="grid_head" 
         OnPageIndexChanging="gvDataList_PageIndexChanging"
+<<<<<<< HEAD
       
 
          class="table table-bordered table-hover dataTable no-footer" 
@@ -72,6 +77,14 @@
       
         >
         <PagerStyle CssClass="pagination-ys" />
+=======
+
+        CssClass="table table-hover table-bordered"
+        RowStyle-CssClass="grid_row" HorizontalAlign="Center"
+        HeaderStyle-BackColor="WhiteSmoke" AllowPaging="True" PageSize="15"
+
+        >
+>>>>>>> origin/master
  <Columns>
            <asp:TemplateField HeaderText="Raise PO" >
                         <ItemTemplate>
@@ -87,9 +100,12 @@
        
          </Columns>
     </asp:GridView>
+<<<<<<< HEAD
     </div>  
                             </div>  
                         
     </div>
               
+=======
+>>>>>>> origin/master
 </asp:Content>
