@@ -19,7 +19,7 @@ namespace LogicUniversity.Control
         // Delegate = Employee is delegate;
         public string Login(string UserID, string PIN)
         {
-            string UserType = UserID.Substring(0, 1);
+            string UserType = UserID.Substring(0, 1).ToUpper();
             if (UserType.Equals("S"))
             {
                 System.Diagnostics.Debug.WriteLine("StoreClerk Login");
@@ -56,6 +56,43 @@ namespace LogicUniversity.Control
                 else
                 {
                     return "EmployeeFound";
+                }
+            }
+            else if (UserType.Equals("F"))
+            {
+                System.Diagnostics.Debug.WriteLine("Finance Employee Login");
+
+                try
+                {
+                    Employee emp = ctx.Employees.Where(x => x.EmployeeID == UserID && x.PIN == PIN).Single();
+
+                    if (emp == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Employee Not Found");
+                        return "NotFound";
+                    }
+                    if (emp.Role != "Department Head")
+                    {
+                        Model.Delegate del = ctx.Delegates.Where(x => x.EmployeeID == emp.EmployeeID && x.ToDate >= DateTime.Today && x.FromDate <= DateTime.Today).FirstOrDefault();
+                        if (del == null)
+                        {
+                            return "FinanceEmployeeFound";
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("Delegate");
+                            return "Delegate";
+                        }
+                    }
+                    else
+                    {
+                        return "FinanceEmployeeFound";
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: Finance Employee Login e=" + e);
                 }
             }
             return "NotFound";

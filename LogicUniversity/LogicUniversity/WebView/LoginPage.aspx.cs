@@ -23,10 +23,17 @@ namespace LogicUniversity.WebView
         {
             System.Diagnostics.Debug.WriteLine("in btnLogin CLick");
             string usertype = "";
-            if(txtEmployeeID.Text.Equals("finance") && txtPIN.Text.Equals("123456"))
-            {
-                Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
-            }
+            //if(txtEmployeeID.Text.Equals("finance") && txtPIN.Text.Equals("123456"))
+            //{
+            //    Model.Employee emp = loginCrt.getEmployeeUserObject(txtEmployeeID.Text);
+            //    if (emp == null)
+            //        return;
+            //    System.Diagnostics.Debug.WriteLine("===FinanceFound======");
+            //    System.Diagnostics.Debug.WriteLine(emp.Role);
+            //    Session["User"] = emp;
+            //    Session["type"] = "Finance";
+            //    Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
+            //}
             if (txtEmployeeID.Text != "" && txtPIN.Text != "")
             { 
                 usertype = loginCrt.Login(txtEmployeeID.Text, txtPIN.Text);
@@ -64,6 +71,16 @@ namespace LogicUniversity.WebView
                         delEmp.Role = "Delegate";
                         Session["User"] = delEmp;
                         Response.Redirect("~/WebView/Employee/EmployeeHome.aspx");
+                        break;
+                    case "FinanceEmployeeFound":
+                        Model.Employee femp = loginCrt.getEmployeeUserObject(txtEmployeeID.Text);
+                        if (femp == null)
+                            return;
+                        System.Diagnostics.Debug.WriteLine("===FinanceEmpFound======");
+                        System.Diagnostics.Debug.WriteLine(femp.Role);
+                        Session["User"] = femp;
+                        Session["type"] = "Finance";
+                        Response.Redirect("~/WebView/Finance/FinanceHomePage.aspx");
                         break;
                 }
             }
