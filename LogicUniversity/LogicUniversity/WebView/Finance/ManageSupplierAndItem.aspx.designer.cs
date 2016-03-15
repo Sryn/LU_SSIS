@@ -211,15 +211,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.DropDownList ddlSupplier1;
         
         /// <summary>
-        /// supplier12CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator supplier12CompareValidator;
-        
-        /// <summary>
         /// tbxPrice1 control.
         /// </summary>
         /// <remarks>
@@ -229,15 +220,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox tbxPrice1;
         
         /// <summary>
-        /// priceValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator priceValidator1;
-        
-        /// <summary>
         /// ddlRank1 control.
         /// </summary>
         /// <remarks>
@@ -245,15 +227,6 @@ namespace LogicUniversity.WebView.Finance {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRank1;
-        
-        /// <summary>
-        /// rank12CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator rank12CompareValidator;
         
         /// <summary>
         /// cbxSupplier1 control.
@@ -274,15 +247,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.DropDownList ddlSupplier2;
         
         /// <summary>
-        /// supplier23CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator supplier23CompareValidator;
-        
-        /// <summary>
         /// tbxPrice2 control.
         /// </summary>
         /// <remarks>
@@ -292,15 +256,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox tbxPrice2;
         
         /// <summary>
-        /// priceValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator priceValidator2;
-        
-        /// <summary>
         /// ddlRank2 control.
         /// </summary>
         /// <remarks>
@@ -308,15 +263,6 @@ namespace LogicUniversity.WebView.Finance {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRank2;
-        
-        /// <summary>
-        /// rank23CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator rank23CompareValidator;
         
         /// <summary>
         /// cbxSupplier2 control.
@@ -337,15 +283,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.DropDownList ddlSupplier3;
         
         /// <summary>
-        /// supplier31CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator supplier31CompareValidator;
-        
-        /// <summary>
         /// tbxPrice3 control.
         /// </summary>
         /// <remarks>
@@ -355,15 +292,6 @@ namespace LogicUniversity.WebView.Finance {
         protected global::System.Web.UI.WebControls.TextBox tbxPrice3;
         
         /// <summary>
-        /// priceValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator priceValidator3;
-        
-        /// <summary>
         /// ddlRank3 control.
         /// </summary>
         /// <remarks>
@@ -371,15 +299,6 @@ namespace LogicUniversity.WebView.Finance {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRank3;
-        
-        /// <summary>
-        /// rank31CompareValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator rank31CompareValidator;
         
         /// <summary>
         /// cbxSupplier3 control.
@@ -407,14 +326,5 @@ namespace LogicUniversity.WebView.Finance {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUserMessage;
-        
-        /// <summary>
-        /// ValidationSummary1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
     }
 }

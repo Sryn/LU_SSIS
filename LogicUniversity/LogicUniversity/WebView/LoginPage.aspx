@@ -41,11 +41,11 @@
             <br />
             EmployeeID</label>
 			<br/>
-			<asp:TextBox ID="txtEmployeeID" runat="server" Text="finance"></asp:TextBox>
+			<asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
 			<br/>
 			<label for="password">PIN</label>
 			<br/>
-			<asp:TextBox ID="txtPIN" runat="server" Text="123456"></asp:TextBox>
+			<asp:TextBox ID="txtPIN" runat="server" TextMode="Password"></asp:TextBox>
 			<br/>
 			<asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log In" />
 			<br/>

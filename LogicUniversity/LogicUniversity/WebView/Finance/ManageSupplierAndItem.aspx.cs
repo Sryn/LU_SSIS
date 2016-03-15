@@ -71,39 +71,6 @@ namespace LogicUniversity.WebView.Finance
 
             // runs everytime the page loads
             System.Diagnostics.Debug.WriteLine(">> ManageSupplierAndItem.Page_Load( 3 IsPostBack=" + IsCallback + ")");
-
-            //checkCBXStatus();
-        }
-
-        private void checkCBXStatus()
-        {
-            System.Diagnostics.Debug.WriteLine(">> ManageSupplierAndItem.checkCBXStatus()");
-
-            for (int i = 1; i <= rankCount; i++)
-            {
-                CheckBox theCheckBox = getControl("cbxSupplier", i) as CheckBox;
-                RangeValidator theRangeValidator = getControl("priceValidator", i) as RangeValidator;
-
-                if (theCheckBox != null && theRangeValidator != null)
-                {
-                    System.Diagnostics.Debug.WriteLine(">>> checkCBXStatus cbxSupplier" + i + " found");
-
-                    if (theCheckBox.Checked)
-                    {
-                        // enable validation
-                        theRangeValidator.Enabled = true;
-                    }
-                    else
-                    {
-                        // disable validation
-                        theRangeValidator.Enabled = false;
-                    }
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(">>> checkCBXStatus cbxSupplier" + i + " and/or priceValidator" + i + " not found");
-                }
-            }
         }
 
         private void getSessionData()
@@ -543,7 +510,7 @@ namespace LogicUniversity.WebView.Finance
             CheckBox theCheckBox = sender as CheckBox;
             String cbxID = theCheckBox.ID;
 
-            lblDevMessage.Text = cbxID + " changed to " + theCheckBox.Checked;
+            lblDevMessage.Text = cbxID;
 
             int i;
 
@@ -555,8 +522,6 @@ namespace LogicUniversity.WebView.Finance
 
         private void changeCbxRow(CheckBox theCheckBox, int i)
         {
-            System.Diagnostics.Debug.WriteLine(">> ManageSupplierAndItem.changeCbxRow( theCheckBox.ID="+ theCheckBox.ID +", i=" + i + " )");
-
             DropDownList theSupplierDDL, theRankDDL;
             TextBox thePriceTBX;
 
@@ -572,41 +537,6 @@ namespace LogicUniversity.WebView.Finance
 
             if (thePriceTBX != null)
                 thePriceTBX.Enabled = theCheckBox.Checked;
-
-            // validator enable/disable
-
-            bool trueOrFalse = theCheckBox.Checked;
-
-            switch (i)
-            {
-                case 1:
-                    System.Diagnostics.Debug.WriteLine(">>> changeCbxRow: switch case i=" + i + " )");
-                    priceValidator1.Enabled = trueOrFalse;
-                    supplier12CompareValidator.Enabled = trueOrFalse;
-                    supplier31CompareValidator.Enabled = trueOrFalse;
-                    rank12CompareValidator.Enabled = trueOrFalse;
-                    rank31CompareValidator.Enabled = trueOrFalse;
-                    break;
-                case 2:
-                    System.Diagnostics.Debug.WriteLine(">>> changeCbxRow: switch case i=" + i + " )");
-                    priceValidator2.Enabled = trueOrFalse;
-                    supplier12CompareValidator.Enabled = trueOrFalse;
-                    supplier23CompareValidator.Enabled = trueOrFalse;
-                    rank12CompareValidator.Enabled = trueOrFalse;
-                    rank23CompareValidator.Enabled = trueOrFalse;
-                    break;
-                case 3:
-                    System.Diagnostics.Debug.WriteLine(">>> changeCbxRow: switch case i=" + i + " )");
-                    priceValidator3.Enabled = trueOrFalse;
-                    supplier23CompareValidator.Enabled = trueOrFalse;
-                    supplier31CompareValidator.Enabled = trueOrFalse;
-                    rank23CompareValidator.Enabled = trueOrFalse;
-                    rank31CompareValidator.Enabled = trueOrFalse;
-                    break;
-                default:
-                    System.Diagnostics.Debug.WriteLine(">>> changeCbxRow: illegal value in switch i=" + i + " )");
-                    break;
-            }
         }
 
         public void btnClick_Submit(Object sender, EventArgs e)
